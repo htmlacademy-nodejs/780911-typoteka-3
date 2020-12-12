@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Olga Tikhonova](https://up.htmlacademy.ru/nodejs/3/user/780911).
-* Наставник: `Неизвестно`.
+* Наставник: `Александр Миловидов`.
 
 ---
 
