@@ -21,6 +21,9 @@
   "homepage": "https://github.com/ChloeSilent/780911-typoteka-3#readme",
   "devDependencies": {
     "eslint": "7.16.0",
-    "eslint-config-htmlacademy": "0.6.0"
+    "eslint-config-htmlacademy": "0.6.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "2.2.1"
   }
 }
