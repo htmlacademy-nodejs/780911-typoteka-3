@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/",
-    "start": "node ./src/service/service.js"
+    "start": "node ./src/service/service.js",
+    "server": "nodemon ./src/service/server.js --server 3000"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "eslint-config-htmlacademy": "0.6.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.0",
+    "nodemon": "2.0.7",
     "prettier": "2.2.1"
   },
   "dependencies": {
