@@ -1,0 +1,75 @@
+doctype html
+html(lang='ru')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    title registration
+    link(rel='preload' href='./fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='./fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='./fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='stylesheet' href='css/style.min.css')
+  body
+    .wrapper
+      header.header
+        a.header__logo.logo(href='#')
+          img.logo__image(src='img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
+          span.logo__name Типотека
+        nav.header__nav
+          ul.header__nav-list
+            li.header__list-item
+              a.header__popup(href='#') Регистрация
+            li.header__list-item
+              a.header__enter(href='#') Вход с паролем
+        a.header__search.button.button--search(href='#' aria-label='поиск по сайту')
+      main
+        h1.visually-hidden Регистрация пользователя
+        section.modal
+          .popup.popup--registration
+            button.popup__button.button.button--popup-close(type='button' aria-label='Закрыть окно') Закрыть окно
+            h2.visually-hidden Форма регистрации
+            ul.popup__tabs
+              li.popup__tab.popup__tab--active.popup__tab--register
+                button.popup__tab-switcher.button(type='button') Регистрация
+              li.popup__tab.popup__tab--log-in
+                button.popup__tab-switcher.button(type='button') Войти
+            .popup__form.popup__form--active.form.form--register
+              form(action='#' method='get')
+                .form__field
+                  label
+                    input(type='email' placeholder='Электронная почта' required)
+                .form__field
+                  label
+                    input(type='text' placeholder='Имя' required)
+                .form__field
+                  label
+                    input(type='text' placeholder='Фамилия')
+                .form__field
+                  label
+                    input(type='password' placeholder='Пароль' required)
+                .form__field
+                  label
+                    input(type='password' placeholder='Повтор пароля' required)
+                .form__image-loader
+                  a.form__avatar.avatar
+                    img(src='img/icons/smile.svg' alt='аватар пользователя')
+                  label
+                    input.visually-hidden(type='file')
+                    | Загрузить фото профиля
+                button.form__submit-btn.form__submit-btn--register.button.button--colored(type='submit') Зарегистрироваться
+            .popup__form.popup__form--hidden.form.form--log-in
+              form(action='#' method='get')
+                .form__field
+                  label
+                    input(type='email' placeholder='Электронная почта' required)
+                .form__field
+                  label
+                    input(type='password' placeholder='Пароль' required)
+                button.form__submit-btn.form__submit-btn--log-in.button.button--colored(type='submit') Войти
+          .modal__overlay
+      footer.footer
+        a.footer__copyright(href='#' aria-label='HTMLAcademy')
+          img(src='img/icons/HTMLAcademyLogo.svg' width='112' height='50' alt='HTMLAcademy')
+        span •
+        p Типотека, 2019
+    script(src='js/main.js')

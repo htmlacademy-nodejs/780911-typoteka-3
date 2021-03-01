@@ -1,0 +1,116 @@
+doctype html
+html(lang='ru')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width,initial-scale=1')
+    meta(http-equiv='X-UA-Compatible' content='ie=edge')
+    title new publication
+    link(rel='preload' href='./fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='./fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='./fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='stylesheet' href='css/style.min.css')
+  body(style='height: 1050px;')
+    .wrapper
+      header.header
+        a.header__logo.logo(href='#')
+          img.logo__image(src='img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
+          span.logo__name Типотека
+        button.button.button--colored.header__button-new Новая запись
+        .header__dropdown
+          a.button.button--burger.header__burger(href='#') Открыть меню
+          ul.navigation.header__navigation
+            li.navigation__item
+              a(href='index.html') index.html --- все ссылки
+            li.navigation__item
+              a(href='main.html') main.html --- Главная страница
+            li.navigation__item
+              a(href='main-variation.html') main-variation.html --- Главная страница (варианты вида)
+            li.navigation__item
+              a(href='main-no-news.html') main-no-news.html --- Страница без новостей и комментов
+            li.navigation__item
+              a(href='admin-my-publications-2.html') admin-my-publications-2.html --- Мои записи
+            li.navigation__item
+              a(href='admin-categories.html') admin-categories.html --- Категории
+            li.navigation__item
+              a(href='admin-my-publications-1.html') admin-my-publications-1.html --- Комментарии
+            li.navigation__item
+              a(href='new-post-photo.html') new-post-photo.html --- Страница для нового поста
+            li.navigation__item
+              a(href='new-post-photo-1.html') new-post-photo-1.html --- Страница добавления нового поста
+            li.navigation__item
+              a(href='new-post-photo-2.html') new-post-photo-2.html --- Страница добавления нового поста (выбор даты)
+            li.navigation__item
+              a(href='new-post-photo-3.html') new-post-photo-3.html --- Страница добавления нового поста (заполненная)
+            li.navigation__item
+              a(href='main-empty.html') main-empty.html --- Главная страница пустая
+            li.navigation__item
+              a(href='registration.html') registration.html --- Регистрация
+            li.navigation__item
+              a(href='sign-in-error-1.html') sign-in-error-1.html.html --- Регистрация c ошибками
+            li.navigation__item
+              a(href='sign-in-error-2.html') sign-in-error-2.html--- Регистрация c ошибкой поля email
+            li.navigation__item
+              a(href='sign-in-error-3.html') sign-in-error-3.html--- Регистрация c ошибкой поля пароль
+            li.navigation__item
+              a(href='publications-by-category.html') publications-by-category.html --- Список публикаций в категории
+            li.navigation__item
+              a(href='404.html') 404.html --- Страница для отображения ошибок
+            li.navigation__item
+              a(href='500.html') 500.html --- Страница для отображения ошибок
+            li.navigation__item
+              a(href='search.html') search.html --- Страница поиска
+            li.navigation__item
+              a(href='search-2.html') search-2.html --- Страница поиска с результатами
+            li.navigation__item
+              a(href='search-3.html') search-3.html --- Страница поиска пустая
+            li.navigation__item
+              a(href='post-user.html') post-user.html --- Страница поcта (для пользователя)
+            li.navigation__item
+              a(href='post-visitor-no-tags.html') post-visitor-no-tags.html --- Страница поcта (для посетителя) без тегов
+            li.navigation__item
+              a(href='post-visitor-no-comments.html') post-visitor-no-comments.html --- Страница поcта (для посетителя) без комментариев
+            li.navigation__item
+              a(href='post-visitor-no-photo.html') post-visitor-no-photo.html --- Страница поcта (для посетителя) без фотографии
+            li.navigation__item
+              a(href='post-user-2.html') post-user-2.html --- Страница поcта (для пользователя) с ошибкой отправки комментария
+            li.navigation__item
+              a(href='uikit.html') uikit.html --- UI KIT
+        a.header__search.button.button--search(href='#' aria-label='поиск по сайту')
+      main
+        section.modal.modal--flex
+          .popup.popup--new-publication.popup--flex
+            .new-publication
+              form(action='#' method='POST')
+                .new-publication__header
+                  h1 Новая публикация
+                  .new-publication__date-form
+                    h3 Дата публикации
+                    .new-publication__date-form-division
+                      .new-publication__date-block
+                        label(for='new-publication-date' aria-label='Календарь')
+                        input#new-publication-date(type='text' name='login' placeholder='21.03.2019')
+                  button.new-publication__button.button.button--colored(type='submit') Опубликовать
+                button.popup__button.button.button--popup-close(type='button' aria-label='Закрыть окно') Закрыть окно
+                .new-publication__form.form
+                  .form__wrapper.form__wrapper--intro
+                    .form__field
+                      label
+                        input(type='text' placeholder='Заголовок' required)
+                    .form__field.form__field--post-image
+                      label
+                        input#image-name-field(type='text' placeholder='Фотография' readonly)
+                      .form__image-loader.form__image-loader--publication
+                        label
+                          input.visually-hidden(type='file')
+                          | Обзор
+                    a.new-publication__form-link.button.button--transparent(href='#') Добавить категорию
+                  .form__wrapper.form__wrapper--text
+                    .form__field.form__field--publication-text
+                      label
+                        textarea(rows='1' placeholder='Анонс публикации')
+                    .form__field.form__field--publication-text
+                      label
+                        textarea(rows='1' placeholder='Полный текст публикации')
+          .modal__overlay
+    script(src='js/vendor.js')
+    script(src='js/main.js')
