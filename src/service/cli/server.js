@@ -9,18 +9,7 @@ const { HttpCode } = require(`../../HttpCode`);
 const { Router } = require(`express`);
 const postsRouter = new Router();
 const express = require(`express`);
-
-const readContent = async (filePath) => {
-  try {
-    const content = await fs.readFile(filePath, `utf8`);
-    return content.split(/\n|\r/g).filter((item) => {
-      return item.length > 0;
-    });
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-};
+const { readContent } = require(`../../utils`);
 
 const sendResponse = (res, statusCode, message) => {
   const template = `
@@ -46,7 +35,7 @@ const returnTitles = async (file) => {
     if (fs2.existsSync(file)) {
       const mockData = await readContent(file);
       const arrMock = JSON.parse(mockData);
-      return JSON.parse(arrMock).map((item) => {
+      return arrMock.map((item) => {
         return item.title;
       });
     } else {
@@ -67,7 +56,7 @@ module.exports = {
     const titlesList = await returnTitles(MOCK_FILE_PATH);
     const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
     const app = express();
-
+    const allArticlesList = await readContent(MOCK_FILE_PATH);
     app.get(`/`, async (req, res) => {
       try {
         sendResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
@@ -84,6 +73,14 @@ module.exports = {
       })
     );
 
+    app.get(
+      `/api/articles`,
+      postsRouter.get(`/`, async (req, res) => {
+        console.log("allArticlesList", allArticlesList);
+        res.json("hohoho");
+      })
+    );
+
     app.use(function (req, res) {
       sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
     });
@@ -94,5 +91,5 @@ module.exports = {
       }
       return console.info(chalk.green(`Ожидаю соединений на ${port}`));
     });
-  }
+  },
 };
