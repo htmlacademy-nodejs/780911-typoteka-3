@@ -1,6 +1,6 @@
 "use strict";
 const fs = require(`fs`).promises;
-const chalk = require(`chalk`);
+const { nanoid } = require(`nanoid`);
 
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
@@ -45,22 +45,54 @@ const shuffle = (someArray) => {
   return someArray;
 };
 
-const readContent = async (filePath) => {
+const readContentJSON = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return JSON.parse(content);
+  } catch (err) {
+    console.error(`readContentJSON`, filePath, err);
+    return [];
+  }
+};
+
+const readContentTxt = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
     return content.split(/\n|\r/g).filter((item) => {
       return item.length > 0;
     });
   } catch (err) {
-    console.error(chalk.red(err));
+    console.error(`readContentTxt`, filePath, err);
     return [];
   }
 };
 
-const generatePublications = (count, titles, categories, sentences) =>
+const createCommentsList = (arr, length) => {
+  const commentsArr = [];
+
+  for (let i = 0; i < length; i++) {
+    commentsArr[i] = {
+      id: nanoid(),
+      text: arr[getRandomInt(1, arr.length - 1)],
+    };
+  }
+  return commentsArr;
+};
+
+const returnItemByID = async (arr, id) => {
+  const offer = arr.find((item) => {
+    return item.id === id;
+  });
+
+  return offer;
+};
+
+const generatePublications = (count, titles, categories, sentences, comments) =>
   Array(count)
     .fill({})
     .map(() => ({
+      id: nanoid(),
+      comments: createCommentsList(comments, getRandomInt(1, count)),
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
       fullText: shuffle(sentences)
@@ -72,7 +104,9 @@ const generatePublications = (count, titles, categories, sentences) =>
 
 module.exports = {
   generatePublications,
-  readContent,
+  readContentTxt,
   getRandomInt,
   getRandomDateOfLastThreeMonths,
+  readContentJSON,
+  returnItemByID
 };

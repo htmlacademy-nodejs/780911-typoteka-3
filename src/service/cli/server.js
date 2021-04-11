@@ -9,7 +9,7 @@ const { HttpCode } = require(`../../HttpCode`);
 const { Router } = require(`express`);
 const postsRouter = new Router();
 const express = require(`express`);
-const { readContent } = require(`../../utils`);
+const { readContentJSON, returnItemByID } = require(`../../utils`);
 
 const sendResponse = (res, statusCode, message) => {
   const template = `
@@ -29,15 +29,13 @@ const sendResponse = (res, statusCode, message) => {
   res.end(template);
 };
 
-const returnTitles = async (file) => {
-  const errMessage = `The file does not exist.`;
+const returnArticles = async (file) => {
+  const errMessage = `The file on ${file} does not exist.`;
+
   try {
     if (fs2.existsSync(file)) {
-      const mockData = await readContent(file);
-      const arrMock = JSON.parse(mockData);
-      return arrMock.map((item) => {
-        return item.title;
-      });
+      const mockData = await readContentJSON(file);
+      return mockData;
     } else {
       console.log(errMessage);
       return false;
@@ -48,15 +46,28 @@ const returnTitles = async (file) => {
   }
 };
 
+const returnTitles = async (articlesLIst) => {
+  try {
+    return articlesLIst.map((item) => {
+      return item.title;
+    });
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
 module.exports = {
   name: `--server`,
   async run(args) {
     const port = args ? Number.parseInt(args[0], 10) : DEFAULT_PORT;
     const notFoundMessageText = `Not found`;
-    const titlesList = await returnTitles(MOCK_FILE_PATH);
+    const articlesList = await returnArticles(MOCK_FILE_PATH);
+    const titlesList = await returnTitles(articlesList);
     const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
+
     const app = express();
-    const allArticlesList = await readContent(MOCK_FILE_PATH);
+
     app.get(`/`, async (req, res) => {
       try {
         sendResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
@@ -76,8 +87,39 @@ module.exports = {
     app.get(
       `/api/articles`,
       postsRouter.get(`/`, async (req, res) => {
-        console.log("allArticlesList", allArticlesList);
-        res.json("hohoho");
+        try {
+          res.json(articlesList);
+        } catch (e) {
+          sendResponse(
+            res,
+            HttpCode.NOT_FOUND,
+            `the articles list is not found`
+          );
+        }
+      })
+    );
+
+    app.get(
+      `/api/articles/:articleId`,
+      postsRouter.get(`/`, async (req, res) => {
+        try {
+          const article = await returnItemByID(
+            articlesList,
+            req.params.articleId
+          );
+          console.log("article", article);
+          if (article) {
+            res.json(article);
+          } else {
+            sendResponse(
+              res,
+              HttpCode.NOT_FOUND,
+              `the article with id ${req.params.articleId} is not found`
+            );
+          }
+        } catch (err) {
+          sendResponse(res, HttpCode.NOT_FOUND, err);
+        }
       })
     );
 
