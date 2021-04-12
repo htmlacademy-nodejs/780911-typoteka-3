@@ -108,5 +108,6 @@ module.exports = {
   getRandomInt,
   getRandomDateOfLastThreeMonths,
   readContentJSON,
-  returnItemByID
+  returnItemByID,
+  createCommentsList
 };
