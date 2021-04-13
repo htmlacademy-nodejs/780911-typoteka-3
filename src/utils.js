@@ -87,6 +87,10 @@ const returnItemByID = async (arr, id) => {
   return offer;
 };
 
+const createArticle = (offer) => {
+  return Object.assign({ id: nanoid(), comments: [] }, offer);
+};
+
 const generatePublications = (count, titles, categories, sentences, comments) =>
   Array(count)
     .fill({})
@@ -109,5 +113,6 @@ module.exports = {
   getRandomDateOfLastThreeMonths,
   readContentJSON,
   returnItemByID,
-  createCommentsList
+  createCommentsList,
+  createArticle,
 };

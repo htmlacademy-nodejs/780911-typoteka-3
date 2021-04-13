@@ -2,8 +2,6 @@
 
 const DEFAULT_PORT = 3000;
 const MOCK_FILE_PATH = `./mocks.json`;
-const TITLES = `./data/titles.txt`;
-const ANNOUNCE = `./data/sentences.txt`;
 const CATEGORIES = `./data/categories.txt`;
 const COMMENTS = `./data/comments.txt`;
 const fs = require(`fs`).promises;
@@ -13,12 +11,14 @@ const { HttpCode } = require(`../../HttpCode`);
 const { Router } = require(`express`);
 const postsRouter = new Router();
 const express = require(`express`);
+const { articleValidator } = require(`../middlewares/articleValidator`);
+
 const {
   readContentJSON,
   returnItemByID,
   readContentTxt,
-  generatePublications,
   createCommentsList,
+  createArticle,
 } = require(`../../utils`);
 
 const sendResponse = (res, statusCode, message) => {
@@ -75,8 +75,6 @@ module.exports = {
     let articlesList = await returnArticles(MOCK_FILE_PATH);
     const titlesList = await returnTitles(articlesList);
     const categories = await readContentTxt(CATEGORIES);
-    const titles = await readContentTxt(TITLES);
-    const sentences = await readContentTxt(ANNOUNCE);
     const comments = await readContentTxt(COMMENTS);
     const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
 
@@ -109,15 +107,9 @@ module.exports = {
       }
     });
 
-    api.post(`/articles`, async (req, res) => {
+    api.post(`/articles`, articleValidator, async (req, res) => {
       try {
-        const newArticle = generatePublications(
-          1,
-          titles,
-          categories,
-          sentences,
-          comments
-        );
+        const newArticle = createArticle(req.body);
         articlesList.push(newArticle[0]);
         res.json(articlesList[articlesList.length - 1]);
       } catch (e) {
