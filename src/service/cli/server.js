@@ -3,7 +3,6 @@
 const DEFAULT_PORT = 3000;
 const MOCK_FILE_PATH = `./mocks.json`;
 const CATEGORIES = `./data/categories.txt`;
-const COMMENTS = `./data/comments.txt`;
 const fs = require(`fs`).promises;
 const fs2 = require(`fs`);
 const chalk = require(`chalk`);
@@ -11,33 +10,22 @@ const { HttpCode } = require(`../../HttpCode`);
 const { Router } = require(`express`);
 const postsRouter = new Router();
 const express = require(`express`);
-const { articleValidator } = require(`../middlewares/articleValidator`);
+const bodyParser = require(`body-parser`);
+const jsonParser = bodyParser.json();
+const {
+  articleValidator,
+  articlePutValidator,
+  commentValidator,
+} = require(`../middlewares/validator`);
 
 const {
   readContentJSON,
   returnItemByID,
   readContentTxt,
-  createCommentsList,
   createArticle,
+  sendResponse,
+  createComment
 } = require(`../../utils`);
-
-const sendResponse = (res, statusCode, message) => {
-  const template = `
-    <!Doctype html>
-      <html lang="ru">
-      <head>
-        <title>With love from Node</title>
-      </head>
-      <body>${message}</body>
-    </html>`.trim();
-
-  res.statusCode = statusCode;
-  res.writeHead(statusCode, {
-    "Content-Type": `text/html; charset=UTF-8`,
-  });
-
-  res.end(template);
-};
 
 const returnArticles = async (file) => {
   const errMessage = `The file on ${file} does not exist.`;
@@ -75,7 +63,6 @@ module.exports = {
     let articlesList = await returnArticles(MOCK_FILE_PATH);
     const titlesList = await returnTitles(articlesList);
     const categories = await readContentTxt(CATEGORIES);
-    const comments = await readContentTxt(COMMENTS);
     const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
 
     const app = express();
@@ -107,10 +94,10 @@ module.exports = {
       }
     });
 
-    api.post(`/articles`, articleValidator, async (req, res) => {
+    api.post(`/articles`, jsonParser, articleValidator, async (req, res) => {
       try {
         const newArticle = createArticle(req.body);
-        articlesList.push(newArticle[0]);
+        articlesList.push(newArticle);
         res.json(articlesList[articlesList.length - 1]);
       } catch (e) {
         sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
@@ -149,26 +136,31 @@ module.exports = {
       }
     });
 
-    api.put(`/articles/:articleId`, async (req, res) => {
-      try {
-        const article = await returnItemByID(
-          articlesList,
-          req.params.articleId
-        );
-        if (article) {
-          article.title = `Updated ${article.title}`;
-          res.json(article);
-        } else {
-          sendResponse(
-            res,
-            HttpCode.NOT_FOUND,
-            `the article with id ${req.params.articleId} is not found`
+    api.put(
+      `/articles/:articleId`,
+      jsonParser,
+      articlePutValidator,
+      async (req, res) => {
+        try {
+          let article = await returnItemByID(
+            articlesList,
+            req.params.articleId
           );
+          if (article) {
+            article = { ...article, ...req.body };
+            res.json(article);
+          } else {
+            sendResponse(
+              res,
+              HttpCode.NOT_FOUND,
+              `the article with id ${req.params.articleId} is not found`
+            );
+          }
+        } catch (err) {
+          sendResponse(res, HttpCode.NOT_FOUND, err);
         }
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
       }
-    });
+    );
 
     api.delete(`/articles/:articleId`, async (req, res) => {
       try {
@@ -227,20 +219,25 @@ module.exports = {
       }
     });
 
-    api.post(`/articles/:articleId/comments`, async (req, res) => {
-      try {
-        const article = await returnItemByID(
-          articlesList,
-          req.params.articleId
-        );
-        const newComment = createCommentsList(comments, 1);
+    api.post(
+      `/articles/:articleId/comments`,
+      jsonParser,
+      commentValidator,
+      async (req, res) => {
+        try {
+          const article = await returnItemByID(
+            articlesList,
+            req.params.articleId
+          );
+          const newComment = createComment(req.body.text);
 
-        article.comments.push(newComment[0]);
-        res.json(article);
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
+          article.comments.push(newComment);
+          res.json(article);
+        } catch (err) {
+          sendResponse(res, HttpCode.NOT_FOUND, err);
+        }
       }
-    });
+    );
 
     api.get(`/search`, async (req, res) => {
       const foundByTitleArr = articlesList.filter((item) => {

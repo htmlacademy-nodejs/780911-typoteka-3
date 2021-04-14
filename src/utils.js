@@ -27,6 +27,11 @@ const getRandomDateOfLastThreeMonths = () => {
   );
 };
 
+const createComment = (text) => {
+  return {id: nanoid(), text};
+};
+
+
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -106,7 +111,26 @@ const generatePublications = (count, titles, categories, sentences, comments) =>
       category: [categories[getRandomInt(0, categories.length - 1)]],
     }));
 
+const sendResponse = (res, statusCode, message) => {
+  const template = `
+    <!Doctype html>
+      <html lang="ru">
+      <head>
+        <title>With love from Node</title>
+      </head>
+      <body>${message}</body>
+    </html>`.trim();
+
+  res.statusCode = statusCode;
+  res.writeHead(statusCode, {
+    "Content-Type": `text/html; charset=UTF-8`,
+  });
+
+  res.end(template);
+};
+
 module.exports = {
+  sendResponse,
   generatePublications,
   readContentTxt,
   getRandomInt,
@@ -115,4 +139,5 @@ module.exports = {
   returnItemByID,
   createCommentsList,
   createArticle,
+  createComment
 };
