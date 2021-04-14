@@ -12,8 +12,6 @@ const articleValidator = (req, res, next) => {
   if (!keysExists) {
     sendResponse(res, HttpCode.BAD_REQUEST, `some fields are not valid`);
   }
-
-  next();
 };
 
 const articlePutValidator = (req, res, next) => {
@@ -24,8 +22,6 @@ const articlePutValidator = (req, res, next) => {
   if (!keysExists) {
     sendResponse(res, HttpCode.BAD_REQUEST, `no such fields in offer`);
   }
-
-  next();
 };
 
 const commentValidator = (req, res, next) => {
