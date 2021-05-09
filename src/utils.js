@@ -1,7 +1,7 @@
 "use strict";
 const fs = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
-
+const fs2 = require(`fs`);
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
     new Date(new Date().setMonth(new Date().getMonth() - 3))
@@ -28,9 +28,8 @@ const getRandomDateOfLastThreeMonths = () => {
 };
 
 const createComment = (text) => {
-  return {id: nanoid(), text};
+  return { id: nanoid(), text };
 };
-
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -129,6 +128,33 @@ const sendResponse = (res, statusCode, message) => {
   res.end(template);
 };
 
+const returnArticles = async (file) => {
+  const errMessage = `The file on ${file} does not exist.`;
+  try {
+    if (fs2.existsSync(file)) {
+      const mockData = await readContentJSON(file);
+      return mockData;
+    } else {
+      console.log(errMessage);
+      return false;
+    }
+  } catch (err) {
+    console.log(errMessage);
+    return false;
+  }
+};
+
+const returnTitles = async (articlesList) => {
+  try {
+    return articlesList.map((item) => {
+      return item.title;
+    });
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
 module.exports = {
   sendResponse,
   generatePublications,
@@ -139,5 +165,7 @@ module.exports = {
   returnItemByID,
   createCommentsList,
   createArticle,
-  createComment
+  createComment,
+  returnArticles,
+  returnTitles,
 };

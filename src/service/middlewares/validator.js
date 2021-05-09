@@ -4,7 +4,7 @@ const ArticleKeys = [`title`, `announce`, `fullText`, `category`];
 const { HttpCode } = require(`../../HttpCode`);
 const { sendResponse } = require(`../../utils`);
 
-const articleValidator = (req, res, next) => {
+const articleValidator = (req, res) => {
   const newArticle = req.body;
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
@@ -14,7 +14,7 @@ const articleValidator = (req, res, next) => {
   }
 };
 
-const articlePutValidator = (req, res, next) => {
+const articlePutValidator = (req, res) => {
   const newArticle = req.body;
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.some((key) => keys.includes(key));
