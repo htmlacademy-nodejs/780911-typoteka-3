@@ -4,10 +4,12 @@
   "description": "Типотека",
   "main": "./src/service/service.js",
   "scripts": {
-    "test": "npm run eslint",
+    "test": "npm run eslint && npm run test::rest",
+    "test::rest": "jest",
     "fix": "eslint --fix --ext .js,.jsx .",
     "eslint": "eslint --ext .js src/",
-    "start": "node ./src/service/service.js",
+    "start": "LOG_LEVEL=error && nodemon ./src/service/server.js --server 3000",
+    "start::debug": "LOG_LEVEL=debug nodemon ./src/service/server.js --server 3000 | ./node_modules/.bin/pino-pretty ",
     "server": "nodemon ./src/service/server.js --server 3000",
     "start-front-server": "node ./src/index.js"
   },
