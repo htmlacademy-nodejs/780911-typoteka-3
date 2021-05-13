@@ -11,7 +11,7 @@ beforeEach(async () => {
   app = await server();
   allOffersList = await readContentJSON(MOCK_FILE_PATH);
 });
-
+//TODO: rename allOffersList to allArticlesList
 describe(`test api end-points`, () => {
   test(`When get books status code should be 200`, async () => {
     const res = await request(app).get(`/api/articles`);
@@ -30,51 +30,55 @@ describe(`test api end-points`, () => {
     expect(res.body.title).toBe(data.title);
   });
 
-  // test(`get the post from the list`, async () => {
-  //   const res = await request(app).get(`/api/offers/${allOffersList[0][`id`]}`);
-  //   const falseRes = await request(app).get(`/api/offers/hohoho`);
-  //   expect(res.statusCode).toBe(200);
-  //   expect(res.body.title).toBe(allOffersList[0].title);
-  //   expect(res.body.sum).toBe(allOffersList[0].sum);
-  //   expect(falseRes.statusCode).toBe(404);
-  // });
-  //
-  // test(`edit the post from the list`, async () => {
-  //   const data = {
-  //     title: `hohoho`,
-  //     category: [`hohoho`],
-  //   };
-  //   const res = await request(app)
-  //     .put(`/api/offers/${allOffersList[0][`id`]}`)
-  //     .send(data);
-  //   expect(res.statusCode).toBe(200);
-  //   expect(res.body.title).toBe(`hohoho`);
-  // });
-  //
-  // test(`edit the post from the list with not correct data`, async () => {
-  //
-  //   const falsyData = {
-  //     hohoho: `hohoho`,
-  //     categories: [`hohoho`],
-  //   };
-  //
-  //   const falseRes = await request(app)
-  //     .put(`/api/offers/${allOffersList[0][`id`]}`)
-  //     .send(falsyData);
-  //
-  //   expect(falseRes.statusCode).toBe(400);
-  // });
-  //
-  // test(`delete the post from the list`, async () => {
-  //   const res = await request(app).delete(
-  //       `/api/offers/${allOffersList[0][`id`]}`
-  //   );
-  //   const falseRes = await request(app).delete(`/api/offers/hohoho`);
-  //   expect(res.statusCode).toBe(200);
-  //   expect(res.body.length).toBe(allOffersList.length - 1);
-  //   expect(falseRes.statusCode).toBe(404);
-  // });
-  //
+  test(`get categories list`, async () => {
+    const res = await request(app).get(`/api/categories`);
+    const categories = await readContentTxt(FILE_CATEGORIES_PATH);
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toStrictEqual(categories);
+  });
+
+  test(`get the article from the list by it's ID`, async () => {
+    const res = await request(app).get(`/api/articles/${allOffersList[0][`id`]}`);
+    const falseRes = await request(app).get(`/api/articles/hohoho`);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.title).toBe(allOffersList[0].title);
+    expect(res.body.announce).toBe(allOffersList[0].announce);
+    expect(falseRes.statusCode).toBe(404);
+  });
+
+  test(`PUT: edit the article from the list`, async () => {
+    const data = {
+      title: `hohoho`,
+      category: [`hohoho`],
+    };
+      const falsyData = {
+        hohoho: `hohoho`,
+        categories: [`hohoho`],
+      };
+
+    const res = await request(app)
+      .put(`/api/articles/${allOffersList[0][`id`]}`)
+      .send(data);
+
+    const falseRes = await request(app)
+      .put(`/api/offers/${allOffersList[0][`id`]}`)
+      .send(falsyData);
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.title).toBe(`hohoho`);
+    expect(falseRes.statusCode).toBe(404);
+  });
+
+  test(`delete the article from the list`, async () => {
+    const res = await request(app).delete(
+        `/api/articles/${allOffersList[0][`id`]}`
+    );
+    const falseRes = await request(app).delete(`/api/articles/hohoho`);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.length).toBe(allOffersList.length - 1);
+    expect(falseRes.statusCode).toBe(404);
+  });
+
   // test(`get comments of post by it's id`, async () => {
   //   const res = await request(app).get(
   //       `/api/offers/${allOffersList[0][`id`]}/comments`

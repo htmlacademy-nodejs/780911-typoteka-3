@@ -20,8 +20,6 @@ const {
   returnArticles,
 } = require(`../../../utils`);
 
-
-
 const api = async () => {
   const { Router } = require(`express`);
   const router = new Router();
@@ -101,16 +99,13 @@ const api = async () => {
         articlesList = articlesList.filter(
           (item) => item.id !== req.params.articleId
         );
-
-        if (articlesList.length < 1) {
-          sendResponse(
-            res,
-            HttpCode.NOT_FOUND,
-            `the article with id ${req.params.articleId} is not found`
-          );
-        } else {
-          res.json(articlesList);
-        }
+        res.json(articlesList);
+      } else {
+        sendResponse(
+          res,
+          HttpCode.NOT_FOUND,
+          `the article with id ${req.params.articleId} is not found`
+        );
       }
     } catch (err) {
       sendResponse(res, HttpCode.NOT_FOUND, err);
