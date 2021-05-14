@@ -19,6 +19,8 @@ const {
   createComment,
   returnArticles,
 } = require(`../../../utils`);
+const {getLogger} = require(`./logger`);
+const log = getLogger();
 
 const api = async () => {
   const { Router } = require(`express`);
@@ -28,8 +30,10 @@ const api = async () => {
   router.get(`/articles`, async (req, res) => {
     try {
       res.json(articlesList);
+      log.info(`End request GET: /articles with status code ${res.statusCode}`);
     } catch (e) {
       sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
+      log.error(`End request GET: /articles with error ${res.statusCode}`);
     }
   });
 
@@ -38,16 +42,20 @@ const api = async () => {
       const newArticle = createArticle(req.body);
       articlesList.push(newArticle);
       res.json(articlesList[articlesList.length - 1]);
+      log.info(`End request POST: /articles with status code ${res.statusCode}`);
     } catch (e) {
       sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
+      log.error(`End request POST: /articles with error ${res.statusCode}`);
     }
   });
 
   router.get(`/categories`, async (req, res) => {
     try {
       res.json(categories);
+      log.info(`End request GET: /categories with status code ${res.statusCode}`);
     } catch (e) {
       sendResponse(res, HttpCode.NOT_FOUND, `the categories list is not found`);
+      log.error(`End request GET: /categories with error ${res.statusCode}`);
     }
   });
 
@@ -56,15 +64,18 @@ const api = async () => {
       const article = await returnItemByID(articlesList, req.params.articleId);
       if (article) {
         res.json(article);
+        log.info(`End request GET: /articles/:articleId with status code ${res.statusCode}`);
       } else {
         sendResponse(
           res,
           HttpCode.NOT_FOUND,
           `the article with id ${req.params.articleId} is not found`
         );
+        log.error(`End request GET: /articles/:articleId with error ${res.statusCode}`);
       }
     } catch (err) {
       sendResponse(res, HttpCode.NOT_FOUND, err);
+      log.error(`End request GET: /articles/:articleId with error ${res.statusCode}`);
     }
   });
 
@@ -78,15 +89,18 @@ const api = async () => {
         if (article) {
           article = { ...article, ...req.body };
           res.json(article);
+          log.info(`End request PUT: /articles/:articleId with status code ${res.statusCode}`);
         } else {
           sendResponse(
             res,
             HttpCode.NOT_FOUND,
             `the article with id ${req.params.articleId} is not found`
           );
+          log.error(`End request PUT: /articles/:articleId with error ${res.statusCode}`);
         }
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, err);
+        log.error(`End requestPUT: /articles/:articleId  with error ${res.statusCode}`);
       }
     }
   );
@@ -100,15 +114,18 @@ const api = async () => {
           (item) => item.id !== req.params.articleId
         );
         res.json(articlesList);
+        log.info(`End request DELETE: /articles/:articleId with status code ${res.statusCode}`);
       } else {
         sendResponse(
           res,
           HttpCode.NOT_FOUND,
           `the article with id ${req.params.articleId} is not found`
         );
+        log.error(`End request DELETE: /articles/:articleId with error ${res.statusCode}`);
       }
     } catch (err) {
       sendResponse(res, HttpCode.NOT_FOUND, err);
+      log.error(`End request DELETE: /articles/:articleId with error ${res.statusCode}`);
     }
   });
 
@@ -120,6 +137,7 @@ const api = async () => {
           articlesList,
           req.params.articleId
         );
+
         const comment = await returnItemByID(
           article.comments,
           req.params.commentId
@@ -132,15 +150,18 @@ const api = async () => {
 
           article.comments = newCommentsList;
           res.json(article);
+          log.info(`End request DELETE: /articles/:articleId/comments/:commentId with status code ${res.statusCode}`);
         } else {
           sendResponse(
             res,
             HttpCode.NOT_FOUND,
             `no such article or article's comment`
           );
+          log.error(`End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`);
         }
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, err);
+        log.error(`End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`);
       }
     }
   );
@@ -159,8 +180,10 @@ const api = async () => {
 
         article.comments.push(newComment);
         res.json(article);
+        log.info(`End request POST: /articles/:articleId/comments with status code ${res.statusCode}`);
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, err);
+        log.error(`End request POST: /articles/:articleId/comments with error ${res.statusCode}`);
       }
     }
   );
@@ -173,11 +196,14 @@ const api = async () => {
     if (foundByTitleArr.length) {
       try {
         res.json(foundByTitleArr);
+        log.info(`End request GET: /search with status code ${res.statusCode}`);
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, err);
+        log.error(`End request GET: /search with error ${res.statusCode} 1`);
       }
     } else {
       sendResponse(res, HttpCode.NOT_FOUND, `no articles with such title`);
+      log.error(`End request GET: /search with error ${res.statusCode}`);
     }
   });
 

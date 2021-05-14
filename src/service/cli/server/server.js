@@ -7,7 +7,8 @@ const notFoundMessageText = `Not found`;
 const express = require(`express`);
 const fs = require(`fs`).promises;
 const fs2 = require(`fs`);
-
+const {getLogger} = require(`./logger`);
+const log = getLogger();
 
 const returnArticles = async (file) => {
   const errMessage = `The file on ${file} does not exist.`;
@@ -46,8 +47,6 @@ const server = async () => {
   const titlesList = await returnTitles(articlesList);
   const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
   const postsRouter = new Router();
-  const { getLogger } = require(`./logger`);
-  const log = getLogger();
 
   app.use(`/api`, await apiRoutes());
 
@@ -74,6 +73,7 @@ const server = async () => {
     postsRouter.get(`/`, async (req, res) => {
       const jsonRes = JSON.parse(await fs.readFile(MOCK_FILE_PATH, `utf8`));
       res.json(jsonRes);
+      log.info(`End request ПУЕЖ /posts with status code ${res.statusCode}`);
     })
   );
 
