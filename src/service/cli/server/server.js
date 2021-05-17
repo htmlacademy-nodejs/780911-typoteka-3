@@ -2,50 +2,23 @@
 
 const MOCK_FILE_PATH = `./mocks.json`;
 const { HttpCode } = require(`../../../HttpCode`);
-const { readContentJSON, sendResponse } = require(`../../../utils`);
+const {
+  sendResponse,
+  returnArticles,
+  returnTitles,
+} = require(`../../../utils`);
 const notFoundMessageText = `Not found`;
 const express = require(`express`);
 const fs = require(`fs`).promises;
-const fs2 = require(`fs`);
-const {getLogger} = require(`./logger`);
+const { getLogger } = require(`./logger`);
 const log = getLogger();
-
-const returnArticles = async (file) => {
-  const errMessage = `The file on ${file} does not exist.`;
-
-  try {
-    if (fs2.existsSync(file)) {
-      const mockData = await readContentJSON(file);
-      return mockData;
-    } else {
-      console.log(errMessage);
-      return false;
-    }
-  } catch (err) {
-    console.log(errMessage);
-    return false;
-  }
-};
-
-const returnTitles = async (articlesLIst) => {
-  try {
-    return articlesLIst.map((item) => {
-      return item.title;
-    });
-  } catch (err) {
-    console.log(err);
-    return false;
-  }
-};
 
 let app;
 const server = async () => {
   app = express();
   const { Router } = require(`express`);
   const apiRoutes = require(`./api-routes`);
-  let articlesList = await returnArticles(MOCK_FILE_PATH);
-  const titlesList = await returnTitles(articlesList);
-  const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
+
   const postsRouter = new Router();
 
   app.use(`/api`, await apiRoutes());
@@ -55,6 +28,9 @@ const server = async () => {
     next();
   });
   app.get(`/`, async (req, res) => {
+    let articlesList = await returnArticles(MOCK_FILE_PATH);
+    const titlesList = await returnTitles(articlesList);
+    const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
     try {
       sendResponse(
         res,
