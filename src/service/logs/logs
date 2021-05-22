@@ -127,3 +127,22 @@
 [2021-14-05, 9:55:18 AM] [32mINFO[39m (pino-and-express/45424 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with status code 200[39m
 [2021-14-05, 9:55:23 AM] [32mINFO[39m (pino-and-express/45424 on MacBook-Pro-2.local): [36mStart request to url /api/offers/Ewm73bKNoxcpQ_hiyqvIc[39m
 [2021-14-05, 9:55:23 AM] [31mERROR[39m (pino-and-express/45424 on MacBook-Pro-2.local): [36mrequested page is not found 200[39m
+[2021-22-05, 11:18:45 AM] [32mINFO[39m (pino-and-express/83980 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:19:08 AM] [32mINFO[39m (pino-and-express/83980 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-05, 11:22:57 AM] [32mINFO[39m (pino-and-express/84025 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:23:37 AM] [32mINFO[39m (pino-and-express/84043 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:24:28 AM] [32mINFO[39m (pino-and-express/84051 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:24:31 AM] [32mINFO[39m (pino-and-express/84051 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-05, 11:24:36 AM] [32mINFO[39m (pino-and-express/84051 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-05, 11:31:04 AM] [32mINFO[39m (pino-and-express/84094 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:31:14 AM] [32mINFO[39m (pino-and-express/84123 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:31:17 AM] [32mINFO[39m (pino-and-express/84123 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-05, 11:31:21 AM] [32mINFO[39m (pino-and-express/84123 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-05, 11:31:29 AM] [32mINFO[39m (pino-and-express/84123 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-05, 11:32:01 AM] [32mINFO[39m (pino-and-express/84127 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:32:56 AM] [32mINFO[39m (pino-and-express/84147 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:33:17 AM] [32mINFO[39m (pino-and-express/84154 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:33:24 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 11:33:26 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-05, 11:33:29 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-05, 11:33:32 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with status code 200[39m
