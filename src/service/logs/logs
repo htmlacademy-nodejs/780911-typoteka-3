@@ -161,3 +161,5 @@
 [2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request POST: /articles/:articleId/comments with status code 200[39m
 [2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
 [2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /search with error 404[39m
+[2021-22-05, 4:43:53 PM] [32mINFO[39m (pino-and-express/85133 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-05, 4:43:55 PM] [32mINFO[39m (pino-and-express/85133 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with status code 200[39m

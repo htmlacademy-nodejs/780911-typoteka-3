@@ -11,7 +11,7 @@ Thumbs.db
 *.log*
 node_modules/
 src/service/logs/logs
-
+*logs
 
 # Папка с собранными файлами проекта
 build/
