@@ -146,3 +146,18 @@
 [2021-22-05, 11:33:26 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
 [2021-22-05, 11:33:29 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
 [2021-22-05, 11:33:32 AM] [32mINFO[39m (pino-and-express/84175 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request POST: /articles with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with error 404[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request PUT: /articles/:articleId with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mStart request to url /api/offers/Sky84yqxYZP37lRIqVlV3[39m
+[2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mrequested page is not found 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId with status code 200[39m
+[2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId with error 404[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with status code 200[39m
+[2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request DELETE: /articles/:articleId/comments/:commentId with error 404[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request POST: /articles/:articleId/comments with status code 200[39m
+[2021-22-05, 11:34:24 AM] [32mINFO[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-22-05, 11:34:24 AM] [31mERROR[39m (pino-and-express/84239 on MacBook-Pro-2.local): [36mEnd request GET: /search with error 404[39m
