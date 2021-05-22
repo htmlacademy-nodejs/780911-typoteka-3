@@ -1,7 +1,7 @@
 "use strict";
-const fs = require(`fs`).promises;
+const FS_OK = 0;
+const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
-const fsp = require(`fs`);
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
     new Date(new Date().setMonth(new Date().getMonth() - 3))
@@ -51,7 +51,7 @@ const shuffle = (someArray) => {
 
 const readContentJSON = async (filePath) => {
   try {
-    const content = await fs.readFile(filePath, `utf8`);
+    const content = await fsp.readFile(filePath, `utf8`);
     return JSON.parse(content);
   } catch (err) {
     console.error(`readContentJSON`, filePath, err);
@@ -61,7 +61,7 @@ const readContentJSON = async (filePath) => {
 
 const readContentTxt = async (filePath) => {
   try {
-    const content = await fs.readFile(filePath, `utf8`);
+    const content = await fsp.readFile(filePath, `utf8`);
     return content.split(/\n|\r/g).filter((item) => {
       return item.length > 0;
     });
@@ -129,28 +129,17 @@ const sendResponse = (res, statusCode, message) => {
 };
 
 const returnArticles = async (file) => {
-  const errMessage = `The file ${file} does not exist.`;
-  try {
-    // if (fs.promises.existsSync(file)) {
-    //   const mockData = await readContentJSON(file);
-    //   return mockData;
-    // } else {
-    //   console.log(errMessage);
-    //   return false;
-    // }
-     await fs.access(file, fs.F_OK, async (err) => {
-      if (err) {
-        console.log(errMessage, err);
-        return false;
-      } else {
-        const mockData = await readContentJSON(file);
-        return mockData;
-      }
+  const errMessage = `The file on ${file} does not exist.`;
+  return fsp
+    .access(file, FS_OK)
+    .then(async () => {
+      const mockData = await readContentJSON(file);
+      return mockData;
+    })
+    .catch(() => {
+      console.log(errMessage);
+      return false;
     });
-  } catch (err) {
-    console.log(errMessage);
-    return false;
-  }
 };
 
 const returnTitles = async (articlesList) => {

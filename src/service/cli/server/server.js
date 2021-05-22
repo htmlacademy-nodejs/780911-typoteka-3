@@ -2,15 +2,11 @@
 
 const MOCK_FILE_PATH = `./mocks.json`;
 const { HttpCode } = require(`../../../HttpCode`);
-const {
-  sendResponse,
-  returnArticles,
-  returnTitles,
-} = require(`../../../utils`);
+const { sendResponse, returnArticles, returnTitles } = require(`../../../utils`);
 const notFoundMessageText = `Not found`;
 const express = require(`express`);
 const fs = require(`fs`).promises;
-const { getLogger } = require(`./logger`);
+const {getLogger} = require(`./logger`);
 const log = getLogger();
 
 let app;
@@ -18,7 +14,9 @@ const server = async () => {
   app = express();
   const { Router } = require(`express`);
   const apiRoutes = require(`./api-routes`);
-
+  let articlesList = await returnArticles(MOCK_FILE_PATH);
+  const titlesList = await returnTitles(articlesList);
+  const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
   const postsRouter = new Router();
 
   app.use(`/api`, await apiRoutes());
@@ -28,9 +26,6 @@ const server = async () => {
     next();
   });
   app.get(`/`, async (req, res) => {
-    let articlesList = await returnArticles(MOCK_FILE_PATH);
-    const titlesList = await returnTitles(articlesList);
-    const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
     try {
       sendResponse(
         res,
