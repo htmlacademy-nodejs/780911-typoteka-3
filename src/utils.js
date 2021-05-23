@@ -2,6 +2,8 @@
 const FS_OK = 0;
 const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
+const {getLogger} = require(`./service/cli/server/logger`);
+const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
     new Date(new Date().setMonth(new Date().getMonth() - 3))
@@ -137,7 +139,7 @@ const returnArticles = async (file) => {
       return mockData;
     })
     .catch(() => {
-      console.log(errMessage);
+      log.error(errMessage);
       return false;
     });
 };
@@ -148,7 +150,7 @@ const returnTitles = async (articlesList) => {
       return item.title;
     });
   } catch (err) {
-    console.log(err);
+    log.error(err);
     return false;
   }
 };
