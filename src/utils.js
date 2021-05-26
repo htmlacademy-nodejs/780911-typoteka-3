@@ -1,7 +1,9 @@
 "use strict";
-const fs = require(`fs`).promises;
+const FS_OK = 0;
+const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
-
+const {getLogger} = require(`./service/cli/server/logger`);
+const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
     new Date(new Date().setMonth(new Date().getMonth() - 3))
@@ -28,9 +30,8 @@ const getRandomDateOfLastThreeMonths = () => {
 };
 
 const createComment = (text) => {
-  return {id: nanoid(), text};
+  return { id: nanoid(), text };
 };
-
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -52,7 +53,7 @@ const shuffle = (someArray) => {
 
 const readContentJSON = async (filePath) => {
   try {
-    const content = await fs.readFile(filePath, `utf8`);
+    const content = await fsp.readFile(filePath, `utf8`);
     return JSON.parse(content);
   } catch (err) {
     console.error(`readContentJSON`, filePath, err);
@@ -62,7 +63,7 @@ const readContentJSON = async (filePath) => {
 
 const readContentTxt = async (filePath) => {
   try {
-    const content = await fs.readFile(filePath, `utf8`);
+    const content = await fsp.readFile(filePath, `utf8`);
     return content.split(/\n|\r/g).filter((item) => {
       return item.length > 0;
     });
@@ -129,6 +130,31 @@ const sendResponse = (res, statusCode, message) => {
   res.end(template);
 };
 
+const returnArticles = async (file) => {
+  const errMessage = `The file on ${file} does not exist.`;
+  return fsp
+    .access(file, FS_OK)
+    .then(async () => {
+      const mockData = await readContentJSON(file);
+      return mockData;
+    })
+    .catch(() => {
+      log.error(errMessage);
+      return false;
+    });
+};
+
+const returnTitles = async (articlesList) => {
+  try {
+    return articlesList.map((item) => {
+      return item.title;
+    });
+  } catch (err) {
+    log.error(err);
+    return false;
+  }
+};
+
 module.exports = {
   sendResponse,
   generatePublications,
@@ -139,5 +165,7 @@ module.exports = {
   returnItemByID,
   createCommentsList,
   createArticle,
-  createComment
+  createComment,
+  returnArticles,
+  returnTitles,
 };

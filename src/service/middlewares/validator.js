@@ -10,7 +10,9 @@ const articleValidator = (req, res, next) => {
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
 
   if (!keysExists) {
-    sendResponse(res, HttpCode.BAD_REQUEST, `some fields are not valid`);
+    sendResponse(res, HttpCode.BAD_REQUEST, `some fields are not valid ${Object.keys(newArticle).join()}`);
+  } else {
+    next();
   }
 };
 
@@ -21,6 +23,8 @@ const articlePutValidator = (req, res, next) => {
 
   if (!keysExists) {
     sendResponse(res, HttpCode.BAD_REQUEST, `no such fields in offer`);
+  } else {
+    next();
   }
 };
 
