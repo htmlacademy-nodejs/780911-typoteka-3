@@ -13,6 +13,8 @@ const adminPublicationsRoute = require(`../routes/admin-publications`);
 const adminAddNewPostEmptyRoute = require(`../routes/admin-add-new-post-empty`);
 const adminCategoriesRoute = require(`../routes/admin-categories`);
 const app = express();
+const axios = require(`axios`);
+const URL_ARTICLES = `http://localhost:3000/api/articles/`;
 
 app.set(`view engine`, `pug`);
 app.set(`views`, path.join(__dirname, `./templates`));
@@ -28,25 +30,38 @@ app.use(`/admin-comments`, adminCommentsRoute);
 app.use(`/admin-publications`, adminPublicationsRoute);
 app.use(`/admin-add-new-post-empty`, adminAddNewPostEmptyRoute);
 app.use(`/admin-categories`, adminCategoriesRoute);
-app.get(`/`, (req, res) => res.render(`main`));
+app.get(`/`, (req, res) => {
+
+  axios.get(URL_ARTICLES, {timeout: 1000})
+    .then((response) => {
+      res.render(`main`, {articles: response.data});
+      console.log(`Count posts ${response.data.length}`);
+      console.log(`Count posts ${response.data[0].title}`);
+    })
+    .catch((err) => {
+      console.log(`Error: ${err.message}`);
+    })
+
+});
 
 app.use(function (req, res) {
   res.status(404);
   res.render(`404`);
 });
 
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('500', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
+// this was commented before
+if (app.get('env') === 'development') {
+  app.use(function (err, req, res) {
+    res.status(err.status || 500);
+    res.render('500', {
+      message: err.message,
+      error: err
+    });
+  });
+}
 
 
 app.listen(DEFAULT_PORT, () =>
-  console.log(`Сервер запущен на порту: ${DEFAULT_PORT}`)
+  console.log(`Сервер front-end запущен на порту: ${DEFAULT_PORT}`)
 );
 
