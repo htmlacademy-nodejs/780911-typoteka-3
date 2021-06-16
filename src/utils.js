@@ -155,6 +155,18 @@ const returnTitles = async (articlesList) => {
   }
 };
 
+const formatDateForPug = (dateIn) => {
+  try {
+    const date = dateIn.split(' ')[0].replace(/-/g, '.');
+    const dateHours = dateIn.split(' ')[1].split(':')[0];
+    const dateMinutes = dateIn.split(' ')[1].split(':')[1]
+    return`${date}, ${dateHours}:${dateMinutes}`;
+  } catch (err) {
+    log.error(err);
+    return false;
+  }
+}
+
 module.exports = {
   sendResponse,
   generatePublications,
@@ -168,4 +180,5 @@ module.exports = {
   createComment,
   returnArticles,
   returnTitles,
+  formatDateForPug
 };

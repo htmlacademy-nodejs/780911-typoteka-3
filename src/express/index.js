@@ -1,5 +1,5 @@
 "use strict";
-
+const {formatDateForPug} = require(`../utils`);
 const express = require(`express`);
 const path = require(`path`);
 const DEFAULT_PORT = 8080;
@@ -34,9 +34,11 @@ app.get(`/`, (req, res) => {
 
   axios.get(URL_ARTICLES, {timeout: 1000})
     .then((response) => {
-      res.render(`main`, {articles: response.data});
-      console.log(`Count posts ${response.data.length}`);
-      console.log(`Count posts ${response.data[0].title}`);
+      const data = response.data;
+      data.forEach(item => {
+        item.formattedDate = formatDateForPug(item.createdDate);
+      })
+      res.render(`main`, {articles: data});
     })
     .catch((err) => {
       console.log(`Error: ${err.message}`);

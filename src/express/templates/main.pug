@@ -88,7 +88,7 @@ block content
                each subcategory in article.category
                 li.preview__breadcrumbs-item
                   a.preview__breadcrumbs-link(href='#') #{subcategory}
-              time.preview__time #{article.createdDate}
+              time.preview__time(datetime=article.createdDate) #{article.formattedDate}
               h3.preview__name
                 a.preview__name-link(href='#') #{article.title}
               p.preview__text #{article.announce}
