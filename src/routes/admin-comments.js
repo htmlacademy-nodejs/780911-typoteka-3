@@ -7,7 +7,7 @@ const URL_ARTICLES = `http://localhost:3000/api/articles/`;
 const {formatDateForPug} = require("../utils");
 const {articleExist} = require(`../express/middlewares/validator`);
 commentsRoute.get(`/:articleId`, articleExist, (req, res) => {
-
+// res.context - find data
   axios.get(URL_ARTICLES, {timeout: 1000})
     .then((response) => {
       const article = response.data.find(item => {

@@ -7,9 +7,11 @@ const PUBLIC_DIR = `./public`;
 const loginRoute = require(`../routes/login`);
 const searchRoute = require(`../routes/search`)
 const postUserRoute = require(`../routes/post-user`);
+const my = require(`../routes/my`);
+const articles = require(`../routes/articles`);
 const publicationsByCategoryRoute = require(`../routes/publications-by-category`);
 const adminCommentsRoute = require(`../routes/admin-comments`);
-const adminPublicationsRoute = require(`../routes/admin-publications`);
+// const adminPublicationsRoute = require(`../routes/admin-publications`);
 const adminAddNewPostEmptyRoute = require(`../routes/admin-add-new-post-empty`);
 const adminCategoriesRoute = require(`../routes/admin-categories`);
 const app = express();
@@ -25,9 +27,10 @@ app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 app.use(`/login`, loginRoute);
 app.use(`/search`, searchRoute);
 app.use(`/post`, postUserRoute);
+app.use(`/my`, my);
 app.use(`/publications-by-category`, publicationsByCategoryRoute);
 app.use(`/admin-comments`, adminCommentsRoute);
-app.use(`/admin-publications`, adminPublicationsRoute);
+// app.use(`/admin-publications`, adminPublicationsRoute);
 app.use(`/admin-add-new-post-empty`, adminAddNewPostEmptyRoute);
 app.use(`/admin-categories`, adminCategoriesRoute);
 app.get(`/`, (req, res) => {
