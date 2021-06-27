@@ -10,8 +10,10 @@ const articleValidator = (req, res, next) => {
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
 
   if (!keysExists) {
+    console.log('From back: ', `some fields are not valid ${Object.keys(newArticle).join()}`)
     sendResponse(res, HttpCode.BAD_REQUEST, `some fields are not valid ${Object.keys(newArticle).join()}`);
   } else {
+    console.log('From back: fields are valid')
     next();
   }
 };
