@@ -28,6 +28,7 @@ const articleValidator = (req, res, next) => {
 
   if (!keysExists) {
     console.log('No keys!');
+    next(new Error('Wrong value in the field'));
   } else {
     console.log('keys are ok!');
     next();

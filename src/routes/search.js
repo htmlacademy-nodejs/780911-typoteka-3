@@ -6,7 +6,7 @@ const searchRouter = new Router();
 searchRouter.get(`/`, async (req, res) => {
 
   try {
-    const {search} = req.query;
+    const {search} = req.body;
     console.log(`search`, search);
 
     res.render(`search-1`);
