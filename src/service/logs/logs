@@ -164,3 +164,49 @@
 [2021-30-06, 3:11:29 PM] [32mINFO[39m (pino-and-express/19837 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
 [2021-30-06, 3:21:41 PM] [32mINFO[39m (pino-and-express/19948 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
 [2021-30-06, 3:22:51 PM] [32mINFO[39m (pino-and-express/19957 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:19:24 PM] [32mINFO[39m (pino-and-express/20368 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:19:30 PM] [32mINFO[39m (pino-and-express/20384 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:21:21 PM] [32mINFO[39m (pino-and-express/20404 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:22:46 PM] [32mINFO[39m (pino-and-express/20418 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:24:01 PM] [32mINFO[39m (pino-and-express/20440 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:30:08 PM] [32mINFO[39m (pino-and-express/20516 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:31:32 PM] [32mINFO[39m (pino-and-express/20530 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:32:06 PM] [32mINFO[39m (pino-and-express/20543 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:33:49 PM] [32mINFO[39m (pino-and-express/20564 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:35:17 PM] [32mINFO[39m (pino-and-express/20587 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:39:49 PM] [32mINFO[39m (pino-and-express/20622 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:43:04 PM] [32mINFO[39m (pino-and-express/20642 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:45:11 PM] [32mINFO[39m (pino-and-express/20678 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:46:06 PM] [32mINFO[39m (pino-and-express/20691 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:49:16 PM] [32mINFO[39m (pino-and-express/20715 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 5:50:28 PM] [32mINFO[39m (pino-and-express/20728 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:42:18 PM] [32mINFO[39m (pino-and-express/20874 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:42:28 PM] [32mINFO[39m (pino-and-express/20874 on MacBook-Pro-2.local): [36mEnd request POST: /articles with status code 200[39m
+[2021-30-06, 6:49:06 PM] [32mINFO[39m (pino-and-express/20911 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:49:18 PM] [32mINFO[39m (pino-and-express/20927 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:50:54 PM] [32mINFO[39m (pino-and-express/20939 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:51:04 PM] [32mINFO[39m (pino-and-express/20949 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:51:17 PM] [32mINFO[39m (pino-and-express/20949 on MacBook-Pro-2.local): [36mEnd request POST: /articles with status code 200[39m
+[2021-30-06, 6:51:17 PM] [32mINFO[39m (pino-and-express/20949 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-30-06, 6:51:17 PM] [31mERROR[39m (pino-and-express/20950 on MacBook-Pro-2.local): [36mCannot read property 'split' of undefined[39m
+    TypeError: Cannot read property 'split' of undefined
+        at formatDateForPug (/Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/utils.js:160:25)
+        at /Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/routes/admin-publications.js:15:30
+        at Array.forEach (<anonymous>)
+        at /Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/routes/admin-publications.js:14:12
+        at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[2021-30-06, 6:52:41 PM] [32mINFO[39m (pino-and-express/20960 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:56:11 PM] [32mINFO[39m (pino-and-express/20979 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 6:57:34 PM] [32mINFO[39m (pino-and-express/20999 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:03:48 PM] [32mINFO[39m (pino-and-express/21038 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:06:27 PM] [32mINFO[39m (pino-and-express/21063 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:25:25 PM] [32mINFO[39m (pino-and-express/21144 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:27:35 PM] [32mINFO[39m (pino-and-express/21165 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:27:47 PM] [32mINFO[39m (pino-and-express/21173 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:32:53 PM] [32mINFO[39m (pino-and-express/21194 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:33:44 PM] [32mINFO[39m (pino-and-express/21194 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-30-06, 7:40:22 PM] [32mINFO[39m (pino-and-express/21227 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:41:03 PM] [32mINFO[39m (pino-and-express/21248 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-30-06, 7:41:06 PM] [32mINFO[39m (pino-and-express/21248 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-30-06, 7:47:59 PM] [32mINFO[39m (pino-and-express/21248 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-30-06, 7:52:11 PM] [32mINFO[39m (pino-and-express/21299 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m

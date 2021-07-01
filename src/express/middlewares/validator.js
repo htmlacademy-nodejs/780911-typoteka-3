@@ -19,24 +19,23 @@ const articleExist = (req, res, next) => {
     })
 };
 
-const articleValidator = (req, res, next) => {
-  const newArticle = req.body;
-  newArticle.category = ``;
-  delete newArticle.image;
-  const keys = Object.keys(newArticle);
-  const keysExists = ArticleKeys.every((key) => keys.includes(key));
-
-  if (!keysExists) {
-    console.log('No keys!');
-    next(new Error('Wrong value in the field'));
-  } else {
-    console.log('keys are ok!');
-    next();
-  }
-};
+// const articleValidator = (req, res, next) => {
+//   const newArticle = req.body;
+//   newArticle.category = ``;
+//   delete newArticle.image;
+//   const keys = Object.keys(newArticle);
+//   const keysExists = ArticleKeys.every((key) => keys.includes(key));
+//
+//   if (!keysExists) {
+//     console.log('No keys!');
+//     next(new Error('Wrong value in the field'));
+//   } else {
+//     console.log('keys are ok!');
+//     next();
+//   }
+// };
 
 
 module.exports = {
   articleExist,
-  articleValidator
 };

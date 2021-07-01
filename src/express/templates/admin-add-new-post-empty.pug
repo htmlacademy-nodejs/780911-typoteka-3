@@ -16,22 +16,22 @@ html(lang='ru')
         section.modal.modal--flex
           .popup.popup--new-publication.popup--flex
             .new-publication
-              form(action='/admin-add-new-post-empty' method='POST')
+              form(action='/articles/add' method='POST')
                 .new-publication__header
-                  h1 Новая публикация
+                  h1 #{type}
                   .new-publication__date-form
                     h3 Дата публикации
                     .new-publication__date-form-division
                       .new-publication__date-block
                         label(for='new-publication-date' aria-label='Календарь')
-                        input#new-publication-date(type='text' placeholder='21.03.2019')
+                        input#new-publication-date(type='text' placeholder=`${article.date}`)
                   button.new-publication__button.button.button--colored(type='submit') Опубликовать
                 button.popup__button.button.button--popup-close(type='button' aria-label='Закрыть окно') Закрыть окно
                 .new-publication__form.form
                   .form__wrapper.form__wrapper--intro
                     .form__field
                       label
-                        input(type='text' placeholder='Заголовок' name='title' required)
+                        input(type='text' placeholder='Заголовок' name='title' required value=`${article.title}`)
                     .form__field.form__field--post-image
                       label
                         input#image-name-field(type='text' name='image' placeholder='Фотография' readonly)
@@ -43,10 +43,10 @@ html(lang='ru')
                   .form__wrapper.form__wrapper--text
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1' placeholder='Анонс публикации' name='announce')
+                        textarea(rows='1' placeholder='Анонс публикации' name='announce' value=`${article.announce}`)
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1' placeholder='Полный текст публикации' name='fullText')
+                        textarea(rows='1' placeholder='Полный текст публикации' name='fullText' value=`${article.fullText}`)
           .modal__overlay
     script(src='/js/vendor.js')
     script(src='/js/main.js')
