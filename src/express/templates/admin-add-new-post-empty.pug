@@ -43,10 +43,10 @@ html(lang='ru')
                   .form__wrapper.form__wrapper--text
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1' placeholder='Анонс публикации' name='announce' value=`${article.announce}`)
+                        textarea(rows='1' placeholder='Анонс публикации' name='announce')=article.announce
                     .form__field.form__field--publication-text
                       label
-                        textarea(rows='1' placeholder='Полный текст публикации' name='fullText' value=`${article.fullText}`)
+                        textarea(rows='1' placeholder='Полный текст публикации' name='fullText')=article.fullText
           .modal__overlay
     script(src='/js/vendor.js')
     script(src='/js/main.js')

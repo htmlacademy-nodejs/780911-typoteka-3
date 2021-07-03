@@ -4,7 +4,7 @@ const {Router} = require(`express`);
 const searchRouter = new Router();
 
 searchRouter.get(`/`, async (req, res) => {
-
+  console.log(`hi from search`);
   try {
     const {search} = req.body;
     console.log(`search`, search);
@@ -15,6 +15,7 @@ searchRouter.get(`/`, async (req, res) => {
     //   results
     // });
   } catch (error) {
+    console.log(`search catch error`);
     res.render(`search-1`);
     // res.render(`search-result`, {
     //   results: []
