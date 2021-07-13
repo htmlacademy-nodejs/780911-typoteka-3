@@ -232,3 +232,24 @@
         at /Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/routes/admin-publications.js:14:12
         at processTicksAndRejections (internal/process/task_queues.js:93:5)
 [2021-03-07, 5:51:48 PM] [32mINFO[39m (pino-and-express/29735 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-03-07, 6:16:57 PM] [32mINFO[39m (pino-and-express/29916 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-03-07, 6:18:59 PM] [32mINFO[39m (pino-and-express/29932 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-05-07, 7:07:20 PM] [32mINFO[39m (pino-and-express/37095 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-05-07, 7:07:30 PM] [32mINFO[39m (pino-and-express/37095 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-05-07, 7:07:55 PM] [32mINFO[39m (pino-and-express/37110 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-05-07, 7:08:30 PM] [32mINFO[39m (pino-and-express/37123 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-05-07, 7:08:38 PM] [32mINFO[39m (pino-and-express/37132 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-05-07, 7:09:06 PM] [32mINFO[39m (pino-and-express/37143 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:11:48 PM] [32mINFO[39m (pino-and-express/66293 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:12:56 PM] [32mINFO[39m (pino-and-express/66293 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-13-07, 2:13:34 PM] [32mINFO[39m (pino-and-express/66617 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:13:58 PM] [32mINFO[39m (pino-and-express/66632 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:15:10 PM] [32mINFO[39m (pino-and-express/66646 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:31:03 PM] [32mINFO[39m (pino-and-express/66736 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:31:52 PM] [32mINFO[39m (pino-and-express/66753 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:36:08 PM] [32mINFO[39m (pino-and-express/66778 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:36:14 PM] [32mINFO[39m (pino-and-express/66791 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:36:34 PM] [32mINFO[39m (pino-and-express/66804 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:40:58 PM] [32mINFO[39m (pino-and-express/66824 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 2:41:26 PM] [32mINFO[39m (pino-and-express/66842 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-13-07, 7:02:57 PM] [32mINFO[39m (pino-and-express/67624 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
