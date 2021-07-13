@@ -10,7 +10,7 @@ Thumbs.db
 # Вспомогательные файлы
 *.log*
 node_modules/
-src/service/logs/logs
+src/service/logs/
 *logs
 
 # Папка с собранными файлами проекта
@@ -19,3 +19,6 @@ mocks.json
 
 #personal reminders and todos
 additional.md
+
+#директория для загрузки файлов
+src/express/upload/
