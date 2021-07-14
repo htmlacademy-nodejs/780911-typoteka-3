@@ -17,7 +17,6 @@ editArticleByIdRoute.get(`/:articleId`, (req, res) => {
   axios.get(`http://localhost:3000/api/articles/${req.params.articleId}`, {timeout: 1000})
     .then((response) => {
       const data = response.data;
-      console.log('Fetched Data', data);
       const fethedPost = {
         title: data.title,
         announce:data.announce,
@@ -27,10 +26,8 @@ editArticleByIdRoute.get(`/:articleId`, (req, res) => {
       res.render(`admin-add-new-post-empty`,  {article: fethedPost, type})
     })
     .catch((err) => {
-      console.log(`Error: ${err.message}`);
+      res.render(`404`);
     })
-
-  // res.render(`admin-add-new-post-empty`, {article: emptyPost, type})
 });
 
 editArticleByIdRoute.put(`/:articleId`, (req, res) => {
@@ -38,7 +35,6 @@ editArticleByIdRoute.put(`/:articleId`, (req, res) => {
   axios.put(`http://localhost:3000/api/articles/${req.params.articleId}`, {timeout: 1000})
     .then((response) => {
       const data = response.data;
-      console.log('Fetched Data', data);
       const fethedPost = {
         title: data.title,
         announce:data.announce,
@@ -48,7 +44,7 @@ editArticleByIdRoute.put(`/:articleId`, (req, res) => {
       res.render(`admin-add-new-post-empty`,  {article: fethedPost, type})
     })
     .catch((err) => {
-      console.log(`Error: ${err.message}`);
+      res.render(`404`);
     })
 
   // res.render(`admin-add-new-post-empty`, {article: emptyPost, type})

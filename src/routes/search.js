@@ -2,37 +2,38 @@
 
 const { Router } = require(`express`);
 const searchRouter = new Router();
+const axios = require("axios");
+const {formatDateForPug} = require("../utils");
 
 searchRouter.get(`/`, async (req, res) => {
-  console.log(`hi from search`);
-  try {
-    // const {search: searchValue} = req.body;
-    // console.log(`req.body`, req.body);
-    console.log(`req.query`, req.query);
-    // console.log(`req.params`, req.params);
-    res.render(`search-1`);
-    // const results = await api.search(search);
-    // res.render(`search-result`, {
-    //   results
-    // });
-  } catch (error) {
-    console.log(`search catch error`, error);
-    res.render(`search-1`);
-    // res.render(`search-result`, {
-    //   results: []
-    // });
-  }
 
-  // axios.post(URL_ARTICLES, newArticle)
-  //   .then((response) => {
-  //     const data = response.data;
-  //     console.log('data: ', data);
-  //     res.redirect(`my`);
-  //   })
-  //   .catch((err) => {
-  //     res.render(`admin-add-new-post-empty`);
-  //     console.log(`Error: ${err.message}`);
-  //   })
+  try {
+    const { search: searchValue } = req.query;
+    if (searchValue) {
+
+      axios
+        .get(
+          encodeURI(`http://localhost:3000/api/search?query=${searchValue}`),
+          {
+            timeout: 1000,
+          }
+        )
+        .then((response) => {
+          const data = response.data;
+          data.forEach(item => {
+            item.formattedDate = formatDateForPug(item.createdDate);
+          })
+          res.render(`search-2`, { searchValue, articles: data });
+        })
+        .catch((err) => {
+          res.render(`search-3`, { searchValue });
+        });
+    } else {
+      res.render(`search-1`);
+    }
+  } catch (error) {
+    res.render(`404`);
+  }
 });
 
 module.exports = searchRouter;

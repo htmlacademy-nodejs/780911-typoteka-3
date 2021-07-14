@@ -43,13 +43,8 @@ adminAddNewPostEmptyRoute.post(`/`, jsonParser, upload.single(`avatar`), async (
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
   const {body, file} = req;
-  // pict name is save in file.filename
-  // picture: file.filename
 
-  console.log(req.body);
   if (!keysExists) {
-    console.log('No keys!');
-
     res.render(`admin-add-new-post-empty`, {article: emptyPost, type});
   } else {
     axios.post(URL_ARTICLES, newArticle)
@@ -66,7 +61,7 @@ adminAddNewPostEmptyRoute.post(`/`, jsonParser, upload.single(`avatar`), async (
           date: `21.04.2019`
         }
         res.render(`admin-add-new-post-empty`, {article: emptyPost, type});
-        console.log(`Error: ${err.message}`);
+        res.render(`404`);
       })
   }
 

@@ -17,7 +17,7 @@ adminPublicationsRoute.get(`/`, (req, res) => {
       res.render(`admin-publications`,  {articles: data})
     })
     .catch((err) => {
-      console.log(`Error: ${err.message}`);
+      res.render(`404`);
     })
 
 });

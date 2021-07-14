@@ -20,7 +20,7 @@ commentsRoute.get(`/`, (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(`Error: ${err.message}`);
+      res.render(`404`);
     })
 });
 
