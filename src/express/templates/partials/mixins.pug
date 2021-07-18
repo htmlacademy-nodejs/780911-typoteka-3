@@ -1,6 +1,4 @@
 mixin bol-found-word(title, found)
   a.search__link
-    | #{title.slice(0, title.indexOf(found)) && title.slice(0, title.indexOf(found))}
-    b #{found}
-    |  #{title.slice(title.indexOf(found) + found.length) && title.slice(title.indexOf(found) + found.length)}
+    | #{title.slice(0, title.indexOf(found)) && title.slice(0, title.indexOf(found))}#[b #{found}]#{title.slice(title.indexOf(found) + found.length) && title.slice(title.indexOf(found) + found.length)}
 
