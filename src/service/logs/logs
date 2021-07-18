@@ -327,3 +327,21 @@
 [2021-14-07, 8:24:54 PM] [32mINFO[39m (pino-and-express/74501 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
 [2021-14-07, 8:25:03 PM] [32mINFO[39m (pino-and-express/74501 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
 [2021-14-07, 8:36:36 PM] [32mINFO[39m (pino-and-express/74619 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-15-07, 6:44:07 AM] [32mINFO[39m (pino-and-express/75037 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-18-07, 7:58:24 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-18-07, 8:00:01 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-18-07, 8:00:13 AM] [31mERROR[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with error 404[39m
+[2021-18-07, 8:00:25 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:36:32 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:37:23 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:38:39 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:38:56 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:39:41 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:42:22 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:42:42 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:43:12 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:43:52 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:50:24 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:51:05 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:52:03 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
+[2021-18-07, 8:53:03 AM] [32mINFO[39m (pino-and-express/87233 on MacBook-Pro-2.local): [36mEnd request GET: /search with status code 200[39m
