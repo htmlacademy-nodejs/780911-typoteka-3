@@ -1,12 +1,12 @@
 'use strict';
 
 const {Router} = require(`express`);
-const commentsRoute = new Router();
+const commentsRouter = new Router();
 const axios = require("axios");
 const URL_ARTICLES = `http://localhost:3000/api/articles/`;
 const {formatDateForPug} = require("../utils");
 
-commentsRoute.get(`/`, (req, res) => {
+commentsRouter.get(`/`, (req, res) => {
 
   axios.get(URL_ARTICLES, {timeout: 1000})
     .then((response) => {
@@ -15,7 +15,7 @@ commentsRoute.get(`/`, (req, res) => {
       data.forEach(item => {
         item.formattedDate = formatDateForPug(item.createdDate);
       })
-      res.render(`admin-comments`, {
+      res.render(`my-comments`, {
         articles: response.data
       });
     })
@@ -25,4 +25,4 @@ commentsRoute.get(`/`, (req, res) => {
 });
 
 
-module.exports = commentsRoute;
+module.exports = commentsRouter;

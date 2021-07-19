@@ -4,9 +4,9 @@ const axios = require("axios");
 const URL_ARTICLES = `http://localhost:3000/api/articles/`;
 const {formatDateForPug} = require("../utils");
 const {Router} = require(`express`);
-const adminPublicationsRoute = new Router();
+const myArticlesRouter = new Router();
 
-adminPublicationsRoute.get(`/`, (req, res) => {
+myArticlesRouter.get(`/`, (req, res) => {
 
   axios.get(URL_ARTICLES, {timeout: 1000})
     .then((response) => {
@@ -14,7 +14,7 @@ adminPublicationsRoute.get(`/`, (req, res) => {
       data.forEach(item => {
         item.formattedDate = formatDateForPug(item.createdDate);
       })
-      res.render(`admin-publications`,  {articles: data})
+      res.render(`my-articles`,  {articles: data})
     })
     .catch((err) => {
       res.render(`404`);
@@ -22,4 +22,4 @@ adminPublicationsRoute.get(`/`, (req, res) => {
 
 });
 
-module.exports = adminPublicationsRoute;
+module.exports = myArticlesRouter;

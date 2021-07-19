@@ -5,13 +5,13 @@ const path = require(`path`);
 const DEFAULT_PORT = 8080;
 const PUBLIC_DIR = `./public`;
 const UPLOAD_DIR = `upload`;
-const loginRoute = require(`../routes/login`);
-const searchRoute = require(`../routes/search`)
-const postUserRoute = require(`../routes/post-user`);
+const login = require(`../routes/login`);
+const search = require(`../routes/search`)
+const usersPost = require(`../routes/post-user`);
 const my = require(`../routes/my`);
 const articles = require(`../routes/articles`);
-const publicationsByCategoryRoute = require(`../routes/publications-by-category`);
-const adminCategoriesRoute = require(`../routes/admin-categories`);
+const publicationsByCategory = require(`../routes/publications-by-category`);
+const categories = require(`../routes/categories`);
 const app = express();
 const axios = require(`axios`);
 const URL_ARTICLES = `http://localhost:3000/api/articles/`;
@@ -35,13 +35,13 @@ app.use(express.static(path.resolve(__dirname, UPLOAD_DIR)));
 + /categories — категории.
  */
 
-app.use(`/login`, loginRoute);
-app.use(`/search`, searchRoute);
-app.use(`/post`, postUserRoute);
+app.use(`/login`, login);
+app.use(`/search`, search);
+app.use(`/post`, usersPost);
 app.use(`/my`, my);
-app.use(`/publications-by-category`, publicationsByCategoryRoute);
+app.use(`/publications-by-category`, publicationsByCategory);
 app.use(`/articles`, articles);
-app.use(`/categories`, adminCategoriesRoute);
+app.use(`/categories`, categories);
 app.get(`/`, (req, res) => {
 
   axios.get(URL_ARTICLES, {timeout: 1000})

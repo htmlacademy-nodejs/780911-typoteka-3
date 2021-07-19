@@ -2,10 +2,10 @@
 
 const {Router} = require(`express`);
 const myRouter = new Router();
-const adminCommentsRoute = require(`./admin-comments`);
-const adminPublicationsRoute = require(`./admin-publications`);
-myRouter.use(`/`, adminPublicationsRoute);
-myRouter.use(`/comments`, adminCommentsRoute);
+const myComments = require(`./my-comments`);
+const myArticles = require(`./my-articles`);
+myRouter.use(`/`, myArticles);
+myRouter.use(`/comments`, myComments);
 
 
 module.exports = myRouter;

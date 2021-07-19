@@ -1,7 +1,7 @@
 'use strict';
 
 const {Router} = require(`express`);
-const adminAddNewPostEmptyRoute = new Router();
+const articleAddRouter = new Router();
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.urlencoded({extended: true});
 const axios = require("axios");
@@ -31,11 +31,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-adminAddNewPostEmptyRoute.get(`/`, (req, res) => {
-  res.render(`admin-add-new-post-empty`, {article: emptyPost, type})
+articleAddRouter.get(`/`, (req, res) => {
+  res.render(`article-add`, {article: emptyPost, type})
 });
 
-adminAddNewPostEmptyRoute.post(`/`, jsonParser, upload.single(`avatar`), async (req, res) => {
+articleAddRouter.post(`/`, jsonParser, upload.single(`avatar`), async (req, res) => {
   const newArticle = req.body;
 
   newArticle.category = ``;
@@ -67,4 +67,4 @@ adminAddNewPostEmptyRoute.post(`/`, jsonParser, upload.single(`avatar`), async (
 
 });
 
-module.exports = adminAddNewPostEmptyRoute;
+module.exports = articleAddRouter;

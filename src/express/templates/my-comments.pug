@@ -5,15 +5,15 @@ html(lang='ru')
     meta(name='viewport' content='width=device-width,initial-scale=1')
     meta(name='Description' content='Личный блог Типотека')
     title Типотека
-    link(rel='preload' href='../fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
-    link(rel='preload' href='../fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
-    link(rel='preload' href='../fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
-    link(rel='stylesheet' href='../css/style.min.css')
+    link(rel='preload' href='/fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='/fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='/fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='stylesheet' href='/css/style.min.css')
   body
     .wrapper.wrapper--nobackground
       header.header
         a.header__logo.logo(href='#')
-          img.logo__image(src='../img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
+          img.logo__image(src='/img/icons/logo-image-only.svg' alt='логотип Тайпотеки')
           span.logo__name Типотека
         button.button.button--colored.header__button-new Новая запись
         .header__dropdown
@@ -84,7 +84,7 @@ html(lang='ru')
             each comment, index in article.comments
              li.publication__list-item(class=articles[articles.length - 1].comments.length - 1 === index && 'publication__list-item--last' )
                .publication__header
-                 img.publication__list-image(src='../img/avatar-small-2.png' width='20' height='20' alt='Аватар пользователя')
+                 img.publication__list-image(src='/img/avatar-small-2.png' width='20' height='20' alt='Аватар пользователя')
                  b.publication__list-name Александр Петров
                  time.publication__item-time(datetime=article.createdDate) #{article.formattedDate}
                a.publication__item-text(href='#') #{comment.text}
@@ -93,6 +93,6 @@ html(lang='ru')
                  span.visually-hidden Закрыть строку списка
       footer.footer.footer--padding
         a.footer__copyright(href='#' aria-label='HTMLAcademy')
-          img(src='../img/icons/HTMLAcademyLogo.svg' width='112' height='50' alt='HTMLAcademy')
+          img(src='/img/icons/HTMLAcademyLogo.svg' width='112' height='50' alt='HTMLAcademy')
         span.footer__dot
         p.footer__text Типотека, 2019

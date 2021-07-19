@@ -5,10 +5,10 @@ html(lang='ru')
     meta(name='viewport' content='width=device-width,initial-scale=1')
     meta(name='Description' content='Личный блог Типотека')
     title Типотека
-    link(rel='preload' href='./fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
-    link(rel='preload' href='./fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
-    link(rel='preload' href='./fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
-    link(rel='stylesheet' href='css/style.min.css')
+    link(rel='preload' href='/fonts/Inter-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='/fonts/Inter-Medium.woff2' as='font' crossorigin='anonymous')
+    link(rel='preload' href='/fonts/SFProDisplay-Regular.woff2' as='font' crossorigin='anonymous')
+    link(rel='stylesheet' href='/css/style.min.css')
   body
     .wrapper.wrapper--nobackground
       header.header
@@ -77,55 +77,17 @@ html(lang='ru')
               a(href='uikit.html') uikit.html --- UI KIT
         a.header__search.button.button--search(href='#' aria-label='поиск по сайту')
       main.main-page.main-page--padding
-        section.main-page__category.category
-          h1.category__title Категории
-          .category__add-form
-            form(action='#' method='POST')
-              input#add-form-add-category(type='text' name='category' placeholder='Новая категория')
-              label(for='add-form-add-category')
-                span.visually-hidden Добавить категорию
-              button.category__button.button.button--category(type='submit') Добавить
-          ul.category__list
-            li.category__list-item
-              form(action='#' method='POST')
-                input#modify-form-category-1(type='text' name='category' value='Жизнь и путешествия')
-                label(for='modify-form-category-1')
-                  span.visually-hidden Редактировать категорию
-                button.category__button.button.button--category(type='submit') Сохранить
-                button.category__button.button.button--category(type='button') Удалить
-            li.category__list-item
-              form(action='#' method='POST')
-                input#modify-form-category-2(type='text' name='category' value='Путешествия')
-                label(for='modify-form-category-2')
-                  span.visually-hidden Редактировать категорию
-                button.category__button.button.button--category(type='submit') Сохранить
-                button.category__button.button.button--category(type='button') Удалить
-            li.category__list-item
-              form(action='#' method='POST')
-                input#modify-form-category-3(type='text' name='category' value='Дизайн и программирование')
-                label(for='modify-form-category-3')
-                  span.visually-hidden Редактировать категорию
-                button.category__button.button.button--category(type='submit') Сохранить
-                button.category__button.button.button--category(type='button') Удалить
-            li.category__list-item
-              form(action='#' method='POST')
-                input#modify-form-category-4(type='text' name='category' value='Другое')
-                label(for='modify-form-category-4')
-                  span.visually-hidden Редактировать категорию
-                button.category__button.button.button--category(type='submit') Сохранить
-                button.category__button.button.button--category(type='button') Удалить
-            li.category__list-item.category__list-item--last
-              form(action='#' method='POST')
-                input#modify-form-category-5(type='text' name='category' value='Личное')
-                label(for='modify-form-category-5')
-                  span.visually-hidden Редактировать категорию
-                button.category__button.button.button--category(type='submit') Сохранить
-                button.category__button.button.button--category(type='button') Удалить
+        section.main-page__notes.notes
+          h1.notes__title Мои записи
+          ul.notes__list
+           each article in articles
+            li.notes__list-item
+              time.notes__item-time(datetime=article.createdDate) #{article.formattedDate}
+              a.notes__item-text(href='#') #{article.title}
+              button.notes__button.button.button--close-item(type='button')
+                span.visually-hidden Закрыть строку списка
       footer.footer.footer--padding
         a.footer__copyright(href='#' aria-label='HTMLAcademy')
-          img(src='img/icons/HTMLAcademyLogo.svg' width='112' height='50' alt='HTMLAcademy')
+          img(src='/img/icons/HTMLAcademyLogo.svg' width='112' height='50' alt='HTMLAcademy')
         span.footer__dot
         p.footer__text Типотека, 2019
-    //
-       <script src="js/vendor.js"></script>
-          <script src="js/main.js"></script> 
