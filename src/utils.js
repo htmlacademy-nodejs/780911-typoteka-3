@@ -167,7 +167,7 @@ const formatDateForPug = (dateIn) => {
   }
 };
 
-const returnSame = function (arr1, arr2) {
+const returnMatchingStringsArray = function (arr1, arr2) {
   const ret = [];
   arr1.sort();
   arr2.sort();
@@ -193,5 +193,5 @@ module.exports = {
   returnArticles,
   returnTitles,
   formatDateForPug,
-  returnSame,
+  returnMatchingStringsArray,
 };

@@ -1,6 +1,6 @@
 "use strict";
 const axios = require("axios");
-const {returnSame} = require("../../utils");
+const {returnMatchingStringsArray} = require("../../utils");
 const {returnCategory, URL_LIST} = require("../../helper");
 const ArticleKeys = [`title`, `announce`, `fullText`, `category`];
 const pageTitle = `Типотека`;
@@ -46,11 +46,10 @@ const articleRequirements = {
 
 const articleValidator = async (req, res, next) => {
   const article = req.body;
-  article.category = returnSame(await returnCategory(), Object.keys(article));
+  article.category = returnMatchingStringsArray(await returnCategory(), Object.keys(article));
   delete article.image;
   const errorsList = {};
 
-  console.log(`article`, article);
   if (article.title.length < articleRequirements.title.min) {
     errorsList.title = articleRequirements.title.minErrorText;
   }

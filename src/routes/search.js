@@ -6,32 +6,25 @@ const axios = require("axios");
 const { formatDateForPug } = require("../utils");
 const pageTitle = `Типотека`;
 
-searchRouter.get(`/`, async (req, res) => {
-  try {
-    const { search: searchValue } = req.query;
-    if (searchValue) {
-      axios
-        .get(
-          encodeURI(`http://localhost:3000/api/search?query=${searchValue}`),
-          {
-            timeout: 1000,
-          }
-        )
-        .then((response) => {
-          const data = response.data;
-          data.forEach((item) => {
-            item.formattedDate = formatDateForPug(item.createdDate);
-          });
-          res.render(`search-2`, { searchValue, articles: data, pageTitle });
-        })
-        .catch((err) => {
-          res.render(`search-3`, { searchValue, pageTitle });
+searchRouter.get(`/`, (req, res) => {
+  const { search: searchValue } = req.query;
+  if (searchValue) {
+    axios
+      .get(encodeURI(`http://localhost:3000/api/search?query=${searchValue}`), {
+        timeout: 1000,
+      })
+      .then((response) => {
+        const data = response.data;
+        data.forEach((item) => {
+          item.formattedDate = formatDateForPug(item.createdDate);
         });
-    } else {
-      res.render(`search-1`, { pageTitle });
-    }
-  } catch (error) {
-    res.render(`404`, { pageTitle });
+        res.render(`search-2`, { searchValue, articles: data, pageTitle });
+      })
+      .catch((err) => {
+        res.render(`search-3`, { searchValue, pageTitle });
+      });
+  } else {
+    res.render(`search-1`, { pageTitle });
   }
 });
 

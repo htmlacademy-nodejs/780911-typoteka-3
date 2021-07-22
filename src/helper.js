@@ -1,8 +1,9 @@
 const URL_LIST = {
   ARTICLES: `http://localhost:3000/api/articles/`,
-  CATEGORIES: `http://localhost:3000/api/categories/`
-}
+  CATEGORIES: `http://localhost:3000/api/categories/`,
+};
 
+const moment = require("moment");
 const axios = require("axios");
 const returnCategory = async () => {
   const category = axios
@@ -17,7 +18,12 @@ const returnCategory = async () => {
   return category;
 };
 
+const returnCurrentDate = (date = new Date()) => {
+  return moment(date).format(`DD.MM.YYYY`);
+};
+
 module.exports = {
   returnCategory,
-  URL_LIST
+  returnCurrentDate,
+  URL_LIST,
 };

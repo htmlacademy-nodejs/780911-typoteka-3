@@ -6,7 +6,7 @@ body(style='height: 1050px;')
       section.modal.modal--flex
         .popup.popup--new-publication.popup--flex
           .new-publication
-            form(action='/articles/add' method='POST')
+            form(action=`${action}` method='POST')
               .new-publication__header
                 h1 #{type}
                 .new-publication__date-form

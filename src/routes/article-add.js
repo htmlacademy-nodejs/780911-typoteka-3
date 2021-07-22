@@ -9,17 +9,17 @@ const axios = require("axios");
 const UPLOAD_DIR = `../upload/img/`;
 const multer = require(`multer`);
 const path = require(`path`);
-const {URL_LIST} = require("../helper");
+const { URL_LIST, returnCurrentDate } = require("../helper");
 const { articleValidator } = require("../express/middlewares/validator");
 const { nanoid } = require(`nanoid`);
 const ArticleKeys = [`title`, `announce`, `fullText`, `category`];
 const { returnCategory } = require(`../helper`);
-let now = new Date();
+let now = returnCurrentDate();
 const emptyPost = {
   title: ``,
   announce: ``,
   fullText: ``,
-  date: moment(now).format(`DD.MM.YYYY`),
+  date: now,
 };
 const type = `Новая публикация`;
 const uploadDirAbsolute = path.resolve(__dirname, UPLOAD_DIR);
@@ -41,6 +41,7 @@ articleAddRouter.get(`/`, async (req, res) => {
     type,
     pageTitle: type,
     category: await returnCategory(),
+    action: `/articles/add`
   });
 });
 
@@ -51,20 +52,24 @@ articleAddRouter.post(
   articleValidator,
   async (req, res) => {
     const newArticle = req.body;
-
+    const categoryList = await returnCategory();
     newArticle.category = ``;
     delete newArticle.image;
     const { body, file } = req;
 
     if (Object.keys(res.locals.errorList).length) {
-      console.log(`Caught Error on route`, res.locals.errorList);
+
       res.render(`article-add`, {
         article: req.body,
         type,
         pageTitle: type,
-        category,
+        category: req.body.category.length
+          ? req.body.category
+          : categoryList,
+        action: `/articles/add`
       });
     } else {
+
       axios
         .post(URL_LIST.ARTICLES, newArticle)
         .then((response) => {
@@ -72,19 +77,13 @@ articleAddRouter.post(
           res.redirect(`/my`);
         })
         .catch((err) => {
-          const notValidArticle = {
-            title: req.body.title,
-            announce: req.body.announce,
-            fullText: req.body.fullText,
-            date: `21.04.2019`,
-          };
           res.render(`article-add`, {
             article: emptyPost,
             type,
             pageTitle: type,
-            category,
+            category : categoryList,
+            action: `/articles/add`
           });
-          res.render(`404`, { pageTitle: type });
         });
     }
   }

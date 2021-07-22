@@ -758,3 +758,75 @@
         at processTicksAndRejections (internal/process/task_queues.js:93:5)
 [2021-21-07, 7:27:24 PM] [32mINFO[39m (pino-and-express/13481 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
 [2021-21-07, 7:33:42 PM] [32mINFO[39m (pino-and-express/13527 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:38:21 AM] [32mINFO[39m (pino-and-express/13942 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 5:47:33 PM] [32mINFO[39m (pino-and-express/19130 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 5:49:04 PM] [32mINFO[39m (pino-and-express/19130 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 5:49:13 PM] [32mINFO[39m (pino-and-express/19130 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 5:50:40 PM] [32mINFO[39m (pino-and-express/19130 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 5:56:55 PM] [32mINFO[39m (pino-and-express/19479 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 5:58:23 PM] [32mINFO[39m (pino-and-express/19495 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:02:40 PM] [32mINFO[39m (pino-and-express/19534 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:02:47 PM] [32mINFO[39m (pino-and-express/19534 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:02:54 PM] [32mINFO[39m (pino-and-express/19534 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:06:36 PM] [32mINFO[39m (pino-and-express/19565 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:06:38 PM] [32mINFO[39m (pino-and-express/19565 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:06:44 PM] [32mINFO[39m (pino-and-express/19565 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:08:15 PM] [32mINFO[39m (pino-and-express/19577 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:08:29 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:08:36 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:08:43 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:08:43 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:09:01 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:09:01 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request POST: /articles with status code 200[39m
+[2021-22-07, 6:09:01 PM] [32mINFO[39m (pino-and-express/19591 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 6:09:01 PM] [31mERROR[39m (pino-and-express/19589 on MacBook-Pro-2.local): [36mCannot read property 'split' of undefined[39m
+    TypeError: Cannot read property 'split' of undefined
+        at formatDateForPug (/Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/utils.js:160:25)
+        at /Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/routes/my-articles.js:16:30
+        at Array.forEach (<anonymous>)
+        at /Users/olgashitova/programming/node.js_htmlacademy/780911-typoteka-3/src/routes/my-articles.js:15:12
+        at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[2021-22-07, 6:09:57 PM] [32mINFO[39m (pino-and-express/19602 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:10:47 PM] [32mINFO[39m (pino-and-express/19611 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:13:22 PM] [32mINFO[39m (pino-and-express/19629 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:13:56 PM] [32mINFO[39m (pino-and-express/19646 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:16:58 PM] [32mINFO[39m (pino-and-express/19686 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:17:07 PM] [32mINFO[39m (pino-and-express/19686 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:17:21 PM] [32mINFO[39m (pino-and-express/19704 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:17:36 PM] [32mINFO[39m (pino-and-express/19704 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:17:54 PM] [32mINFO[39m (pino-and-express/19717 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:18:27 PM] [32mINFO[39m (pino-and-express/19738 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:21:32 PM] [32mINFO[39m (pino-and-express/19756 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:21:37 PM] [32mINFO[39m (pino-and-express/19756 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:22:03 PM] [32mINFO[39m (pino-and-express/19774 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:22:07 PM] [32mINFO[39m (pino-and-express/19774 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:23:05 PM] [32mINFO[39m (pino-and-express/19785 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:24:30 PM] [32mINFO[39m (pino-and-express/19806 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:24:37 PM] [32mINFO[39m (pino-and-express/19806 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:24:50 PM] [32mINFO[39m (pino-and-express/19823 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:27:24 PM] [32mINFO[39m (pino-and-express/19837 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:28:58 PM] [32mINFO[39m (pino-and-express/19859 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:29:58 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:30:15 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:30:15 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:30:29 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:30:29 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:30:41 PM] [32mINFO[39m (pino-and-express/19874 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 6:33:16 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:33:36 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:33:36 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:33:48 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:34:00 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:34:00 PM] [32mINFO[39m (pino-and-express/19898 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:37:10 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:37:44 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:37:44 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:37:51 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mEnd request GET: /categories with status code 200[39m
+[2021-22-07, 6:38:12 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:39:06 PM] [32mINFO[39m (pino-and-express/19924 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:46:41 PM] [32mINFO[39m (pino-and-express/20013 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:46:47 PM] [32mINFO[39m (pino-and-express/20013 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:47:20 PM] [32mINFO[39m (pino-and-express/20013 on MacBook-Pro-2.local): [36mEnd request GET: /articles/:articleId with status code 200[39m
+[2021-22-07, 6:47:33 PM] [32mINFO[39m (pino-and-express/20031 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
+[2021-22-07, 6:48:41 PM] [32mINFO[39m (pino-and-express/20031 on MacBook-Pro-2.local): [36mEnd request GET: /articles with status code 200[39m
+[2021-22-07, 8:02:34 PM] [32mINFO[39m (pino-and-express/20100 on MacBook-Pro-2.local): [36mОжидаю соединений на 3000[39m
