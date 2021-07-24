@@ -99,6 +99,7 @@ const api = async () => {
         if (article) {
           article = { ...article, ...req.body };
           res.json(article);
+          console.log('on back end put article', article);
           log.info(
             `End request PUT: /articles/:articleId with status code ${res.statusCode}`
           );

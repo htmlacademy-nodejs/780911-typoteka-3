@@ -1,18 +1,12 @@
 "use strict";
 
-const moment = require("moment");
 const { Router } = require(`express`);
 const articleAddRouter = new Router();
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.urlencoded({ extended: true });
 const axios = require("axios");
-const UPLOAD_DIR = `../upload/img/`;
-const multer = require(`multer`);
-const path = require(`path`);
-const { URL_LIST, returnCurrentDate } = require("../helper");
+const { URL_LIST, returnCurrentDate, upload } = require("../helper");
 const { articleValidator } = require("../express/middlewares/validator");
-const { nanoid } = require(`nanoid`);
-const ArticleKeys = [`title`, `announce`, `fullText`, `category`];
 const { returnCategory } = require(`../helper`);
 let now = returnCurrentDate();
 const emptyPost = {
@@ -22,18 +16,6 @@ const emptyPost = {
   date: now,
 };
 const type = `Новая публикация`;
-const uploadDirAbsolute = path.resolve(__dirname, UPLOAD_DIR);
-
-const storage = multer.diskStorage({
-  destination: uploadDirAbsolute,
-  filename: (req, file, cb) => {
-    const uniqueName = nanoid(10);
-    const extension = file.originalname.split(`.`).pop();
-    cb(null, `${uniqueName}.${extension}`);
-  },
-});
-
-const upload = multer({ storage });
 
 articleAddRouter.get(`/`, async (req, res) => {
   res.render(`article-add`, {
@@ -55,7 +37,7 @@ articleAddRouter.post(
     const categoryList = await returnCategory();
     newArticle.category = ``;
     delete newArticle.image;
-    const { body, file } = req;
+    // const { body, file } = req;
 
     if (Object.keys(res.locals.errorList).length) {
 
@@ -72,8 +54,7 @@ articleAddRouter.post(
 
       axios
         .post(URL_LIST.ARTICLES, newArticle)
-        .then((response) => {
-          const data = response.data;
+        .then(() => {
           res.redirect(`/my`);
         })
         .catch((err) => {

@@ -2,7 +2,6 @@
 const axios = require("axios");
 const {returnMatchingStringsArray} = require("../../utils");
 const {returnCategory, URL_LIST} = require("../../helper");
-const ArticleKeys = [`title`, `announce`, `fullText`, `category`];
 const pageTitle = `Типотека`;
 
 const articleExist = (req, res, next) => {
@@ -46,6 +45,7 @@ const articleRequirements = {
 
 const articleValidator = async (req, res, next) => {
   const article = req.body;
+  // console.log('data got in validator', article);
   article.category = returnMatchingStringsArray(await returnCategory(), Object.keys(article));
   delete article.image;
   const errorsList = {};

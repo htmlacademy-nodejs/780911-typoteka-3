@@ -156,6 +156,7 @@ const returnTitles = async (articlesList) => {
 };
 
 const formatDateForPug = (dateIn) => {
+  console.log('formatDateForPug', dateIn);
   try {
     const date = dateIn.split(" ")[0].replace(/-/g, ".");
     const dateHours = dateIn.split(" ")[1].split(":")[0];
