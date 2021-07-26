@@ -31,7 +31,8 @@ body(style='height: 1050px;')
                         | Обзор
                   each categoryItem in category
                     .new-publication__checkbox.new-publication__checkbox--auto
-                      input(type='checkbox' name=`${categoryItem}` id=`checkbox-${categoryItem}`)
+                      - var checked = false;
+                      input(type='checkbox' name=`${categoryItem}` id=`checkbox-${categoryItem}` checked = type === `Редактирование публикации` ? '' : null)
                       label(for=`checkbox-${categoryItem}`) #{categoryItem}
                     | !{' '}
                   a.new-publication__form-link.button.button--transparent(href='/categories') Добавить категорию

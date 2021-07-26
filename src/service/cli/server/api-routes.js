@@ -5,6 +5,7 @@ const CATEGORIES = `./data/categories.txt`;
 const { HttpCode } = require(`../../../HttpCode`);
 
 const bodyParser = require(`body-parser`);
+const {findReplaceItemById} = require("../../../utils");
 const jsonParser = bodyParser.json();
 const {
   articleValidator,
@@ -99,7 +100,7 @@ const api = async () => {
         if (article) {
           article = { ...article, ...req.body };
           res.json(article);
-          console.log('on back end put article', article);
+          articlesList = findReplaceItemById(articlesList, article);
           log.info(
             `End request PUT: /articles/:articleId with status code ${res.statusCode}`
           );

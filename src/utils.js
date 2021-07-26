@@ -180,6 +180,13 @@ const returnMatchingStringsArray = function (arr1, arr2) {
   return ret;
 };
 
+const findReplaceItemById = (arr, replacer) => {
+const foundIndex = arr.findIndex(item => item.id == replacer.id);
+  arr[foundIndex] = replacer;
+  return arr;
+};
+
+
 module.exports = {
   sendResponse,
   generatePublications,
@@ -195,4 +202,5 @@ module.exports = {
   returnTitles,
   formatDateForPug,
   returnMatchingStringsArray,
+  findReplaceItemById
 };

@@ -29,7 +29,7 @@ const articlePutValidator = (req, res, next) => {
      console.log("article DOES NOT pass validation on back", Object.keys(newArticle).join());
     sendResponse(res, HttpCode.BAD_REQUEST, `no such fields in offer`);
   } else {
-     console.log("article passes validation on back");
+     // console.log("article passes validation on back");
     next();
   }
 };
