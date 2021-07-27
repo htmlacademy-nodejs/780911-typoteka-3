@@ -2,7 +2,7 @@
 const FS_OK = 0;
 const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
-const {getLogger} = require(`./service/cli/server/logger`);
+const { getLogger } = require(`./service/cli/server/logger`);
 const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
@@ -155,6 +155,38 @@ const returnTitles = async (articlesList) => {
   }
 };
 
+const formatDateForPug = (dateIn) => {
+  console.log('formatDateForPug', dateIn);
+  try {
+    const date = dateIn.split(" ")[0].replace(/-/g, ".");
+    const dateHours = dateIn.split(" ")[1].split(":")[0];
+    const dateMinutes = dateIn.split(" ")[1].split(":")[1];
+    return `${date}, ${dateHours}:${dateMinutes}`;
+  } catch (err) {
+    log.error(err);
+    return false;
+  }
+};
+
+const returnMatchingStringsArray = function (arr1, arr2) {
+  const ret = [];
+  arr1.sort();
+  arr2.sort();
+  for (let i = 0; i < arr1.length; i += 1) {
+    if (arr2.indexOf(arr1[i]) > -1) {
+      ret.push(arr1[i]);
+    }
+  }
+  return ret;
+};
+
+const findReplaceItemById = (arr, replacer) => {
+const foundIndex = arr.findIndex(item => item.id == replacer.id);
+  arr[foundIndex] = replacer;
+  return arr;
+};
+
+
 module.exports = {
   sendResponse,
   generatePublications,
@@ -168,4 +200,7 @@ module.exports = {
   createComment,
   returnArticles,
   returnTitles,
+  formatDateForPug,
+  returnMatchingStringsArray,
+  findReplaceItemById
 };
