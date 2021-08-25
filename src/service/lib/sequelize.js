@@ -1,15 +1,9 @@
 "use strict";
+
 require("dotenv").config();
-const Sequelize = require(`sequelize`);
+const { Sequelize } = require('sequelize');
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT } = process.env;
 
-// const somethingIsNotDefined = [
-//   DB_NAME,
-//   DB_USER,
-//   DB_PASSWORD,
-//   DB_HOST,
-//   DB_PORT,
-// ].some((it) => it === undefined);
 const notDefinedENVVars = [
   DB_NAME,
   DB_USER,
@@ -18,6 +12,8 @@ const notDefinedENVVars = [
   DB_PORT,
 ].filter((envVar) => envVar === undefined);
 
+console.log(notDefinedENVVars.join(", "));
+
 if (notDefinedENVVars.length > 0) {
   throw new Error(
     `One or more environmental variables are not defined: ${notDefinedENVVars.join(
@@ -25,10 +21,6 @@ if (notDefinedENVVars.length > 0) {
     )}`
   );
 }
-
-// if (somethingIsNotDefined) {
-//   throw new Error(`One or more environmental variables are not defined`);
-// }
 
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
