@@ -22,3 +22,7 @@ additional.md
 
 #директория для загрузки файлов
 src/express/upload/
+
+#env файлы
+/.env*
+!/.env.example

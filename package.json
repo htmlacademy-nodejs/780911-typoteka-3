@@ -8,7 +8,7 @@
     "test::rest": "jest",
     "fix": "eslint --fix --ext .js,.jsx .",
     "eslint": "eslint --ext .js src/",
-    "start": "LOG_LEVEL=error && nodemon ./src/service/server.js --server 3000",
+    "start": "LOG_LEVEL=error && nodemon ./src/service/service.js --server 3000",
     "start::debug": "LOG_LEVEL=debug nodemon ./src/service/server.js --server 3000 | ./node_modules/.bin/pino-pretty ",
     "server": "nodemon ./src/service/server.js --server 3000",
     "start-front-server": "nodemon ./src/express/index.js"
@@ -39,11 +39,14 @@
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "chalk": "4.1.0",
+    "dotenv": "10.0.0",
     "express": "4.17.1",
     "moment": "^2.29.1",
     "multer": "^1.4.2",
     "nanoid": "^3.1.22",
+    "pg": "8.7.1",
     "pino": "^6.11.3",
-    "pug": "2.0.4"
+    "pug": "2.0.4",
+    "sequelize": "6.6.5"
   }
 }
