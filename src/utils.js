@@ -3,6 +3,7 @@ const FS_OK = 0;
 const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
 const { getLogger } = require(`./service/cli/server/logger`);
+const moment = require("moment");
 const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
@@ -51,6 +52,20 @@ const shuffle = (someArray) => {
   return someArray;
 };
 
+const getRandomSubarray = (items) => {
+  items = items.slice();
+  let count = getRandomInt(1, items.length - 1);
+  const result = [];
+  while (count--) {
+    result.push(
+        ...items.splice(
+            getRandomInt(0, items.length - 1), 1
+        )
+    );
+  }
+  return result;
+};
+
 const readContentJSON = async (filePath) => {
   try {
     const content = await fsp.readFile(filePath, `utf8`);
@@ -97,21 +112,36 @@ const createArticle = (offer) => {
   return Object.assign({ id: nanoid(), comments: [] }, offer);
 };
 
+// const generatePublications = (count, titles, categories, sentences, comments) =>
+//   Array(count)
+//     .fill({})
+//     .map(() => ({
+//       id: nanoid(),
+//       comments: createCommentsList(comments, getRandomInt(1, count)),
+//       title: titles[getRandomInt(0, titles.length - 1)],
+//       announce: shuffle(sentences).slice(1, 5).join(` `),
+//       fullText: shuffle(sentences)
+//         .slice(1, getRandomInt(0, sentences.length - 1))
+//         .join(` `),
+//       createdDate: getRandomDateOfLastThreeMonths(),
+//       categories: shuffle(categories).slice(0, getRandomInt(1, categories.length)),
+//     }));
+
 const generatePublications = (count, titles, categories, sentences, comments) =>
   Array(count)
     .fill({})
     .map(() => ({
-      id: nanoid(),
       comments: createCommentsList(comments, getRandomInt(1, count)),
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
       fullText: shuffle(sentences)
         .slice(1, getRandomInt(0, sentences.length - 1))
         .join(` `),
-      createdDate: getRandomDateOfLastThreeMonths(),
-      category: [categories[getRandomInt(0, categories.length - 1)]],
+      createdDate: moment().format('L'),
+      categories: shuffle(categories).slice(0, getRandomInt(1, categories.length)),
     }));
 
+//category: [categories[getRandomInt(0, categories.length - 1)]],
 const sendResponse = (res, statusCode, message) => {
   const template = `
     <!Doctype html>

@@ -28,9 +28,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     avatar: {
-      type: Sequelize.STRING(50)
+      type: DataTypes.STRING(50)
     }
-    // add authorId with connection to authors table
   }, {
     sequelize,
     timestamps: true,

@@ -3,24 +3,22 @@
 const {Model, DataTypes} = require(`sequelize`);
 
 module.exports = (sequelize) => {
-  class Category extends Model{}
-  Category.init({
+  class Comment extends Model{}
+  Comment.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
-    name: {
-      type: DataTypes.STRING(30),
+    text: {
+      type: DataTypes.TEXT(),
       allowNull: false,
     },
   }, {
-    sequelize,
     timestamps: false,
-    freezeTableName: true,
-    tableName: 'Categories'
+    sequelize,
   });
 
-  return Category;
+  return Comment;
 };

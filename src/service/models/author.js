@@ -3,8 +3,8 @@
 const {Model, DataTypes} = require(`sequelize`);
 
 module.exports = (sequelize) => {
-  class Category extends Model{}
-  Category.init({
+  class Author extends Model{}
+  Author.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     email: {
-      type: Sequelize.STRING(255),
+      type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
         isEmail:true
@@ -31,17 +31,16 @@ module.exports = (sequelize) => {
       }
     },
     passwordHash: {
-      type: Sequelize.STRING(255),
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
     avatar: {
-      type: Sequelize.STRING(50)
+      type: DataTypes.STRING(50)
     }
   }, {
     sequelize,
-    timestamps: true,
-    paranoid: true,
+    timestamps: false,
   });
 
-  return Category;
+  return Author;
 };
