@@ -25,21 +25,11 @@ module.exports = {
     const sentences = await readContentTxt(ANNOUNCE);
     const comments = await readContentTxt(COMMENTS);
 
-    // console.log('content', content);
-    // try {
-    //   await fs.writeFile(FILE_NAME, content);
-    //   console.log(chalk.green(`Operation success. File created.`));
-    // } catch (error) {
-    //   console.error(chalk.red(`Can't write data to file...`));
-    // }
-
     try {
-      // console.log(`Trying to connect to database...`);
       logger.info(`Trying to connect to database...`);
       await sequelize.authenticate();
     } catch (err) {
       logger.error(`An error occurred: ${err.message}`);
-      // console.log(`An error occurred: ${err.message}`);
       process.exit(1);
     }
 

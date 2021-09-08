@@ -88,12 +88,23 @@ const readContentTxt = async (filePath) => {
   }
 };
 
+// const createCommentsList = (arr, length) => {
+//   const commentsArr = [];
+//
+//   for (let i = 0; i < length; i++) {
+//     commentsArr[i] = {
+//       id: nanoid(),
+//       text: arr[getRandomInt(1, arr.length - 1)],
+//     };
+//   }
+//   return commentsArr;
+// };
+
 const createCommentsList = (arr, length) => {
   const commentsArr = [];
 
   for (let i = 0; i < length; i++) {
     commentsArr[i] = {
-      id: nanoid(),
       text: arr[getRandomInt(1, arr.length - 1)],
     };
   }

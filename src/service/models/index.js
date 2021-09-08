@@ -21,12 +21,17 @@ const define = (sequelize) => {
   const Comment = defineComment(sequelize);
   const PostCategory = definePostCategory(sequelize);
 
-  Post.belongsTo(Author, {
+  Post.hasOne(Author, {
     foreignKey: `authorId`,
     as: Aliase.AUTHORS,
   });
 
-  Post.belongsToMany(Category, {
+  Post.hasMany(Comment, {
+    foreignKey: `commentId`,
+    as: Aliase.COMMENTS,
+  });
+
+  Post.hasMany(Category, {
     through: PostCategory,
     foreignKey: `categoryId`,
     as: Aliase.CATEGORIES,
@@ -43,13 +48,7 @@ const define = (sequelize) => {
     as: Aliase.AUTHORS,
   });
 
-  Comment.belongsTo(Post, {
-    foreignKey: `postId`,
-    as: Aliase.POSTS,
-  });
-
   return { Category, Comment, Post, PostCategory };
 };
 
 module.exports = define;
-
