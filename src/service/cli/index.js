@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const help = require(`./help`);
 const filldb = require(`./filldb`);

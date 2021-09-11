@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const {Cli} = require(`./cli`);
 const {

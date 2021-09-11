@@ -81,7 +81,7 @@ SELECT
 comments.created_date,
 comments.id,
 comments.post_id,
-concat(authors.first_name, ' ', authors.last_name) AS "authors name",
+concat(authors.first_name, " ", authors.last_name) AS "authors name",
 comments.text
 FROM comments
 LEFT JOIN authors ON authors.id = comments.author_id
@@ -95,7 +95,7 @@ LIMIT 5;
 SELECT
 comments.id AS "comments id",
 posts.id AS "posts id",
-concat(authors.first_name, ' ', authors.last_name) AS "authors name",
+concat(authors.first_name, " ", authors.last_name) AS "authors name",
 comments.text
 FROM comments
 LEFT JOIN authors ON authors.id = comments.author_id
@@ -106,6 +106,6 @@ WHERE comments.post_id = 1
 В данном запросе это пост с id = 1*/
 
 UPDATE posts
-  set title = 'Как я встретил Новый год'
+  set title = "Как я встретил Новый год"
 WHERE
   posts.id = 1;

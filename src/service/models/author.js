@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
 
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       },
       unique: {
         args: true,
-        msg: 'Email address already in use!'
+        msg: "Email address already in use!"
       }
     },
     passwordHash: {
@@ -39,7 +39,6 @@ module.exports = (sequelize) => {
     }
   }, {
     sequelize,
-    timestamps: false,
   });
 
   return Author;

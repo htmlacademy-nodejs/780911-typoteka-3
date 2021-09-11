@@ -7,7 +7,7 @@ const defineModels = require(`../models`);
 const Aliase = require(`../models/aliase`);
 const { getLogger } = require(`./server/logger`);
 const logger = getLogger();
-
+const { ExitCode } = require(`../../constants`);
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
 const TITLES = `./data/titles.txt`;
@@ -30,7 +30,7 @@ module.exports = {
       await sequelize.authenticate();
     } catch (err) {
       logger.error(`An error occurred: ${err.message}`);
-      process.exit(1);
+      process.exit(ExitCode.error);
     }
 
     logger.info(`Connection to database established`);

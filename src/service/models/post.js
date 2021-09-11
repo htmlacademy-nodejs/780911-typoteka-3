@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
 
@@ -32,7 +32,6 @@ module.exports = (sequelize) => {
     }
   }, {
     sequelize,
-    timestamps: true,
     paranoid: true,
   });
 

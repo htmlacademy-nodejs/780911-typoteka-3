@@ -57,11 +57,7 @@ const getRandomSubarray = (items) => {
   let count = getRandomInt(1, items.length - 1);
   const result = [];
   while (count--) {
-    result.push(
-        ...items.splice(
-            getRandomInt(0, items.length - 1), 1
-        )
-    );
+    result.push(...items.splice(getRandomInt(0, items.length - 1), 1));
   }
   return result;
 };
@@ -88,18 +84,6 @@ const readContentTxt = async (filePath) => {
   }
 };
 
-// const createCommentsList = (arr, length) => {
-//   const commentsArr = [];
-//
-//   for (let i = 0; i < length; i++) {
-//     commentsArr[i] = {
-//       id: nanoid(),
-//       text: arr[getRandomInt(1, arr.length - 1)],
-//     };
-//   }
-//   return commentsArr;
-// };
-
 const createCommentsList = (arr, length) => {
   const commentsArr = [];
 
@@ -123,21 +107,6 @@ const createArticle = (offer) => {
   return Object.assign({ id: nanoid(), comments: [] }, offer);
 };
 
-// const generatePublications = (count, titles, categories, sentences, comments) =>
-//   Array(count)
-//     .fill({})
-//     .map(() => ({
-//       id: nanoid(),
-//       comments: createCommentsList(comments, getRandomInt(1, count)),
-//       title: titles[getRandomInt(0, titles.length - 1)],
-//       announce: shuffle(sentences).slice(1, 5).join(` `),
-//       fullText: shuffle(sentences)
-//         .slice(1, getRandomInt(0, sentences.length - 1))
-//         .join(` `),
-//       createdDate: getRandomDateOfLastThreeMonths(),
-//       categories: shuffle(categories).slice(0, getRandomInt(1, categories.length)),
-//     }));
-
 const generatePublications = (count, titles, categories, sentences, comments) =>
   Array(count)
     .fill({})
@@ -148,11 +117,13 @@ const generatePublications = (count, titles, categories, sentences, comments) =>
       fullText: shuffle(sentences)
         .slice(1, getRandomInt(0, sentences.length - 1))
         .join(` `),
-      createdDate: moment().format('L'),
-      categories: shuffle(categories).slice(0, getRandomInt(1, categories.length)),
+      createdDate: moment().format("L"),
+      categories: shuffle(categories).slice(
+        0,
+        getRandomInt(1, categories.length)
+      ),
     }));
 
-//category: [categories[getRandomInt(0, categories.length - 1)]],
 const sendResponse = (res, statusCode, message) => {
   const template = `
     <!Doctype html>
@@ -197,7 +168,7 @@ const returnTitles = async (articlesList) => {
 };
 
 const formatDateForPug = (dateIn) => {
-  console.log('formatDateForPug', dateIn);
+  console.log("formatDateForPug", dateIn);
   try {
     const date = dateIn.split(" ")[0].replace(/-/g, ".");
     const dateHours = dateIn.split(" ")[1].split(":")[0];
@@ -222,11 +193,10 @@ const returnMatchingStringsArray = function (arr1, arr2) {
 };
 
 const findReplaceItemById = (arr, replacer) => {
-const foundIndex = arr.findIndex(item => item.id == replacer.id);
+  const foundIndex = arr.findIndex((item) => item.id == replacer.id);
   arr[foundIndex] = replacer;
   return arr;
 };
-
 
 module.exports = {
   sendResponse,
@@ -243,5 +213,5 @@ module.exports = {
   returnTitles,
   formatDateForPug,
   returnMatchingStringsArray,
-  findReplaceItemById
+  findReplaceItemById,
 };

@@ -5,6 +5,7 @@ const DEFAULT_PORT = 3000;
 const { getLogger } = require(`./logger`);
 const logger = getLogger();
 const { sequelize } = require(`../../lib/sequelize`);
+const { ExitCode } = require("../../../constants");
 
 const name = `--server`;
 let app;
@@ -14,7 +15,7 @@ const run = async (args) => {
     logger.info(`Соединение с сервером установлено!`);
   } catch (err) {
     logger.error(`Не удалось установить соединение по причине: ${err}`);
-    process.exit(1);
+    process.exit(ExitCode.error);
   }
 
   app = await server();
