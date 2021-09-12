@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 const pino = require(`pino`);
 
 const logger = pino({
