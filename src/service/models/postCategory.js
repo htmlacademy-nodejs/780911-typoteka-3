@@ -1,7 +1,7 @@
 "use strict";
 
 const { Model } = require(`sequelize`);
-const Aliase = require("./aliase");
+const Alias = require("./alias");
 
 module.exports = (sequelize) => {
   class PostCategory extends Model {}
@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
     {
       sequelize,
       modelName: `PostCategory`,
-      tableName: Aliase.POST_CATEGORIES,
+      tableName: Alias.POST_CATEGORIES,
       paranoid: false,
     }
   );

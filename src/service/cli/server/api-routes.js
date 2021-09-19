@@ -27,7 +27,7 @@ const findPage = async ({limit, offset}) => {
   const {count, rows} = await this._Offer.findAndCountAll({
     limit,
     offset,
-    include: [Aliase.CATEGORIES],
+    include: [Alias.CATEGORIES],
     order: [
       [`createdAt`, `DESC`]
     ],

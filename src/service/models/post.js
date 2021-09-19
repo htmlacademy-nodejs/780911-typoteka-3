@@ -1,7 +1,7 @@
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
-const Aliase = require("./aliase");
+const Alias = require("./alias");
 
 module.exports = (sequelize) => {
   class Post extends Model{}
@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
   }, {
     sequelize,
     modelName: `Post`,
-    tableName: Aliase.POSTS,
+    tableName: Alias.POSTS,
     paranoid: true,
   });
 
@@ -46,7 +46,7 @@ module.exports = (sequelize) => {
     const {count, rows} = await Post.findAndCountAll({
       limit,
       offset,
-      include: [Aliase.CATEGORIES],
+      include: [Alias.CATEGORIES],
       order: [
         [`createdAt`, `DESC`]
       ],

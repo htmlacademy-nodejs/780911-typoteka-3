@@ -115,7 +115,7 @@ const generatePublications = (count, titles, categories, sentences, comments) =>
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
       full_text: shuffle(sentences)
-        .slice(1, getRandomInt(0, sentences.length - 1))
+        .slice(1, getRandomInt(1, sentences.length - 1))
         .join(` `),
       created_date: moment().format("L"),
       categories: shuffle(categories).slice(

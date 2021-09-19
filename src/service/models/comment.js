@@ -1,7 +1,7 @@
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
-const Aliase = require("./aliase");
+const Alias = require("./alias");
 
 module.exports = (sequelize) => {
   class Comment extends Model{}
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
   }, {
     sequelize,
     modelName: `Comment`,
-    tableName: Aliase.COMMENTS
+    tableName: Alias.COMMENTS
   });
 
   return Comment;

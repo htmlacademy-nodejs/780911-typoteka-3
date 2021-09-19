@@ -1,7 +1,7 @@
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
-const Aliase = require("./aliase");
+const Alias = require("./alias");
 
 module.exports = (sequelize) => {
   class Category extends Model{}
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
     sequelize,
     freezeTableName: true,
     modelName: `Category`,
-    tableName: Aliase.CATEGORIES
+    tableName: Alias.CATEGORIES
   });
 
   return Category;

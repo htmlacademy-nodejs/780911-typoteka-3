@@ -1,15 +1,15 @@
 "use strict";
-const fs = require(`fs`).promises;
-const chalk = require(`chalk`);
+// const fs = require(`fs`).promises;
+// const chalk = require(`chalk`);
 const { generatePublications, readContentTxt } = require("../../utils");
-const { sequelize } = require(`../lib/sequelize`);
+const { getSequelize } = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
-const Aliase = require(`../models/aliase`);
+const {Alias} = require(`../models/alias`);
 const { getLogger } = require(`./server/logger`);
 const logger = getLogger();
 const { ExitCode } = require(`../../constants`);
 const DEFAULT_COUNT = 1;
-const FILE_NAME = `mocks.json`;
+// const FILE_NAME = `mocks.json`;
 const TITLES = `./data/titles.txt`;
 const ANNOUNCE = `./data/sentences.txt`;
 const CATEGORIES = `./data/categories.txt`;
@@ -27,7 +27,7 @@ module.exports = {
 
     try {
       logger.info(`Trying to connect to database...`);
-      await sequelize.authenticate();
+      await getSequelize.authenticate();
     } catch (err) {
       logger.error(`An error occurred: ${err.message}`);
       process.exit(ExitCode.error);
@@ -36,9 +36,9 @@ module.exports = {
     logger.info(`Connection to database established`);
    // console.log(`Connection to database established`);
 
-    const { Post, Category } = defineModels(sequelize);
+    const { Post, Category } = defineModels(getSequelize);
 
-    await sequelize.sync({ force: true });
+    await getSequelize.sync({ force: true });
 
     const categoryModels = await Category.bulkCreate(
       categories.map((item) => ({ name: item }))
@@ -53,7 +53,7 @@ module.exports = {
     );
 
     const postPromises = generatedPosts.map(async (post) => {
-      // const postModel = await Post.create(post, { include: [Aliase.COMMENTS] });
+      // const postModel = await Post.create(post, { include: [Alias.COMMENTS] });
       const postModel = await Post.create(post);
       await postModel.addCategories(post.categories);
     });
