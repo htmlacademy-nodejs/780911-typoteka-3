@@ -1,6 +1,7 @@
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
+const Aliase = require("./aliase");
 
 module.exports = (sequelize) => {
   class Post extends Model{}
@@ -15,11 +16,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(250),
       allowNull: false,
     },
-    createdDate: {
+    created_date: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    fullText: {
+    full_text: {
       type: DataTypes.TEXT(),
       allowNull: false,
     },
@@ -29,11 +30,31 @@ module.exports = (sequelize) => {
     },
     avatar: {
       type: DataTypes.STRING(50)
+    },
+    author_id : {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   }, {
     sequelize,
+    modelName: `Post`,
+    tableName: Aliase.POSTS,
     paranoid: true,
   });
+
+  Post.prototype.findPage = async({limit, offset})=> {
+    const {count, rows} = await Post.findAndCountAll({
+      limit,
+      offset,
+      include: [Aliase.CATEGORIES],
+      order: [
+        [`createdAt`, `DESC`]
+      ],
+      distinct: true
+    });
+    return {count, offers: rows};
+  }
+
 
   return Post;
 };

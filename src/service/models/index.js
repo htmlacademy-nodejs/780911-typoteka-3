@@ -1,11 +1,6 @@
 "use strict";
 
-const Sequelize = require(`sequelize`);
-
-const sequelize = new Sequelize(`library`, `academy`, `123456`, {
-  host: `localhost`,
-  dialect: `postgres`,
-});
+// const Sequelize = require(`sequelize`);
 
 const defineCategory = require(`./category`);
 const defineAuthor = require(`./author`);
@@ -22,31 +17,31 @@ const define = (sequelize) => {
   const PostCategory = definePostCategory(sequelize);
 
   Post.hasOne(Author, {
-    foreignKey: `authorId`,
+    foreignKey: `author_id`,
     as: Aliase.AUTHORS,
   });
 
-  Post.hasMany(Comment, {
-    foreignKey: `commentId`,
-    as: Aliase.COMMENTS,
-  });
-
-  Post.hasMany(Category, {
-    through: PostCategory,
-    foreignKey: `categoryId`,
-    as: Aliase.CATEGORIES,
-  });
-
-  Category.belongsToMany(Post, {
-    through: PostCategory,
-    foreignKey: `postId`,
-    as: Aliase.POSTS,
-  });
-
-  Comment.belongsTo(Author, {
-    foreignKey: `authorId`,
-    as: Aliase.AUTHORS,
-  });
+  // Comment.belongsTo(Author, {
+  //   foreignKey: `author_id`,
+  //   as: Aliase.AUTHORS,
+  // });
+  //
+  // Comment.belongsTo(Post, {
+  //   foreignKey: `post_id`,
+  //   as: Aliase.AUTHORS,
+  // });
+  //
+  // Post.belongsToMany(Category, {
+  //   through: PostCategory,
+  //   foreignKey: `category_id`,
+  //   as: Aliase.CATEGORIES,
+  // });
+  //
+  // Category.belongsToMany(Post, {
+  //   through: PostCategory,
+  //   foreignKey: `post_id`,
+  //   as: Aliase.POSTS,
+  // });
 
   return { Category, Comment, Post, PostCategory };
 };

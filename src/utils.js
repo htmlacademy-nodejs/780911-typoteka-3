@@ -111,17 +111,18 @@ const generatePublications = (count, titles, categories, sentences, comments) =>
   Array(count)
     .fill({})
     .map(() => ({
-      comments: createCommentsList(comments, getRandomInt(1, count)),
+      // comments: createCommentsList(comments, getRandomInt(1, count)),
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
-      fullText: shuffle(sentences)
+      full_text: shuffle(sentences)
         .slice(1, getRandomInt(0, sentences.length - 1))
         .join(` `),
-      createdDate: moment().format("L"),
+      created_date: moment().format("L"),
       categories: shuffle(categories).slice(
         0,
         getRandomInt(1, categories.length)
       ),
+      author_id: getRandomInt(0, count)
     }));
 
 const sendResponse = (res, statusCode, message) => {
@@ -168,7 +169,6 @@ const returnTitles = async (articlesList) => {
 };
 
 const formatDateForPug = (dateIn) => {
-  console.log("formatDateForPug", dateIn);
   try {
     const date = dateIn.split(" ")[0].replace(/-/g, ".");
     const dateHours = dateIn.split(" ")[1].split(":")[0];

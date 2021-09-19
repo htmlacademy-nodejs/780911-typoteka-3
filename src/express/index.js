@@ -43,11 +43,13 @@ app.use(`/my`, my);
 app.use(`/publications-by-category`, publicationsByCategory);
 app.use(`/articles`, articles);
 app.use(`/categories`, categories);
+
 app.get(`/`, (req, res) => {
   axios
     .get(URL_LIST.ARTICLES, { timeout: 1000 })
     .then((response) => {
       const data = response.data;
+      console.log('data', data);
       data.forEach((item) => {
         item.formattedDate = formatDateForPug(item.createdDate);
       });

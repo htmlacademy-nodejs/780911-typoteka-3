@@ -16,7 +16,7 @@ CREATE TABLE posts(
   created_date timestamp NOT NULL,
   full_text text NOT NULL,
   announce text NOT NULL,
-  picture varchar(50),
+  avatar varchar(50),
   author_id integer NOT NULL,
   FOREIGN KEY (author_id) REFERENCES authors(id)
 );

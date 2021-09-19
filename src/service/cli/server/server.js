@@ -7,16 +7,20 @@ const notFoundMessageText = `Not found`;
 const express = require(`express`);
 const fs = require(`fs`).promises;
 const {getLogger} = require(`./logger`);
+const {getSequelize} = require("../../lib/sequelize");
+const {ExitCode} = require("../../../constants");
 const log = getLogger();
+const define = require(`../../models/index`);
+
 
 let app;
 const server = async () => {
   app = express();
   const { Router } = require(`express`);
   const apiRoutes = require(`./api-routes`);
-  let articlesList = await returnArticles(MOCK_FILE_PATH);
-  const titlesList = await returnTitles(articlesList);
-  const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
+   let articlesList = await returnArticles(MOCK_FILE_PATH);
+   const titlesList = await returnTitles(articlesList);
+   const message = titlesList.map((post) => `<li>${post}</li>`).join(``);
   const postsRouter = new Router();
 
   app.use(`/api`, await apiRoutes());
@@ -26,6 +30,26 @@ const server = async () => {
     next();
   });
   app.get(`/`, async (req, res) => {
+
+    try {
+      log.info(`Trying to connect to database...`);
+      await getSequelize.authenticate();
+    } catch (err) {
+      log.error(`An error occurred: ${err.message}`);
+      process.exit(ExitCode.error);
+    }
+
+   // const posts = await define.Post.findAll();
+   //  const posts = await define(getSequelize).Post.findAll();
+   //  console.log(posts);
+    // console.log(posts.every(post => post instanceof define.Post)); // true
+    //console.log("All posts:", JSON.stringify(posts, null, 2));
+
+    // log.info(`Connection to database established`);
+    console.log(`Connection to database established 111`);
+    // console.log(`Connection to database established`);
+     const message = JSON.stringify(articlesList, null, 2);
+    // const message = `hohoho`;
     try {
       sendResponse(
         res,

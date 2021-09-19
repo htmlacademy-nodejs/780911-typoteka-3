@@ -1,6 +1,7 @@
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
+const Aliase = require("./aliase");
 
 module.exports = (sequelize) => {
   class Author extends Model{}
@@ -11,11 +12,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    firstName: {
+    first_name: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    lastName: {
+    last_name: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
@@ -39,6 +40,8 @@ module.exports = (sequelize) => {
     }
   }, {
     sequelize,
+    modelName: `Author`,
+    tableName: Aliase.AUTHORS
   });
 
   return Author;

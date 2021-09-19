@@ -22,7 +22,7 @@ if (notDefinedENVVars.length > 0) {
   );
 }
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+const getSequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
   port: DB_PORT,
   dialect: `postgres`,
@@ -35,5 +35,5 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 });
 
 module.exports = {
-  sequelize,
+  getSequelize,
 };

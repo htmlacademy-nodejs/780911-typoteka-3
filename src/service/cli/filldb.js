@@ -34,7 +34,7 @@ module.exports = {
     }
 
     logger.info(`Connection to database established`);
-    console.log(`Connection to database established`);
+   // console.log(`Connection to database established`);
 
     const { Post, Category } = defineModels(sequelize);
 
@@ -53,7 +53,8 @@ module.exports = {
     );
 
     const postPromises = generatedPosts.map(async (post) => {
-      const postModel = await Post.create(post, { include: [Aliase.COMMENTS] });
+      // const postModel = await Post.create(post, { include: [Aliase.COMMENTS] });
+      const postModel = await Post.create(post);
       await postModel.addCategories(post.categories);
     });
     await Promise.all(postPromises);
