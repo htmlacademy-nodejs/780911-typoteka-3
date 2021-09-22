@@ -10,7 +10,8 @@ const defineModels = require(`../../models`);
 const { ExitCode } = require("../../../constants");
 const express = require(`express`);
 const { Router } = require(`express`);
-const apiRoutes = require(`./api-routes`);
+//const apiRoutes = require(`./api-routes`);
+const apiRoutes = require(`../../api`)
 const postsRouter = new Router();
 const { HttpCode } = require(`../../../HttpCode`);
 const { sendResponse, returnArticles, returnTitles } = require(`../../../utils`);
@@ -49,7 +50,7 @@ const run = async (args) => {
 
   const app = express();
 
-  app.use(`/api`, await apiRoutes());
+  app.use(`/api`, await apiRoutes.postRoutes(getSequelize));
 
   app.use(function (req, res, next) {
     logger.info(`Start request to url ${req.url}`);
@@ -74,8 +75,6 @@ const run = async (args) => {
   app.use(
     `/posts`,
     postsRouter.get(`/`, async (req, res) => {
-      // const jsonRes = JSON.parse(await fs.readFile(MOCK_FILE_PATH, `utf8`));
-      //res.json(jsonRes);
       res.json(allPosts);
       logger.info(`End request get /posts with status code ${res.statusCode}`);
       console.log(`End request get /posts with status code ${res.statusCode}`);

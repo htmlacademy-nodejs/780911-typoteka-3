@@ -55,6 +55,5 @@ module.exports = (sequelize) => {
     return {count, offers: rows};
   }
 
-
   return Post;
 };
