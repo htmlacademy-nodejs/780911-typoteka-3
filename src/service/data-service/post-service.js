@@ -1,7 +1,10 @@
 "use strict";
 
+const Sequelize = require(`sequelize`);
+
 module.exports = class PostService{
   constructor(sequelize) {
+    this._sequelize = sequelize;
     this._Post=sequelize.models.Post;
     this._PostCategory = sequelize.models.PostCategory;
   }
@@ -12,7 +15,7 @@ module.exports = class PostService{
     return newPost.get();
   }
 
-  async getAll() {
+  async findAll() {
     const posts = await this._Post.findAll();
     return posts.map((post) => post.get());
   }
@@ -39,6 +42,6 @@ module.exports = class PostService{
     const deletedRows = await this._Post.destroy({
       where: {id}
     });
-    return Boolean(deletedRows);
+    return Boolean(!!deletedRows);
   }
 }
