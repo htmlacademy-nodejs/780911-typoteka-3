@@ -3,12 +3,13 @@
 
 const express = require(`express`);
 const http = require(`http`);
-const { HttpCode } = require(`../../../HttpCode`);
+const {HttpCode} = require(`../../../HttpCode`);
 const routes = require(`../../api`);
-const { getLogger } = require(`./logger`);
+const {getLogger} = require(`./logger`);
 const logger = getLogger();
-const getSequelize = require(`../lib/sequelize`);
+const {getSequelize} = require(`../../lib/sequelize.js`);
 const {sendResponse} = require("../../../utils");
+const {API_PREFIX} = require("../../../constants");
 const DEFAULT_PORT = 3000;
 const app = express();
 const server = http.createServer(app);
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
 });
 
 
-app.use(`/api`, routes);
+app.use(API_PREFIX, routes);
 
 app.use((req, res) => {
   res.status(HttpCode.NOT_FOUND)
@@ -46,17 +47,17 @@ app.use((err, _req, _res, _next) => {
 module.exports = {
   name: `--server`,
   async run(args) {
+  const sequelize = getSequelize();
   try {
-    await getSequelize.authenticate();
-    console.log(`Соединение с сервером установлено!`);
-    logger.info(`Соединение с сервером установлено!`);
+     await sequelize.authenticate();
+     console.log(`Соединение с сервером установлено!`);
+     logger.info(`Соединение с сервером установлено!`);
   } catch (err) {
-    logger.error(`Не удалось установить соединение по причине: ${err}`);
-    process.exit(ExitCode.error);
+      logger.error(`Не удалось установить соединение по причине: ${err}`);
+      process.exit(ExitCode.error);
   }
     logger.info(`Connection to database established`);
     console.log(`Connection to database established`);
-
 
     const port = args ? Number.parseInt(args[0], 10) : DEFAULT_PORT;
 
@@ -185,31 +186,4 @@ module.exports = {
 // const { getSequelize } = require(`../../lib/sequelize`);
 // const { ExitCode } = require("../../../constants");
 //
-// const name = `--server`;
-//
-// const run = async (args) => {
-//   try {
-//     await getSequelize.authenticate();
-//     console.log(`Соединение с сервером установлено!`);
-//     logger.info(`Соединение с сервером установлено!`);
-//   } catch (err) {
-//     logger.error(`Не удалось установить соединение по причине: ${err}`);
-//     process.exit(ExitCode.error);
-//   }
-//
-//   const app = await server();
-//   const port = args ? Number.parseInt(args[0], 10) : DEFAULT_PORT;
-//
-//   app.listen(port, (err) => {
-//     if (err) {
-//       logger.error(`Ошибка при создании сервера`, err);
-//     }
-//     console.log(`Ожидаю соединений на ${port} src/service/cli/server/index.js`);
-//     return logger.info(`Ожидаю соединений на ${port}`);
-//   });
-// };
-//
-// module.exports = {
-//   name,
-//   run,
-// };
+

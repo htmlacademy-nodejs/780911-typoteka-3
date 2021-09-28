@@ -4,7 +4,9 @@ const {Model, DataTypes} = require(`sequelize`);
 const Alias = require("./alias");
 
 module.exports = (sequelize) => {
-  class Author extends Model{}
+  class Author extends Model{
+  }
+
   Author.init({
     id: {
       type: DataTypes.INTEGER,

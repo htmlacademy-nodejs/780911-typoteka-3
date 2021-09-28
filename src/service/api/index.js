@@ -5,16 +5,19 @@ const {Router} = require(`express`);
 const post = require(`./post-routes`);
 const {
   PostService,
+  CommentService
 } = require(`../data-service`);
-const sequelize = require(`../lib/sequelize`);
+const {getSequelize} = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
 
 const app = new Router();
-console.log('11111');
+const sequelize = getSequelize();
+
+console.log('src/service/api/index.js');
 defineModels(sequelize);
 
 (() => {
-  post(app, new PostService(sequelize));
+  post(app, new PostService(sequelize), new CommentService(sequelize));
 })();
 
 module.exports = app;

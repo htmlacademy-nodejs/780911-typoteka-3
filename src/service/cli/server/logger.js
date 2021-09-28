@@ -8,7 +8,7 @@ const logger = pino({
     colorize: true,
     translateTime: `yyyy-dd-mm, h:MM:ss TT`,
   },
-}, pino.destination({dest: `./src/service/logs/logs`, sync: false}));
+}, pino.destination({dest: `./src/service/logs/api.log`, sync: false}));
 
 module.exports = {
   logger,

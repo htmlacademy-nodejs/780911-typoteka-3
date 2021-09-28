@@ -22,35 +22,38 @@ const {
 } = require(`../../../utils`);
 const { getLogger } = require(`./logger`);
 const log = getLogger();
+// TODO: commented routes are replaced to corresponding files in api folder
 
 const api = async () => {
   const { Router } = require(`express`);
   const router = new Router();
   let articlesList = await returnArticles(MOCK_FILE_PATH);
   const categories = await readContentTxt(CATEGORIES);
-  router.get(`/articles`, async (req, res) => {
-    try {
-      res.json(articlesList);
-      log.info(`End request GET: /articles with status code ${res.statusCode}`);
-    } catch (e) {
-      sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
-      log.error(`End request GET: /articles with error ${res.statusCode}`);
-    }
-  });
 
-  router.post(`/articles`, jsonParser, articleValidator, async (req, res) => {
-    try {
-      const newArticle = createArticle(req.body);
-      articlesList.push(newArticle);
-      res.json(articlesList[articlesList.length - 1]);
-      log.info(
-        `End request POST: /articles with status code ${res.statusCode}`
-      );
-    } catch (e) {
-      sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
-      log.error(`End request POST: /articles with error ${res.statusCode}`);
-    }
-  });
+
+  // router.get(`/articles`, async (req, res) => {
+  //   try {
+  //     res.json(articlesList);
+  //     log.info(`End request GET: /articles with status code ${res.statusCode}`);
+  //   } catch (e) {
+  //     sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
+  //     log.error(`End request GET: /articles with error ${res.statusCode}`);
+  //   }
+  // });
+
+  // router.post(`/articles`, jsonParser, articleValidator, async (req, res) => {
+  //   try {
+  //     const newArticle = createArticle(req.body);
+  //     articlesList.push(newArticle);
+  //     res.json(articlesList[articlesList.length - 1]);
+  //     log.info(
+  //       `End request POST: /articles with status code ${res.statusCode}`
+  //     );
+  //   } catch (e) {
+  //     sendResponse(res, HttpCode.NOT_FOUND, `the articles list is not found`);
+  //     log.error(`End request POST: /articles with error ${res.statusCode}`);
+  //   }
+  // });
 
   router.get(`/categories`, async (req, res) => {
     try {
@@ -64,31 +67,31 @@ const api = async () => {
     }
   });
 
-  router.get(`/articles/:articleId`, async (req, res) => {
-    try {
-      const article = await returnItemByID(articlesList, req.params.articleId);
-      if (article) {
-        res.json(article);
-        log.info(
-          `End request GET: /articles/:articleId with status code ${res.statusCode}`
-        );
-      } else {
-        sendResponse(
-          res,
-          HttpCode.NOT_FOUND,
-          `the article with id ${req.params.articleId} is not found`
-        );
-        log.error(
-          `End request GET: /articles/:articleId with error ${res.statusCode}`
-        );
-      }
-    } catch (err) {
-      sendResponse(res, HttpCode.NOT_FOUND, err);
-      log.error(
-        `End request GET: /articles/:articleId with error ${res.statusCode}`
-      );
-    }
-  });
+  // router.get(`/articles/:articleId`, async (req, res) => {
+  //   try {
+  //     const article = await returnItemByID(articlesList, req.params.articleId);
+  //     if (article) {
+  //       res.json(article);
+  //       log.info(
+  //         `End request GET: /articles/:articleId with status code ${res.statusCode}`
+  //       );
+  //     } else {
+  //       sendResponse(
+  //         res,
+  //         HttpCode.NOT_FOUND,
+  //         `the article with id ${req.params.articleId} is not found`
+  //       );
+  //       log.error(
+  //         `End request GET: /articles/:articleId with error ${res.statusCode}`
+  //       );
+  //     }
+  //   } catch (err) {
+  //     sendResponse(res, HttpCode.NOT_FOUND, err);
+  //     log.error(
+  //       `End request GET: /articles/:articleId with error ${res.statusCode}`
+  //     );
+  //   }
+  // });
 
   router.put(
     `/articles/:articleId`,
@@ -123,35 +126,35 @@ const api = async () => {
     }
   );
 
-  router.delete(`/articles/:articleId`, async (req, res) => {
-    try {
-      const article = await returnItemByID(articlesList, req.params.articleId);
-
-      if (article) {
-        articlesList = articlesList.filter(
-          (item) => item.id !== req.params.articleId
-        );
-        res.json(articlesList);
-        log.info(
-          `End request DELETE: /articles/:articleId with status code ${res.statusCode}`
-        );
-      } else {
-        sendResponse(
-          res,
-          HttpCode.NOT_FOUND,
-          `the article with id ${req.params.articleId} is not found`
-        );
-        log.error(
-          `End request DELETE: /articles/:articleId with error ${res.statusCode}`
-        );
-      }
-    } catch (err) {
-      sendResponse(res, HttpCode.NOT_FOUND, err);
-      log.error(
-        `End request DELETE: /articles/:articleId with error ${res.statusCode}`
-      );
-    }
-  });
+  // router.delete(`/articles/:articleId`, async (req, res) => {
+  //   try {
+  //     const article = await returnItemByID(articlesList, req.params.articleId);
+  //
+  //     if (article) {
+  //       articlesList = articlesList.filter(
+  //         (item) => item.id !== req.params.articleId
+  //       );
+  //       res.json(articlesList);
+  //       log.info(
+  //         `End request DELETE: /articles/:articleId with status code ${res.statusCode}`
+  //       );
+  //     } else {
+  //       sendResponse(
+  //         res,
+  //         HttpCode.NOT_FOUND,
+  //         `the article with id ${req.params.articleId} is not found`
+  //       );
+  //       log.error(
+  //         `End request DELETE: /articles/:articleId with error ${res.statusCode}`
+  //       );
+  //     }
+  //   } catch (err) {
+  //     sendResponse(res, HttpCode.NOT_FOUND, err);
+  //     log.error(
+  //       `End request DELETE: /articles/:articleId with error ${res.statusCode}`
+  //     );
+  //   }
+  // });
 
   router.delete(
     `/articles/:articleId/comments/:commentId`,

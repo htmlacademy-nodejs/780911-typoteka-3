@@ -1,15 +1,13 @@
 "use strict";
-// const fs = require(`fs`).promises;
-// const chalk = require(`chalk`);
+
 const { generatePublications, readContentTxt } = require("../../utils");
 const { getSequelize } = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
-const {Alias} = require(`../models/alias`);
+const { Alias } = require(`../models/alias`);
 const { getLogger } = require(`./server/logger`);
 const logger = getLogger();
 const { ExitCode } = require(`../../constants`);
 const DEFAULT_COUNT = 1;
-// const FILE_NAME = `mocks.json`;
 const TITLES = `./data/titles.txt`;
 const ANNOUNCE = `./data/sentences.txt`;
 const CATEGORIES = `./data/categories.txt`;
@@ -18,6 +16,7 @@ const COMMENTS = `./data/comments.txt`;
 module.exports = {
   name: "--filldb",
   async run(args) {
+    const sequelize = getSequelize();
     const [count] = args;
     const countVal = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const titles = await readContentTxt(TITLES);
@@ -26,19 +25,21 @@ module.exports = {
     const comments = await readContentTxt(COMMENTS);
 
     try {
+      console.log(`Trying to connect to database...`);
       logger.info(`Trying to connect to database...`);
-      await getSequelize.authenticate();
+      await sequelize.authenticate();
     } catch (err) {
+      console.log(`An error occurred: ${err.message}`);
       logger.error(`An error occurred: ${err.message}`);
       process.exit(ExitCode.error);
     }
 
     logger.info(`Connection to database established`);
-   // console.log(`Connection to database established`);
+    console.log(`Connection to database established`);
 
-    const { Post, Category } = defineModels(getSequelize);
+    const { Post, Category } = defineModels(sequelize);
 
-    await getSequelize.sync({ force: true });
+    await sequelize.sync({ force: true });
 
     const categoryModels = await Category.bulkCreate(
       categories.map((item) => ({ name: item }))
