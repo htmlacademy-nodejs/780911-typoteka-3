@@ -1,10 +1,9 @@
 "use strict";
-
+/* Important!!! Categories to post are named as categories, not category, cuz they are stored in DB as categories*/
 const Alias = require("../models/alias");
 
 module.exports = class PostService {
   constructor(sequelize) {
-    // this._sequelize = sequelize;
     this._Post = sequelize.models.Post;
     this._PostCategory = sequelize.models.PostCategory;
   }
@@ -18,9 +17,7 @@ module.exports = class PostService {
   async findAll() {
     const options = {
       include: [Alias.CATEGORIES],
-      order: [
-        [`createdAt`, `DESC`]
-      ],
+      order: [[`createdAt`, `DESC`]],
     };
 
     options.order = [[`createdAt`, `DESC`]];
@@ -47,27 +44,19 @@ module.exports = class PostService {
 
   async update({ id, post }) {
     console.log("PostService", id, post);
-    const [updatedRows] = await this._Post.update(post, {
-      where: { id },
-    });
-
-    // TODO: uncomment this lines after the whole func is working and enable updates for categories of post
-    // await this._PostCategory.destroy({
-    //   where: {post_id: id}
-    // });
-
-    // const updatedArticle = await this._Post.findByPk(id);
-    // console.log('updatedArticle', updatedArticle);
-    // await updatedArticle.addCategories([...post.categories]);
-    // return Boolean(updatedRows);
-
-    const updatedArticle = await this._Post.findOne({
+    const affectedRows = await this._Post.update(post, {
       where: {
         id,
-      },
+      }
     });
 
-    await updatedArticle.setCategories(offer.categories);
+    const updatedOffer = await this._Post.findOne({
+      where: {
+        id,
+      }
+    });
+
+    await updatedOffer.setCategories(post.categories);
 
     return !!affectedRows;
   }

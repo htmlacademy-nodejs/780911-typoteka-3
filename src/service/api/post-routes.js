@@ -6,17 +6,17 @@ const { Router } = require(`express`);
 const { HttpCode } = require(`../../HttpCode`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.json();
-const {articleValidator} = require("../../express/middlewares/validator");
-const {sendResponse} = require("../../utils");
-const {articlePutValidator}= require("../../express/middlewares/validator");
-
+const { articleValidator } = require("../../express/middlewares/validator");
+const { sendResponse } = require("../../utils");
+const { articlePutValidator } = require("../../express/middlewares/validator");
+const { formatPostToBD } = require("../lib/formatPosTtoBD");
 module.exports = (app, postService, commentService) => {
   const router = new Router();
 
   app.use(`/articles`, router);
 
   router.get(`/`, async (req, res) => {
-    const {limit, offset, userId, categoryId, withComments} = req.query;
+    const { limit, offset, userId, categoryId, withComments } = req.query;
 
     let posts = {};
 
@@ -27,71 +27,63 @@ module.exports = (app, postService, commentService) => {
   });
 
   router.get(`/:articleId`, async (req, res) => {
-    const {articleId} = req.params;
+    const { articleId } = req.params;
 
-    console.log('src/service/api/post-routes.js', articleId);
-    const post = await postService.findOne({articleId});
+    console.log("src/service/api/post-routes.js", articleId);
+    const post = await postService.findOne({ articleId });
 
     if (!post) {
-      return res.status(HttpCode.NOT_FOUND)
+      return res
+        .status(HttpCode.NOT_FOUND)
         .send(`the article with id ${articleId} is not found`);
     }
 
-    return res.status(HttpCode.OK)
-      .json(post);
+    return res.status(HttpCode.OK).json(post);
   });
 
   router.post(`/`, jsonParser, articleValidator, async (req, res) => {
-    const data = await postService.create(req.body);
+    const formattedPost = formatPostToBD(req.body);
+    console.log("formattedPost", formattedPost);
+    const data = await postService.create(formattedPost);
     return res.json(data);
   });
 
-  router.put(`/:articleId`,
-    jsonParser, async (req, res) => {
-      const {articleId} = req.params;
+  router.put(`/:articleId`, jsonParser, async (req, res) => {
+    const { articleId } = req.params;
+    const updated = await postService.update({ id: articleId, post: req.body });
 
-    console.log('articleId', articleId);
-    console.log('req.body', req.body);
-    const updated = await postService.update({id: articleId, post: req.body});
-
-    console.log('updated', updated);
+    console.log("updated", updated);
     if (!updated) {
-      return res.status(HttpCode.NOT_FOUND)
+      return res
+        .status(HttpCode.NOT_FOUND)
         .send(`the article with id ${articleId} is not found`);
     }
-    return res.status(HttpCode.OK)
-      .json(updated);
+    return res.status(HttpCode.OK).json(updated);
   });
 
   router.delete(`/:articleId`, async (req, res) => {
-    const {articleId} = req.params;
-    console.log('router.delete /:articleId/', articleId)
-    const post = await postService.findOne({articleId});
+    const { articleId } = req.params;
+    console.log("router.delete /:articleId/", articleId);
+    const post = await postService.findOne({ articleId });
 
     if (!post) {
-      return res.status(HttpCode.NOT_FOUND)
-        .send(`Not found`);
+      return res.status(HttpCode.NOT_FOUND).send(`Not found`);
     }
 
-    const deletedPost = await postService.drop({id: articleId});
+    const deletedPost = await postService.drop({ id: articleId });
 
     if (!deletedPost) {
-      return res.status(HttpCode.FORBIDDEN)
-        .send(`Forbidden`);
+      return res.status(HttpCode.FORBIDDEN).send(`Forbidden`);
     }
 
-    return res.status(HttpCode.OK)
-      .json(deletedPost);
+    return res.status(HttpCode.OK).json(deletedPost);
   });
 
   router.post(`/:articleId/comments`, async (req, res) => {
-    const {articleId} = req.params;
+    const { articleId } = req.params;
     //TODO: create commentService file
     const comment = await commentService.create(articleId, req.body);
 
-    return res.status(HttpCode.CREATED)
-      .json(comment);
+    return res.status(HttpCode.CREATED).json(comment);
   });
-
-
 };

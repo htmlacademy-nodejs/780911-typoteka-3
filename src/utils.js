@@ -122,7 +122,7 @@ const generatePublications = (count, titles, categories, sentences, comments) =>
         0,
         getRandomInt(1, categories.length)
       ),
-      author_id: getRandomInt(0, count)
+      // author_id: getRandomInt(0, count)
     }));
 
 const sendResponse = (res, statusCode, message) => {

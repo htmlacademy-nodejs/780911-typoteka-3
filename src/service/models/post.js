@@ -31,10 +31,10 @@ module.exports = (sequelize) => {
     avatar: {
       type: DataTypes.STRING(50)
     },
-    author_id : {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    }
+    // author_id : {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // }
   }, {
     sequelize,
     modelName: `Post`,
