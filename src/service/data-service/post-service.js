@@ -50,11 +50,14 @@ module.exports = class PostService {
       }
     });
 
+    console.log('affectedRows', affectedRows);
+
     const updatedOffer = await this._Post.findOne({
       where: {
         id,
       }
     });
+    console.log('updatedOffer', updatedOffer);
 
     await updatedOffer.setCategories(post.categories);
 
