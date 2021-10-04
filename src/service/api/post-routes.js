@@ -1,11 +1,10 @@
 "use strict";
 
-// TODO: router PUT /:articleId doesn't work, req.body is empty
-
 const { Router } = require(`express`);
 const { HttpCode } = require(`../../HttpCode`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.json();
+const articleExist = require("../middlewares/article-exist");
 const { articleValidator } = require("../../express/middlewares/validator");
 const { sendResponse } = require("../../utils");
 const { articlePutValidator } = require("../../express/middlewares/validator");
@@ -62,9 +61,9 @@ module.exports = (app, postService, commentService) => {
   });
 
   router.delete(`/:articleId`, async (req, res) => {
-    const { articleId } = req.params;
-    console.log("router.delete /:articleId/", articleId);
-    const post = await postService.findOne({ articleId });
+    const { postId } = req.params;
+    console.log("router.delete /:articleId/", postId);
+    const post = await postService.findOne({ postId });
 
     if (!post) {
       return res.status(HttpCode.NOT_FOUND).send(`Not found`);
@@ -79,11 +78,56 @@ module.exports = (app, postService, commentService) => {
     return res.status(HttpCode.OK).json(deletedPost);
   });
 
-  router.post(`/:articleId/comments`, async (req, res) => {
-    const { articleId } = req.params;
-    //TODO: create commentService file
-    const comment = await commentService.create(articleId, req.body);
+  router.get(
+    `/:articleId/comments`,
+    articleExist(postService),
+    async (req, res) => {
+      const { articleId } = req.params;
 
-    return res.status(HttpCode.CREATED).json(comment);
-  });
+      console.log("src/service/api/post-routes.js: articleId", articleId);
+      const comments = await commentService.findAll(articleId);
+
+      console.log("comments", comments);
+      res.status(HttpCode.OK).json(comments);
+    }
+  );
+
+  router.post(
+    `/:articleId/comments`,
+    articleExist(postService),
+    async (req, res) => {
+      const { articleId } = req.params;
+
+      const comment = await commentService.create(articleId, req.body);
+
+      return res.status(HttpCode.OK).json(comment);
+    }
+  );
+
+  router.delete(
+    `/:articleId/comments/:commentId`,
+    articleExist(postService),
+    async (req, res) => {
+      const { articleId, commentId } = req.params;
+
+      const comment = await commentService.findOne(commentId, articleId);
+
+      if (!comment) {
+        return res.status(HttpCode.NOT_FOUND).send(`Not found`);
+      }
+
+      console.log('found comment to delete:', comment);
+
+      const deletedComment = await commentService.drop(
+        articleId,
+        commentId
+      );
+
+      if (!deletedComment) {
+        return res.status(HttpCode.FORBIDDEN).send(`Forbidden`);
+      }
+
+      return res.status(HttpCode.OK).json(deletedComment);
+    }
+  );
 };

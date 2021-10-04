@@ -2,38 +2,37 @@
 
 module.exports = class CommentService {
   constructor(sequelize) {
-    // this._sequelize = sequelize;
     this._Comment = sequelize.models.Comment;
     this._Post = sequelize.models.Post;
   }
 
-  async create(articleId, comment) {
+  async create(post_id, comment) {
     return await this._Comment.create({
-      articleId,
+      post_id,
       ...comment,
     });
   }
 
-  async findAll(articleId) {
+  async findAll(post_id) {
     return await this._Comment.findAll({
-      where: { articleId },
+      where: { post_id },
       raw: true,
     });
   }
 
-  async findOne(id, articleId) {
+  async findOne(id, post_id) {
     return await this._Comment.findOne({
       where: {
         id,
-        articleId,
+        post_id,
       },
     });
   }
 
-  async drop(articleId, commentId) {
+  async drop(post_id, commentId) {
     const post = await this._Post.findOne({
       where: {
-        id: articleId,
+        id: post_id,
       },
     });
 

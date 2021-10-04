@@ -1,5 +1,5 @@
 "use strict";
-
+// Commented routes are implemented in service/api
 const MOCK_FILE_PATH = `./mocks.json`;
 const CATEGORIES = `./data/categories.txt`;
 const { HttpCode } = require(`../../../HttpCode`);
@@ -93,38 +93,38 @@ const api = async () => {
   //   }
   // });
 
-  router.put(
-    `/articles/:articleId`,
-    jsonParser,
-    articlePutValidator,
-    async (req, res) => {
-      try {
-        let article = await returnItemByID(articlesList, req.params.articleId);
-        if (article) {
-          article = { ...article, ...req.body };
-          res.json(article);
-          articlesList = findReplaceItemById(articlesList, article);
-          log.info(
-            `End request PUT: /articles/:articleId with status code ${res.statusCode}`
-          );
-        } else {
-          sendResponse(
-            res,
-            HttpCode.NOT_FOUND,
-            `the article with id ${req.params.articleId} is not found`
-          );
-          log.error(
-            `End request PUT: /articles/:articleId with error ${res.statusCode}`
-          );
-        }
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
-        log.error(
-          `End requestPUT: /articles/:articleId  with error ${res.statusCode}`
-        );
-      }
-    }
-  );
+  // router.put(
+  //   `/articles/:articleId`,
+  //   jsonParser,
+  //   articlePutValidator,
+  //   async (req, res) => {
+  //     try {
+  //       let article = await returnItemByID(articlesList, req.params.articleId);
+  //       if (article) {
+  //         article = { ...article, ...req.body };
+  //         res.json(article);
+  //         articlesList = findReplaceItemById(articlesList, article);
+  //         log.info(
+  //           `End request PUT: /articles/:articleId with status code ${res.statusCode}`
+  //         );
+  //       } else {
+  //         sendResponse(
+  //           res,
+  //           HttpCode.NOT_FOUND,
+  //           `the article with id ${req.params.articleId} is not found`
+  //         );
+  //         log.error(
+  //           `End request PUT: /articles/:articleId with error ${res.statusCode}`
+  //         );
+  //       }
+  //     } catch (err) {
+  //       sendResponse(res, HttpCode.NOT_FOUND, err);
+  //       log.error(
+  //         `End requestPUT: /articles/:articleId  with error ${res.statusCode}`
+  //       );
+  //     }
+  //   }
+  // );
 
   // router.delete(`/articles/:articleId`, async (req, res) => {
   //   try {
@@ -156,74 +156,74 @@ const api = async () => {
   //   }
   // });
 
-  router.delete(
-    `/articles/:articleId/comments/:commentId`,
-    async (req, res) => {
-      try {
-        const article = await returnItemByID(
-          articlesList,
-          req.params.articleId
-        );
+  // router.delete(
+  //   `/articles/:articleId/comments/:commentId`,
+  //   async (req, res) => {
+  //     try {
+  //       const article = await returnItemByID(
+  //         articlesList,
+  //         req.params.articleId
+  //       );
+  //
+  //       const comment = await returnItemByID(
+  //         article.comments,
+  //         req.params.commentId
+  //       );
+  //
+  //       if (article && comment) {
+  //         const newCommentsList = article.comments.filter(
+  //           (item) => item.id !== req.params.commentId
+  //         );
+  //
+  //         article.comments = newCommentsList;
+  //         res.json(article);
+  //         log.info(
+  //           `End request DELETE: /articles/:articleId/comments/:commentId with status code ${res.statusCode}`
+  //         );
+  //       } else {
+  //         sendResponse(
+  //           res,
+  //           HttpCode.NOT_FOUND,
+  //           `no such article or article's comment`
+  //         );
+  //         log.error(
+  //           `End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`
+  //         );
+  //       }
+  //     } catch (err) {
+  //       sendResponse(res, HttpCode.NOT_FOUND, err);
+  //       log.error(
+  //         `End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`
+  //       );
+  //     }
+  //   }
+  // );
 
-        const comment = await returnItemByID(
-          article.comments,
-          req.params.commentId
-        );
-
-        if (article && comment) {
-          const newCommentsList = article.comments.filter(
-            (item) => item.id !== req.params.commentId
-          );
-
-          article.comments = newCommentsList;
-          res.json(article);
-          log.info(
-            `End request DELETE: /articles/:articleId/comments/:commentId with status code ${res.statusCode}`
-          );
-        } else {
-          sendResponse(
-            res,
-            HttpCode.NOT_FOUND,
-            `no such article or article's comment`
-          );
-          log.error(
-            `End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`
-          );
-        }
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
-        log.error(
-          `End request DELETE: /articles/:articleId/comments/:commentId with error ${res.statusCode}`
-        );
-      }
-    }
-  );
-
-  router.post(
-    `/articles/:articleId/comments`,
-    jsonParser,
-    commentValidator,
-    async (req, res) => {
-      try {
-        const article = await returnItemByID(
-          articlesList,
-          req.params.articleId
-        );
-        const newComment = createComment(req.body.text);
-
-        article.comments.push(newComment);
-        res.json(article);
-        log.info(
-          `End request POST: /articles/:articleId/comments with status code ${res.statusCode}`
-        );
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
-        log.error(
-          `End request POST: /articles/:articleId/comments with error ${res.statusCode}`
-        );
-      }
-    }
-  );
+  // router.post(
+  //   `/articles/:articleId/comments`,
+  //   jsonParser,
+  //   commentValidator,
+  //   async (req, res) => {
+  //     try {
+  //       const article = await returnItemByID(
+  //         articlesList,
+  //         req.params.articleId
+  //       );
+  //       const newComment = createComment(req.body.text);
+  //
+  //       article.comments.push(newComment);
+  //       res.json(article);
+  //       log.info(
+  //         `End request POST: /articles/:articleId/comments with status code ${res.statusCode}`
+  //       );
+  //     } catch (err) {
+  //       sendResponse(res, HttpCode.NOT_FOUND, err);
+  //       log.error(
+  //         `End request POST: /articles/:articleId/comments with error ${res.statusCode}`
+  //       );
+  //     }
+  //   }
+  // );
 
   router.get(`/search`, async (req, res) => {
     const foundByTitleArr = articlesList.filter((item) => {
