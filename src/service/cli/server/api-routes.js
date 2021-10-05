@@ -25,10 +25,10 @@ const log = getLogger();
 // TODO: commented routes are replaced to corresponding files in api folder
 
 const api = async () => {
-  const { Router } = require(`express`);
-  const router = new Router();
-  let articlesList = await returnArticles(MOCK_FILE_PATH);
-  const categories = await readContentTxt(CATEGORIES);
+  // const { Router } = require(`express`);
+  // const router = new Router();
+  // let articlesList = await returnArticles(MOCK_FILE_PATH);
+  // const categories = await readContentTxt(CATEGORIES);
 
 
   // router.get(`/articles`, async (req, res) => {
@@ -55,17 +55,17 @@ const api = async () => {
   //   }
   // });
 
-  router.get(`/categories`, async (req, res) => {
-    try {
-      res.json(categories);
-      log.info(
-        `End request GET: /categories with status code ${res.statusCode}`
-      );
-    } catch (e) {
-      sendResponse(res, HttpCode.NOT_FOUND, `the categories list is not found`);
-      log.error(`End request GET: /categories with error ${res.statusCode}`);
-    }
-  });
+  // router.get(`/categories`, async (req, res) => {
+  //   try {
+  //     res.json(categories);
+  //     log.info(
+  //       `End request GET: /categories with status code ${res.statusCode}`
+  //     );
+  //   } catch (e) {
+  //     sendResponse(res, HttpCode.NOT_FOUND, `the categories list is not found`);
+  //     log.error(`End request GET: /categories with error ${res.statusCode}`);
+  //   }
+  // });
 
   // router.get(`/articles/:articleId`, async (req, res) => {
   //   try {

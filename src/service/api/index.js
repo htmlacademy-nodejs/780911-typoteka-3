@@ -1,13 +1,15 @@
 "use strict";
 
-// TODO:  create CategoryService file
 const {Router} = require(`express`);
 const post = require(`./post-routes`);
 const category = require(`./category-routes`);
+const search = require(`./search-routes`);
+
 const {
   PostService,
   CommentService,
-  CategoryService
+  CategoryService,
+  SearchService
 } = require(`../data-service`);
 const {getSequelize} = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
@@ -21,6 +23,7 @@ defineModels(sequelize);
 (() => {
   post(app, new PostService(sequelize), new CommentService(sequelize));
   category(app, new CategoryService(sequelize));
+  search(app, new SearchService(sequelize));
 })();
 
 module.exports = app;

@@ -6,8 +6,6 @@ const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.json();
 const articleExist = require("../middlewares/article-exist");
 const { articleValidator } = require("../../express/middlewares/validator");
-const { sendResponse } = require("../../utils");
-const { articlePutValidator } = require("../../express/middlewares/validator");
 const { formatPostToBD } = require("../lib/formatPosTtoBD");
 module.exports = (app, postService, commentService) => {
   const router = new Router();

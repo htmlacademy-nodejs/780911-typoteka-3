@@ -1,5 +1,5 @@
 "use strict";
-// TODO:  create CategoryService file
+
 const { Router } = require(`express`);
 const { HttpCode } = require(`../../HttpCode`);
 
@@ -15,13 +15,4 @@ module.exports = (app, CategoryService) => {
     res.status(HttpCode.OK).json(categories);
   });
 
-  router.get(`/:categoryId`, async (req, res) => {
-    const { categoryId } = req.params;
-
-    const category = await CategoryService.findOne(categoryId);
-
-    res.status(HttpCode.OK).json({
-      category,
-    });
-  });
 };
