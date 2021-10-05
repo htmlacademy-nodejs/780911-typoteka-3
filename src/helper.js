@@ -6,7 +6,7 @@ const URL_LIST = {
 };
 
 const moment = require("moment");
-const axios = require("axios");
+const axios = require(`axios`);
 const multer = require("multer");
 const { nanoid } = require(`nanoid`);
 const UPLOAD_DIR = `../upload/img/`;

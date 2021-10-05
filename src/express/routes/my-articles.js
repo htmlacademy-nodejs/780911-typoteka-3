@@ -1,8 +1,8 @@
 "use strict";
 
-const axios = require("axios");
-const {URL_LIST} = require("../helper");
-const {formatDateForPug} = require("../utils");
+const axios = require(`axios`);
+const {URL_LIST} = require(`../../helper`);
+const {formatDateForPug} = require("../../utils");
 const {Router} = require(`express`);
 const myArticlesRouter = new Router();
 const pageTitle = `Типотека`;

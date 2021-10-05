@@ -180,6 +180,10 @@ const formatDateForPug = (dateIn) => {
   }
 };
 
+const formatDataForPug = (data) => {
+
+};
+
 const returnMatchingStringsArray = function (arr1, arr2) {
   const ret = [];
   arr1.sort();
@@ -214,4 +218,5 @@ module.exports = {
   formatDateForPug,
   returnMatchingStringsArray,
   findReplaceItemById,
+  formatDataForPug
 };

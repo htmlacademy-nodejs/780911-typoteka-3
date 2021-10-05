@@ -2,8 +2,8 @@
 
 const { Router } = require(`express`);
 const searchRouter = new Router();
-const axios = require("axios");
-const { formatDateForPug } = require("../utils");
+const axios = require(`axios`);
+const { formatDateForPug } = require("../../utils");
 const pageTitle = `Типотека`;
 
 searchRouter.get(`/`, (req, res) => {

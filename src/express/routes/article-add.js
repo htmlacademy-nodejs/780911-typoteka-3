@@ -4,10 +4,10 @@ const { Router } = require(`express`);
 const articleAddRouter = new Router();
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.urlencoded({ extended: true });
-const axios = require("axios");
-const { URL_LIST, returnCurrentDate, upload } = require("../helper");
-const { articleValidator } = require("../express/middlewares/validator");
-const { returnCategory } = require(`../helper`);
+const axios = require(`axios`);
+const { URL_LIST, returnCurrentDate, upload } = require(`../../helper`);
+const { articleValidator } = require(`../middlewares/validator`);
+const { returnCategory } = require(`../../helper`);
 let now = returnCurrentDate();
 const emptyPost = {
   title: ``,

@@ -2,11 +2,11 @@
 
 const { Router } = require(`express`);
 const articleEditRouter = new Router();
-const axios = require("axios");
-const { returnCurrentDate, upload } = require("../helper");
+const axios = require(`axios`);
+const { returnCurrentDate, upload } = require(`../../helper`);
 const type = `Редактирование публикации`;
 const moment = require("moment");
-const { articleValidator } = require("../express/middlewares/validator");
+const { articleValidator } = require(`../middlewares/validator`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.urlencoded({ extended: true });
 

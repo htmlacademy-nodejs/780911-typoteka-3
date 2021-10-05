@@ -1,7 +1,7 @@
 "use strict";
-const axios = require("axios");
+const axios = require(`axios`);
 const {returnMatchingStringsArray} = require("../../utils");
-const {returnCategory, URL_LIST} = require("../../helper");
+const {returnCategory, URL_LIST} = require(`../../helper`);
 const pageTitle = `Типотека`;
 
 const articleExist = (req, res, next) => {
