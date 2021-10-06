@@ -5,7 +5,8 @@ const Alias = require("../models/alias");
 module.exports = class PostService {
   constructor(sequelize) {
     this._Post = sequelize.models.Post;
-    this._PostCategory = sequelize.models.PostCategory;
+    // this._PostCategory = sequelize.models.PostCategory;
+    this._Comment = sequelize.models.Comment;
   }
 
   async create(post) {
@@ -14,15 +15,23 @@ module.exports = class PostService {
     return newPost.get();
   }
 
-  async findAll() {
+  async findAll({ withComments }) {
     const options = {
       include: [Alias.CATEGORIES],
       order: [[`createdAt`, `DESC`]],
     };
 
+    if (withComments) {
+      options.include.push({
+        model: this._Comment,
+        as: Alias.COMMENTS,
+      });
+    }
+
     options.order = [[`createdAt`, `DESC`]];
 
     const posts = await this._Post.findAll(options);
+    // console.log("findAll in post-service ", posts);
     return posts.map((post) => post.get());
   }
 
@@ -47,17 +56,17 @@ module.exports = class PostService {
     const affectedRows = await this._Post.update(post, {
       where: {
         id,
-      }
+      },
     });
 
-    console.log('affectedRows', affectedRows);
+    console.log("affectedRows", affectedRows);
 
     const updatedOffer = await this._Post.findOne({
       where: {
         id,
-      }
+      },
     });
-    console.log('updatedOffer', updatedOffer);
+    console.log("updatedOffer", updatedOffer);
 
     await updatedOffer.setCategories(post.categories);
 

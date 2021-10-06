@@ -50,11 +50,10 @@ app.use(`/categories`, categories);
 
 app.get(`/`, (req, res) => {
   axios
-    .get(URL_LIST.ARTICLES, { timeout: 1000 })
+    .get(URL_LIST.ARTICLES, { params: { withComments: true } })
     .then((response) => {
       const { current: postsData } = response.data;
-      //TODO: add comments to data list on back end
-       res.render(`main`, { articles: postsData, pageTitle });
+      res.render(`main`, { articles: postsData, pageTitle });
     })
     .catch((err) => {
       console.log(`Error: ${err.message}`);

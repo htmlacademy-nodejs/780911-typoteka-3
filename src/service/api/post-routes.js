@@ -13,11 +13,11 @@ module.exports = (app, postService, commentService) => {
   app.use(`/articles`, router);
 
   router.get(`/`, async (req, res) => {
-    const { limit, offset, userId, categoryId, withComments } = req.query;
+    const { withComments } = req.query;
 
     let posts = {};
 
-    posts.current = await postService.findAll();
+    posts.current = await postService.findAll({ withComments });
     return res.status(HttpCode.OK).json(posts);
 
     return res.status(HttpCode.OK).json(posts);
@@ -114,12 +114,9 @@ module.exports = (app, postService, commentService) => {
         return res.status(HttpCode.NOT_FOUND).send(`Not found`);
       }
 
-      console.log('found comment to delete:', comment);
+      console.log("found comment to delete:", comment);
 
-      const deletedComment = await commentService.drop(
-        articleId,
-        commentId
-      );
+      const deletedComment = await commentService.drop(articleId, commentId);
 
       if (!deletedComment) {
         return res.status(HttpCode.FORBIDDEN).send(`Forbidden`);
