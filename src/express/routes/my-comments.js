@@ -9,14 +9,15 @@ const pageTitle = `Типотека`;
 
 commentsRouter.get(`/`, (req, res) => {
   axios
-    .get(URL_LIST.ARTICLES, { timeout: 1000 })
+    .get(URL_LIST.ARTICLES, { params: { withComments: true } })
     .then((response) => {
-      const data = response.data;
-      data.forEach((item) => {
-        item.formattedDate = formatDateForPug(item.createdDate);
-      });
+      // const data = response.data;
+      // data.forEach((item) => {
+      //   item.formattedDate = formatDateForPug(item.createdDate);
+      // });
+      const { current: postsData } = response.data;
       res.render(`my-comments`, {
-        articles: response.data,
+        articles: postsData,
         pageTitle,
       });
     })

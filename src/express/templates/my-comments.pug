@@ -76,7 +76,7 @@ body
              .publication__header
                img.publication__list-image(src='/img/avatar-small-2.png' width='20' height='20' alt='Аватар пользователя')
                b.publication__list-name Александр Петров
-               time.publication__item-time(datetime=article.createdDate) #{article.formattedDate}
+               time.publication__item-time(datetime=article.created_date) #{article.created_date}
              a.publication__item-text(href='#') #{comment.text}
              p.publication__text-strong #{article.title}
              button.publication__button.button.button--close-item(type='button')

@@ -72,7 +72,7 @@ body
         ul.notes__list
          each article in articles
           li.notes__list-item
-            time.notes__item-time(datetime=article.createdDate) #{article.formattedDate}
+            time.notes__item-time(datetime=article.created_date) #{article.created_date}
             a.notes__item-text(href='#') #{article.title}
             button.notes__button.button.button--close-item(type='button')
               span.visually-hidden Закрыть строку списка

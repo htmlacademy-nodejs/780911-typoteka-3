@@ -26,19 +26,7 @@ app.set(`views`, path.join(__dirname, `./templates`));
 
 app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 app.use(express.static(path.resolve(__dirname, UPLOAD_DIR)));
-/*
-+ / — главная страница;
-/register — регистрация;
-+ /login — вход;
-+ /my — мои публикации;
-+ /my/comments — комментарии к публикациям;
-/articles/category/:id — публикации определённой категории;
-+ /articles/add — страница создания новой публикации;
- + /search — поиск;
-/articles/edit/:id — редактирование публикации;
-/articles/:id — страница публикации;
-+ /categories — категории.
- */
+
 
 app.use(`/login`, login);
 app.use(`/search`, search);
