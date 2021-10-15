@@ -14,7 +14,7 @@ body(style='height: 1050px;')
                   .new-publication__date-form-division
                     .new-publication__date-block
                       label(for='new-publication-date' aria-label='Календарь')
-                      input#new-publication-date(type='text' placeholder=`${article.date}` name='date' value=`${article.date}`)
+                      input#new-publication-date(type='text' placeholder=`${article.created_date}` name='created_date' value=`${article.created_date}`)
                 button.new-publication__button.button.button--colored(type='submit') Опубликовать
               button.popup__button.button.button--popup-close(type='button' aria-label='Закрыть окно') Закрыть окно
               .new-publication__form.form
@@ -24,16 +24,17 @@ body(style='height: 1050px;')
                       input(type='text' placeholder='Заголовок' name='title' required value=`${article.title}`)
                   .form__field.form__field--post-image
                     label
-                      input#image-name-field(type='text' name='image' placeholder='Фотография' readonly)
+                      input#image-name-field(type='text' name='avatar' placeholder='Фотография' readonly)
                     .form__image-loader.form__image-loader--publication
                       label
                         input.visually-hidden(type='file')
                         | Обзор
-                  each categoryItem in category
+                    button.button.button--transparent Удалить
+                  each categoryItem in categories
                     .new-publication__checkbox.new-publication__checkbox--auto
                       - var checked = false;
-                      input(type='checkbox' name=`${categoryItem}` id=`checkbox-${categoryItem}` checked = type === `Редактирование публикации` ? '' : null)
-                      label(for=`checkbox-${categoryItem}`) #{categoryItem}
+                      input(type='checkbox' name=`${'categories'}` id=`checkbox-${categoryItem.id}` checked = type === `Редактирование публикации` ? '' : null value = categoryItem.id)
+                      label(for=`checkbox-${categoryItem.id}`) #{categoryItem.name}
                     | !{' '}
                   a.new-publication__form-link.button.button--transparent(href='/categories') Добавить категорию
                 .form__wrapper.form__wrapper--text
@@ -42,7 +43,7 @@ body(style='height: 1050px;')
                       textarea(rows='1' placeholder='Анонс публикации' name='announce')=article.announce
                   .form__field.form__field--publication-text
                     label
-                      textarea(rows='1' placeholder='Полный текст публикации' name='fullText')=article.fullText
+                      textarea(rows='1' placeholder='Полный текст публикации' name='full_text')=article.full_text
         .modal__overlay
   script(src='/js/vendor.js')
   script(src='/js/main.js')

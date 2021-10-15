@@ -1,10 +1,10 @@
 "use strict";
 
-const ArticleKeys = [`date`,`title`, `announce`, `full_text`, `category`];
+const ArticleKeys = [`created_date`,`title`, `announce`, `full_text`, `categories`];
 const { HttpCode } = require(`../../HttpCode`);
 const { sendResponse } = require(`../../utils`);
 
-const articleValidator = (req, res, next) => {
+const articleBackEndValidator = (req, res, next) => {
   const newArticle = req.body;
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
@@ -43,7 +43,7 @@ const commentValidator = (req, res, next) => {
 };
 
 module.exports = {
-  articleValidator,
+  articleBackEndValidator,
   articlePutValidator,
   commentValidator,
 };

@@ -7,6 +7,7 @@ module.exports = class PostService {
     this._Post = sequelize.models.Post;
     // this._PostCategory = sequelize.models.PostCategory;
     this._Comment = sequelize.models.Comment;
+    this._Category = sequelize.models.Category;
   }
 
   async create(post) {
@@ -35,7 +36,32 @@ module.exports = class PostService {
     return posts.map((post) => post.get());
   }
 
-  findOne({ articleId }) {
+  async findByCategory({id, withComments}) {
+    const options = {
+      include: [
+        {
+          model: this._Category,
+          as: Alias.CATEGORIES,
+          where: {
+            id: id,
+          },
+        },
+      ],
+    };
+
+    if (withComments) {
+      options.include.push({
+        model: this._Comment,
+        as: Alias.COMMENTS
+      });
+    }
+
+    options.order = [[`createdAt`, `DESC`]];
+
+    return this._Post.findAll(options);
+  }
+
+  findOne({ articleId, withComments }) {
     console.log("id: ", articleId);
     const options = {
       include: [Alias.CATEGORIES],
@@ -45,6 +71,14 @@ module.exports = class PostService {
         },
       ],
     };
+
+    if (withComments) {
+      options.include.push({
+        model: this._Comment,
+        as: Alias.COMMENTS,
+        include: [Alias.AUTHORS],
+      });
+    }
 
     options.order = [[`createdAt`, `DESC`]];
 

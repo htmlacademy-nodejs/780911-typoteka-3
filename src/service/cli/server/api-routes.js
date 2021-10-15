@@ -1,30 +1,30 @@
 "use strict";
 // Commented routes are implemented in service/api
-const MOCK_FILE_PATH = `./mocks.json`;
-const CATEGORIES = `./data/categories.txt`;
-const { HttpCode } = require(`../../../HttpCode`);
+// const MOCK_FILE_PATH = `./mocks.json`;
+// const CATEGORIES = `./data/categories.txt`;
+// const { HttpCode } = require(`../../../HttpCode`);
 
-const bodyParser = require(`body-parser`);
-const {findReplaceItemById} = require("../../../utils");
-const jsonParser = bodyParser.json();
-const {
-  articleValidator,
-  articlePutValidator,
-  commentValidator,
-} = require(`../../middlewares/validator`);
-const {
-  returnItemByID,
-  readContentTxt,
-  createArticle,
-  sendResponse,
-  createComment,
-  returnArticles,
-} = require(`../../../utils`);
-const { getLogger } = require(`./logger`);
-const log = getLogger();
+// const bodyParser = require(`body-parser`);
+// const {findReplaceItemById} = require("../../../utils");
+// const jsonParser = bodyParser.json();
+// const {
+//   articleValidator,
+//   articlePutValidator,
+//   commentValidator,
+// } = require(`../../middlewares/validator`);
+// const {
+//   returnItemByID,
+//   readContentTxt,
+//   createArticle,
+//   sendResponse,
+//   createComment,
+//   returnArticles,
+// } = require(`../../../utils`);
+// const { getLogger } = require(`./logger`);
+// const log = getLogger();
 // TODO: commented routes are replaced to corresponding files in api folder
 
-const api = async () => {
+// const api = async () => {
   // const { Router } = require(`express`);
   // const router = new Router();
   // let articlesList = await returnArticles(MOCK_FILE_PATH);
@@ -225,26 +225,26 @@ const api = async () => {
   //   }
   // );
 
-  router.get(`/search`, async (req, res) => {
-    const foundByTitleArr = articlesList.filter((item) => {
-      return item.title.includes(req.query.query);
-    });
+  // router.get(`/search`, async (req, res) => {
+  //   const foundByTitleArr = articlesList.filter((item) => {
+  //     return item.title.includes(req.query.query);
+  //   });
+  //
+  //   if (foundByTitleArr.length) {
+  //     try {
+  //       res.json(foundByTitleArr);
+  //       log.info(`End request GET: /search with status code ${res.statusCode}`);
+  //     } catch (err) {
+  //       sendResponse(res, HttpCode.NOT_FOUND, err);
+  //       log.error(`End request GET: /search with error ${res.statusCode} 1`);
+  //     }
+  //   } else {
+  //     sendResponse(res, HttpCode.NOT_FOUND, `no articles with such title`);
+  //     log.error(`End request GET: /search with error ${res.statusCode}`);
+  //   }
+  // });
+  //
+  // return router;
+// };
 
-    if (foundByTitleArr.length) {
-      try {
-        res.json(foundByTitleArr);
-        log.info(`End request GET: /search with status code ${res.statusCode}`);
-      } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, err);
-        log.error(`End request GET: /search with error ${res.statusCode} 1`);
-      }
-    } else {
-      sendResponse(res, HttpCode.NOT_FOUND, `no articles with such title`);
-      log.error(`End request GET: /search with error ${res.statusCode}`);
-    }
-  });
-
-  return router;
-};
-
-module.exports = api;
+// module.exports = api;

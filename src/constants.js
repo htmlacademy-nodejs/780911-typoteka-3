@@ -27,3 +27,9 @@ module.exports.Env = {
   DEVELOPMENT: `development`,
   PRODUCTION: `production`
 };
+
+
+module.exports.pageTitles = {
+  default:`Типотека`,
+  newPost: `Новая публикация`
+};

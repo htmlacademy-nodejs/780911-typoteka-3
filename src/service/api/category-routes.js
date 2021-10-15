@@ -10,7 +10,7 @@ module.exports = (app, CategoryService) => {
 
   router.get(`/`, async (req, res) => {
     console.log(`src/service/api/category-routes.js file`);
-    const categories = await CategoryService.findAll();
+    const categories = await CategoryService.findAll(false);
 
     res.status(HttpCode.OK).json(categories);
   });

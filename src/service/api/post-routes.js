@@ -5,9 +5,9 @@ const { HttpCode } = require(`../../HttpCode`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.json();
 const articleExist = require("../middlewares/article-exist");
-const { articleValidator } = require("../../express/middlewares/validator");
+const { articleBackEndValidator } = require("../middlewares/validator");
 const { formatPostToBD } = require("../lib/formatPosTtoBD");
-module.exports = (app, postService, commentService) => {
+module.exports = (app, postService, commentService, CategoryService) => {
   const router = new Router();
 
   app.use(`/articles`, router);
@@ -25,10 +25,11 @@ module.exports = (app, postService, commentService) => {
 
   router.get(`/:articleId`, async (req, res) => {
     const { articleId } = req.params;
-
+    const { withComments } = req.query;
     console.log("src/service/api/post-routes.js", articleId);
-    const post = await postService.findOne({ articleId });
+    const post = await postService.findOne({ articleId, withComments });
 
+    console.log("post on backEnd", post);
     if (!post) {
       return res
         .status(HttpCode.NOT_FOUND)
@@ -38,7 +39,25 @@ module.exports = (app, postService, commentService) => {
     return res.status(HttpCode.OK).json(post);
   });
 
-  router.post(`/`, jsonParser, articleValidator, async (req, res) => {
+  router.get(`/category/:id`, async (req, res) => {
+    const { id } = req.params;
+    const { withComments } = req.query;
+    console.log("POST ROUTES category/:", id);
+    const posts = await postService.findByCategory({ id, withComments });
+    const categoryName = await CategoryService.findOne(id);
+    const otherCategories = await CategoryService.findAll(true);
+    if (!posts) {
+      return res
+        .status(HttpCode.NOT_FOUND)
+        .send(`the article with id ${id} is not found`);
+    }
+
+    return res
+      .status(HttpCode.OK)
+      .json({ category: categoryName, otherCategories, posts });
+  });
+
+  router.post(`/`, jsonParser, articleBackEndValidator, async (req, res) => {
     const formattedPost = formatPostToBD(req.body);
     console.log("formattedPost", formattedPost);
     const data = await postService.create(formattedPost);

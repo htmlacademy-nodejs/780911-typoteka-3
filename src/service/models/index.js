@@ -39,43 +39,11 @@ const define = (sequelize) => {
     foreignKey: `author_id`,
   });
 
-
   Author.hasMany(Comment, { as: Alias.COMMENTS, foreignKey: `author_id` });
   Comment.belongsTo(Author, {
     as: Alias.AUTHORS,
     foreignKey: `author_id`,
   });
-
-  // Post.hasMany(Comment, {
-  //   as: Alias.COMMENTS,
-  //   foreignKey: `post_id`,
-  //   onDelete: `cascade`,
-  // });
-  // Comment.belongsTo(Post, {
-  //   foreignKey: `post_id`,
-  // });
-  //
-  // Post.belongsToMany(Category, {
-  //   through: PostCategory,
-  //   as: Alias.CATEGORIES,
-  // });
-  // Category.belongsToMany(Post, {
-  //   through: PostCategory,
-  //   as: Alias.POSTS,
-  // });
-  // Category.hasMany(PostCategory, { as: Alias.POST_CATEGORIES });
-  //
-  // Post.belongsTo(Author, {
-  //   foreignKey: `author_id`,
-  //   as: Alias.AUTHORS,
-  // });
-  // Author.hasMany(Post, { as: Alias.POSTS, foreignKey: `author_id` });
-  //
-  // Author.hasMany(Comment, { as: Alias.COMMENTS, foreignKey: `author_id` });
-  // Comment.belongsTo(Author, {
-  //   as: Alias.AUTHORS,
-  //   foreignKey: `post_id`,
-  // });
 
   return { Post, Category, Comment, PostCategory };
 };
