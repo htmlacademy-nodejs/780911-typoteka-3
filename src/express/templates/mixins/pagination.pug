@@ -1,0 +1,27 @@
+mixin pagination(page, totalPages, width, prefix)
+  -
+    let start = page - width;
+    let end = page + width;
+    if (start < 1) {
+      end += 1 - start;
+      start = 1;
+    }
+    if (end > totalPages) {
+      start -= end - totalPages;
+      end = totalPages;
+    }
+    if (start < 1) {
+      start = 1;
+    }
+    let i = start - 1
+  .preview__toggle-wrapper
+    ul.preview__pagination.pagination
+      if start > 1
+        li
+          a.pagination__button.button.button--backwards.button--disabled(href='#' aria-label='Страница назад') Назад
+      while i++ < end
+        li.pagination__item(class=i === page ? 'pagination__item--active': '')
+          a(href=`${prefix}page=${i}`) #{i}
+      if end < totalPages
+        li
+          a.pagination__button.button.button--forward(href=`${prefix}page=${page + 1}` aria-label='Страница вперед') Вперед

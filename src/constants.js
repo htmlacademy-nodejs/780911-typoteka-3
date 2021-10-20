@@ -25,11 +25,13 @@ module.exports.MAX_ID_LENGTH = 6;
 
 module.exports.Env = {
   DEVELOPMENT: `development`,
-  PRODUCTION: `production`
+  PRODUCTION: `production`,
 };
-
 
 module.exports.pageTitles = {
-  default:`Типотека`,
-  newPost: `Новая публикация`
+  default: `Типотека`,
+  newPost: `Новая публикация`,
+  editPost: `Редактирование публикации`,
 };
+
+module.exports.OFFERS_PER_PAGE = 8;

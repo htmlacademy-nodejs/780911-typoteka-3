@@ -35,7 +35,7 @@ module.exports = class CategoryService {
     } else {
       return this._Category.findAll({raw: true});
     }
-    //return this._Category.findAll({ raw: true });
+
   }
 
   async findOne(categoryId) {

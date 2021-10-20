@@ -3,10 +3,9 @@
 const { Router } = require(`express`);
 const articleEditRouter = new Router();
 const axios = require(`axios`);
-const { returnCurrentDate, upload } = require(`../../helper`);
-const type = `Редактирование публикации`;
-const moment = require("moment");
-// const { articleValidator } = require(`../middlewares/validator`);
+const { upload } = require(`../../helper`);
+const { pageTitles } = require("../../constants");
+const type = pageTitles.editPost;
 const editArticleValidator = require(`../middlewares/edit-article-frontend-validator`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.urlencoded({ extended: true });
@@ -21,19 +20,18 @@ articleEditRouter.get(`/:articleId`, (req, res) => {
       const fetchedPost = {
         title: data.title,
         announce: data.announce,
-        fullText: data.fullText,
-        date: returnCurrentDate(
-          moment(data.createdDate, "DD-MM-YYYY hh:mm:ss")
-        ),
-        category: data.category,
+        full_text: data.full_text,
+        created_date: data.created_date,
+        categories: data.categories,
       };
-      // res.render(`article-add`, {
-      //   article: fetchedPost,
-      //   type,
-      //   pageTitle: type,
-      //   category: data.category,
-      //   action: `/articles/edit/${req.params.articleId}`,
-      // });
+
+      res.render(`article-add`, {
+        article: fetchedPost,
+        type,
+        pageTitle: type,
+        categories: data.categories,
+        action: `/articles/edit/${req.params.articleId}`,
+      });
     })
     .catch((err) => {
       res.render(`404`, { pageTitle: type });
@@ -59,24 +57,23 @@ articleEditRouter.post(
           title: data.title,
           announce: data.announce,
           full_text: data.full_text,
-          date: returnCurrentDate(
-            moment(data.created_date, "DD-MM-YYYY hh:mm:ss")
-          ),
+          created_date: data.created_date,
           categories: data.categories,
         };
 
-        console.log('edit post Frontend got', data);
-        // if (Object.keys(res.locals.errorList).length) {
-        //   res.render(`article-add`, {
-        //     article: fetchedPost,
-        //     type,
-        //     pageTitle: type,
-        //     categories: data.categories,
-        //     action: `/articles/edit/${req.params.articleId}`,
-        //   });
-        // } else {
-        //   res.redirect(`/my`);
-        // }
+        console.log("edit post Frontend got", data);
+        if (Object.keys(res.locals.errorList).length) {
+          console.log('got some errors', res.locals.errorList);
+          res.render(`article-add`, {
+            article: fetchedPost,
+            type,
+            pageTitle: type,
+            categories: data.categories,
+            action: `/articles/edit/${req.params.articleId}`,
+          });
+        } else {
+          res.redirect(`/my`);
+        }
       })
       .catch((err) => {
         res.render(`404`, { pageTitle: type });

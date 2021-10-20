@@ -36,7 +36,18 @@ module.exports = class PostService {
     return posts.map((post) => post.get());
   }
 
-  async findByCategory({id, withComments}) {
+  async findPage({ limit, offset, withComments }) {
+    const { count, rows } = await this._Post.findAndCountAll({
+      limit,
+      offset,
+      include: [Alias.CATEGORIES],
+      order: [[`createdAt`, `DESC`]],
+      distinct: true,
+    });
+    return { count, offers: rows };
+  }
+
+  async findByCategory({ id, withComments }) {
     const options = {
       include: [
         {
@@ -52,7 +63,7 @@ module.exports = class PostService {
     if (withComments) {
       options.include.push({
         model: this._Comment,
-        as: Alias.COMMENTS
+        as: Alias.COMMENTS,
       });
     }
 

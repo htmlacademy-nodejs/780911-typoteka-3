@@ -1,5 +1,5 @@
 extends layout.pug
-
+include ./mixins/pagination
 block content
       main.main-page
         h1.visually-hidden Главная страница личного блога Типотека
@@ -10,34 +10,11 @@ block content
         section.main-page__theme-list
           h2.visually-hidden Список тем
           ul.themes
-            li.themes__item
-              a.themes__item-link(href='#')
-                | Автомобили
-                sup 88
-            li.themes__item
-              a.themes__item-link(href='#')
-                | Удаленная работа
-                sup 13
-            li.themes__item
-              a.themes__item-link(href='#')
-                | Бизнес
-                sup 13
-            li.themes__item
-              a.themes__item-link(href='#')
-                | Путешествия
-                sup 13
-            li.themes__item
-              a.themes__item-link.themes__item-link--padding(href='#')
-                | Дизайн и обустройство
-                sup 13
-            li.themes__item
-              a.themes__item-link(href='#')
-                | Производство игрушек
-                sup 22
-            li.themes__item
-              a.themes__item-link(href='#')
-                | UX & UI
-                sup 22
+            each category in categories
+              li.themes__item
+                a.themes__item-link(href=`/articles/category/${category.id}`)
+                  | #{category.name}
+                  sup #{category.count}
         .main-page__section-flex
           section.main-page__hot.hot
             h2.hot__name
@@ -84,10 +61,11 @@ block content
           ul.preview__list
            each article in articles
             li.preview__item.preview__item--noimage
-              ul.preview__breadcrumbs
-               each subcategory in article.categories
-                li.preview__breadcrumbs-item
-                  a.preview__breadcrumbs-link(href='#') #{subcategory.name}
+              if article.categories && article.categories.length
+                ul.preview__breadcrumbs
+                 each subcategory in article.categories
+                    li.preview__breadcrumbs-item
+                      a.preview__breadcrumbs-link(href='#') #{subcategory.name}
               time.preview__time(datetime=article.created_date) #{article.created_date}
               h3.preview__name
                 a.preview__name-link(href='#') #{article.title}
@@ -96,6 +74,5 @@ block content
                 | Комментарии
                 span.preview__cloud
                 |
-                b.preview__comment-count #{article.comments.length}
-
-
+                b.preview__comment-count #{article.comments && article.comments.length}
+          + pagination(page, totalPages, 2, `?`)

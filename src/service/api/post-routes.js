@@ -13,13 +13,22 @@ module.exports = (app, postService, commentService, CategoryService) => {
   app.use(`/articles`, router);
 
   router.get(`/`, async (req, res) => {
-    const { withComments } = req.query;
+    const { offset, limit, withComments } = req.query;
 
     let posts = {};
 
-    posts.current = await postService.findAll({ withComments });
-    return res.status(HttpCode.OK).json(posts);
+    if (limit || offset) {
+      posts.current = await postService.findPage({
+        limit,
+        offset,
+      });
+    } else {
+      posts.current = await postService.findAll({ withComments });
+    }
 
+    // posts.current = await postService.findAll({ withComments });
+    // return res.status(HttpCode.OK).json(posts);
+console.log('posts list', posts);
     return res.status(HttpCode.OK).json(posts);
   });
 

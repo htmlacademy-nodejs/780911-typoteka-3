@@ -2,7 +2,7 @@
 const axios = require(`axios`);
 const { URL_LIST } = require(`../../helper`);
 const {sendResponse} = require("../../utils");
-const ArticleKeys = [`date`,`title`, `announce`, `full_text`, `categories`];
+const ArticleKeys = [`created_date`,`title`, `announce`, `full_text`, `categories`];
 
 
 module.exports =  (req, res, next) => {
