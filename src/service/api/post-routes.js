@@ -1,12 +1,12 @@
 "use strict";
 
 const { Router } = require(`express`);
-const { HttpCode } = require(`../../HttpCode`);
+const { HttpCode } = require(`../../http-code`);
 const bodyParser = require(`body-parser`);
 const jsonParser = bodyParser.json();
 const articleExist = require("../middlewares/article-exist");
 const { articleBackEndValidator } = require("../middlewares/validator");
-const { formatPostToBD } = require("../lib/formatPosTtoBD");
+const { formatPostToBD } = require("../lib/format-post-to-db");
 module.exports = (app, postService, commentService, CategoryService) => {
   const router = new Router();
 
@@ -15,30 +15,30 @@ module.exports = (app, postService, commentService, CategoryService) => {
   router.get(`/`, async (req, res) => {
     const { offset, limit, withComments } = req.query;
 
-    let posts = {};
+    let posts;
 
     if (limit || offset) {
-      posts.current = await postService.findPage({
+      posts = await postService.findPage({
         limit,
         offset,
       });
     } else {
-      posts.current = await postService.findAll({ withComments });
+      posts = await postService.findAll({ withComments });
     }
 
     // posts.current = await postService.findAll({ withComments });
     // return res.status(HttpCode.OK).json(posts);
-console.log('posts list', posts);
+    // console.log("posts list", posts);
     return res.status(HttpCode.OK).json(posts);
   });
 
   router.get(`/:articleId`, async (req, res) => {
     const { articleId } = req.params;
     const { withComments } = req.query;
-    console.log("src/service/api/post-routes.js", articleId);
+    // console.log("src/service/api/post-routes.js", articleId);
     const post = await postService.findOne({ articleId, withComments });
 
-    console.log("post on backEnd", post);
+    // console.log("post on backEnd", post);
     if (!post) {
       return res
         .status(HttpCode.NOT_FOUND)
@@ -50,25 +50,50 @@ console.log('posts list', posts);
 
   router.get(`/category/:id`, async (req, res) => {
     const { id } = req.params;
-    const { withComments } = req.query;
-    console.log("POST ROUTES category/:", id);
-    const posts = await postService.findByCategory({ id, withComments });
-    const categoryName = await CategoryService.findOne(id);
+    const { offset, limit, withComments } = req.query;
+    // console.log(
+    //   "POST ROUTES category/: id",
+    //   id,
+    //   "offset",
+    //   offset,
+    //   "limit",
+    //   limit
+    // );
+
+    let data;
+
+    if (limit || offset) {
+      data = await CategoryService.findPage({
+        id,
+        limit,
+        offset,
+      });
+    } else {
+      data = await postService.findByCategory({
+        id,
+        withComments,
+      });
+    }
+
+    const category = await CategoryService.findOne(id);
     const otherCategories = await CategoryService.findAll(true);
-    if (!posts) {
+    if (!data) {
       return res
         .status(HttpCode.NOT_FOUND)
         .send(`the article with id ${id} is not found`);
     }
 
-    return res
-      .status(HttpCode.OK)
-      .json({ category: categoryName, otherCategories, posts });
+    return res.status(HttpCode.OK).json({
+      category,
+      otherCategories,
+      posts: data.posts,
+      count: data.count,
+    });
   });
 
   router.post(`/`, jsonParser, articleBackEndValidator, async (req, res) => {
     const formattedPost = formatPostToBD(req.body);
-    console.log("formattedPost", formattedPost);
+    // console.log("formattedPost", formattedPost);
     const data = await postService.create(formattedPost);
     return res.json(data);
   });
@@ -77,7 +102,7 @@ console.log('posts list', posts);
     const { articleId } = req.params;
     const updated = await postService.update({ id: articleId, post: req.body });
 
-    console.log("updated", updated);
+    // console.log("updated", updated);
     if (!updated) {
       return res
         .status(HttpCode.NOT_FOUND)
@@ -88,7 +113,7 @@ console.log('posts list', posts);
 
   router.delete(`/:articleId`, async (req, res) => {
     const { postId } = req.params;
-    console.log("router.delete /:articleId/", postId);
+    // console.log("router.delete /:articleId/", postId);
     const post = await postService.findOne({ postId });
 
     if (!post) {
@@ -110,10 +135,10 @@ console.log('posts list', posts);
     async (req, res) => {
       const { articleId } = req.params;
 
-      console.log("src/service/api/post-routes.js: articleId", articleId);
+      // console.log("src/service/api/post-routes.js: articleId", articleId);
       const comments = await commentService.findAll(articleId);
 
-      console.log("comments", comments);
+      // console.log("comments", comments);
       res.status(HttpCode.OK).json(comments);
     }
   );
@@ -142,7 +167,7 @@ console.log('posts list', posts);
         return res.status(HttpCode.NOT_FOUND).send(`Not found`);
       }
 
-      console.log("found comment to delete:", comment);
+      // console.log("found comment to delete:", comment);
 
       const deletedComment = await commentService.drop(articleId, commentId);
 

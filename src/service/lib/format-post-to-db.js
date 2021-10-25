@@ -7,7 +7,7 @@ const getCategories = (categories) => {
   });
 };
 
-const formatPostToBD = (postData) => {
+const formatPostToDb = (postData) => {
   const adaptedPost = {
     title: postData.title,
     created_date: postData.created_date,
@@ -24,7 +24,7 @@ const formatPostToBD = (postData) => {
 };
 
 module.exports = {
-  formatPostToBD,
+  formatPostToBD: formatPostToDb,
 };
 
 

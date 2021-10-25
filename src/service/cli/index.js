@@ -1,7 +1,7 @@
 "use strict";
 
 const help = require(`./help`);
-const filldb = require(`./filldb`);
+const filldb = require(`./fill-db`);
 const version = require(`./version`);
 const server = require(`./server/index.js`);
 const Cli = {

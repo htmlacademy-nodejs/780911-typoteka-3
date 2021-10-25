@@ -25,17 +25,17 @@ module.exports = {
     const comments = await readContentTxt(COMMENTS);
 
     try {
-      console.log(`Trying to connect to database...`);
+      // console.log(`Trying to connect to database...`);
       logger.info(`Trying to connect to database...`);
       await sequelize.authenticate();
     } catch (err) {
-      console.log(`An error occurred: ${err.message}`);
+      // console.log(`An error occurred: ${err.message}`);
       logger.error(`An error occurred: ${err.message}`);
       process.exit(ExitCode.error);
     }
 
     logger.info(`Connection to database established`);
-    console.log(`Connection to database established`);
+    // console.log(`Connection to database established`);
 
     const { Post, Category } = defineModels(sequelize);
 

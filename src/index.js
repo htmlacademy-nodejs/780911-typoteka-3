@@ -20,5 +20,5 @@ app.use(`/categories`, categoriesRoutes);
 app.get(`/`, (req, res) => res.send(`/`));
 
 app.listen(DEFAULT_PORT, () =>
-  console.log(`Сервер запущен на порту: ${DEFAULT_PORT}`)
+  // console.log(`Сервер запущен на порту: ${DEFAULT_PORT}`)
 );

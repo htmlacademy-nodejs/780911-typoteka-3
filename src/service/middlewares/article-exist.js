@@ -4,7 +4,7 @@ const { HttpCode } = require(`../../constants`);
 
 module.exports = (service) => async (req, res, next) => {
   const { articleId } = req.params;
-  console.log('article-exist validator file got value:', articleId);
+  // console.log('article-exist validator file got value:', articleId);
 
   const article = await service.findOne({ articleId });
 

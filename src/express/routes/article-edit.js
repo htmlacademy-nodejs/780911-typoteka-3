@@ -8,76 +8,43 @@ const { pageTitles } = require("../../constants");
 const type = pageTitles.editPost;
 const editArticleValidator = require(`../middlewares/edit-article-frontend-validator`);
 const bodyParser = require(`body-parser`);
-const jsonParser = bodyParser.urlencoded({ extended: true });
+const api = require(`../api`).getAPI();
 
-articleEditRouter.get(`/:articleId`, (req, res) => {
-  axios
-    .get(`http://localhost:3000/api/articles/${req.params.articleId}`, {
-      timeout: 1000,
-    })
-    .then((response) => {
-      const data = response.data;
-      const fetchedPost = {
-        title: data.title,
-        announce: data.announce,
-        full_text: data.full_text,
-        created_date: data.created_date,
-        categories: data.categories,
-      };
-
-      res.render(`article-add`, {
-        article: fetchedPost,
-        type,
-        pageTitle: type,
-        categories: data.categories,
-        action: `/articles/edit/${req.params.articleId}`,
-      });
-    })
-    .catch((err) => {
-      res.render(`404`, { pageTitle: type });
-    });
+articleEditRouter.get(`/:id`, async (req, res) => {
+  const article = await api.getPostById({
+    id: req.params.id,
+    withComments: false,
+  });
+  res.render(`article-add`, {
+    article: article,
+    moment: require("moment"),
+    type,
+    pageTitle: type,
+    categories: article.categories,
+    action: `/articles/edit/${req.params.id}`,
+  });
 });
 
 articleEditRouter.post(
-  `/:articleId`,
-  jsonParser,
+  `/:id`,
   upload.single(`avatar`),
   editArticleValidator,
-  (req, res) => {
-    //console.log('PUT req body', req.body);
-    axios
-      .put(
-        `http://localhost:3000/api/articles/${req.params.articleId}`,
-        req.body
-      )
-      .then((response) => {
-        const data = response.data;
-        // console.log('PUT req body in req to back', req.body);
-        const fetchedPost = {
-          title: data.title,
-          announce: data.announce,
-          full_text: data.full_text,
-          created_date: data.created_date,
-          categories: data.categories,
-        };
+  async (req, res) => {
+    try {
+      await api.putPost({ id: req.params.id, data: req.body });
 
-        console.log("edit post Frontend got", data);
-        if (Object.keys(res.locals.errorList).length) {
-          console.log('got some errors', res.locals.errorList);
-          res.render(`article-add`, {
-            article: fetchedPost,
-            type,
-            pageTitle: type,
-            categories: data.categories,
-            action: `/articles/edit/${req.params.articleId}`,
-          });
-        } else {
-          res.redirect(`/my`);
-        }
-      })
-      .catch((err) => {
-        res.render(`404`, { pageTitle: type });
+      res.redirect(`/my`);
+    } catch (err) {
+      // console.log("caught err", err);
+      res.render(`article-add`, {
+        article: req.body,
+        moment: require("moment"),
+        type,
+        pageTitle: type,
+        categories: req.body.categories,
+        action: `/articles/edit/${req.params.id}`,
       });
+    }
   }
 );
 module.exports = articleEditRouter;

@@ -1,7 +1,7 @@
 "use strict";
 
 const { Router } = require(`express`);
-const { HttpCode } = require(`../../HttpCode`);
+const { HttpCode } = require(`../../http-code`);
 
 module.exports = (app, CategoryService) => {
   const router = new Router();
@@ -9,7 +9,7 @@ module.exports = (app, CategoryService) => {
   app.use(`/category`, router);
 
   router.get(`/`, async (req, res) => {
-    console.log(`src/service/api/category-routes.js file`);
+    // console.log(`src/service/api/category-routes.js file`);
     const {withCount} = req.query;
     const categories = await CategoryService.findAll(withCount);
 

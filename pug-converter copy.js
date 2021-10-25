@@ -7,7 +7,7 @@ const {exec} = require('child_process');
 function fromDir(startPath, filter) {
 
   if (!fs.existsSync(startPath)) {
-    console.log("no dir ", startPath);
+    // console.log("no dir ", startPath);
     return;
   }
 
@@ -20,7 +20,7 @@ function fromDir(startPath, filter) {
       fromDir(filename, filter); // recurse
     } else if (filename.indexOf(filter) >= 0) {
       const name = files[i].split(`.`).slice(0, -1).join(`.`)
-      console.log(`-- convert: `, filename, name);
+      // console.log(`-- convert: `, filename, name);
       exec(`html2pug < ./${filename} > ./src/express/raw-templates/${name}.pug`);
     }
 

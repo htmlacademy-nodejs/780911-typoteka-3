@@ -11,7 +11,7 @@
     "start": "LOG_LEVEL=error && nodemon ./src/service/service.js --server 3000",
     "start::debug": "LOG_LEVEL=debug nodemon ./src/service/server.js --server 3000 | ./node_modules/.bin/pino-pretty ",
     "server": "nodemon ./src/service/server.js --server 3000",
-    "start-front-server": "nodemon ./src/express/index.js"
+    "start-front-server": "nodemon ./src/express/express.js"
   },
   "repository": {
     "type": "git",

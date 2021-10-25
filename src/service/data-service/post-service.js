@@ -37,17 +37,25 @@ module.exports = class PostService {
   }
 
   async findPage({ limit, offset, withComments }) {
-    const { count, rows } = await this._Post.findAndCountAll({
+    const options = {
       limit,
       offset,
       include: [Alias.CATEGORIES],
       order: [[`createdAt`, `DESC`]],
       distinct: true,
-    });
-    return { count, offers: rows };
-  }
+    };
 
-  async findByCategory({ id, withComments }) {
+    if (withComments) {
+      options.include.push({
+        model: this._Comment,
+        as: Alias.COMMENTS,
+      });
+    }
+    const { count, rows } = await this._Post.findAndCountAll(options);
+    return { count, posts: rows };
+  }
+  //TODO: remove this method findByCategory
+  async findByCategory({ id, limit, offset }) {
     const options = {
       include: [
         {
@@ -60,20 +68,32 @@ module.exports = class PostService {
       ],
     };
 
-    if (withComments) {
-      options.include.push({
-        model: this._Comment,
-        as: Alias.COMMENTS,
+    if (limit || offset) {
+      const { count, rows } = await this._Post.findAndCountAll({
+        limit,
+        offset,
+        options,
+        distinct: true,
       });
+
+      return {
+        count,
+        articles: rows,
+      };
     }
 
-    options.order = [[`createdAt`, `DESC`]];
+    const result = await this._Post.findAll({ options });
+    const posts = result.map((it) => it.get());
 
-    return this._Post.findAll(options);
+    // console.log("hohoho");
+    return {
+      count: posts.length,
+      posts,
+    };
   }
 
   findOne({ articleId, withComments }) {
-    console.log("id: ", articleId);
+    // console.log("id: ", articleId);
     const options = {
       include: [Alias.CATEGORIES],
       where: [
@@ -97,21 +117,21 @@ module.exports = class PostService {
   }
 
   async update({ id, post }) {
-    console.log("PostService", id, post);
+    // console.log("PostService", id, post);
     const affectedRows = await this._Post.update(post, {
       where: {
         id,
       },
     });
 
-    console.log("affectedRows", affectedRows);
+    // console.log("affectedRows", affectedRows);
 
     const updatedOffer = await this._Post.findOne({
       where: {
         id,
       },
     });
-    console.log("updatedOffer", updatedOffer);
+    // console.log("updatedOffer", updatedOffer);
 
     await updatedOffer.setCategories(post.categories);
 

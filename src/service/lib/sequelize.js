@@ -12,7 +12,7 @@ const notDefinedENVVars = [
   DB_PORT,
 ].filter((envVar) => envVar === undefined);
 
-console.log(notDefinedENVVars.join(", "));
+// console.log(notDefinedENVVars.join(", "));
 
 if (notDefinedENVVars.length > 0) {
   throw new Error(

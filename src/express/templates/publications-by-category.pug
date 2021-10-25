@@ -1,5 +1,5 @@
 extends layout.pug
-
+include ./mixins/pagination
 block content
       main.articles-category
         h1 #{category.name}
@@ -17,9 +17,9 @@ block content
            each article in articles
             li.preview__item(class=!article.avatar && '.preview__item--noimage')
               ul.preview__breadcrumbs
-               each subcategory in article.categories
+               each category in article.categories
                 li.preview__breadcrumbs-item
-                  a.preview__breadcrumbs-link(href='#') #{subcategory.name}
+                  a.preview__breadcrumbs-link(href='#') #{category.name}
               if article.avatar
                 .preview__background
                   img.preview__background-image(src='/img/skyscraper@1x.jpg' width='460' height='240' srcset='/img/skyscraper@1x.jpg, /img/skyscraper@2x.jpg 2x' alt='Фотография небоскреба')
@@ -32,3 +32,4 @@ block content
                 span.preview__cloud
                 |
                 b.preview__comment-count #{article.comments.length}
+          + pagination(page, totalPages, 2, `?`)

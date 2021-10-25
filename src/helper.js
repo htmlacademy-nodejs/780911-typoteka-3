@@ -7,7 +7,6 @@ const URL_LIST = {
   DEFAULT: `http://localhost:3000/api/`,
 };
 
-const moment = require("moment");
 const axios = require(`axios`);
 const multer = require("multer");
 const { nanoid } = require(`nanoid`);
@@ -27,9 +26,6 @@ const returnCategory = async () => {
   return category;
 };
 
-const returnCurrentDate = (date = new Date()) => {
-  return moment(date).format(`DD.MM.YYYY`);
-};
 
 const storage = multer.diskStorage({
   destination: uploadDirAbsolute,
@@ -43,7 +39,6 @@ const upload = multer({ storage });
 
 module.exports = {
   returnCategory,
-  returnCurrentDate,
   URL_LIST,
   upload,
 };

@@ -34,4 +34,11 @@ module.exports.pageTitles = {
   editPost: `Редактирование публикации`,
 };
 
-module.exports.OFFERS_PER_PAGE = 8;
+module.exports.POSTS_PER_PAGE = 8;
+
+module.exports.HttpMethod = {
+  GET: `GET`,
+  POST: `POST`,
+  PUT: `PUT`,
+  DELETE: `DELETE`
+};

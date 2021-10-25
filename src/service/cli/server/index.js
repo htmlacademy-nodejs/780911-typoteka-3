@@ -3,7 +3,7 @@
 
 const express = require(`express`);
 const http = require(`http`);
-const {HttpCode} = require(`../../../HttpCode`);
+const {HttpCode} = require(`../../../http-code`);
 const routes = require(`../../api`);
 const {getLogger} = require(`./logger`);
 const logger = getLogger();
@@ -50,14 +50,14 @@ module.exports = {
   const sequelize = getSequelize();
   try {
      await sequelize.authenticate();
-     console.log(`Соединение с сервером установлено!`);
+     // console.log(`Соединение с сервером установлено!`);
      logger.info(`Соединение с сервером установлено!`);
   } catch (err) {
       logger.error(`Не удалось установить соединение по причине: ${err}`);
       process.exit(ExitCode.error);
   }
     logger.info(`Connection to database established`);
-    console.log(`Connection to database established`);
+    // console.log(`Connection to database established`);
 
     const port = args ? Number.parseInt(args[0], 10) : DEFAULT_PORT;
 
@@ -90,7 +90,7 @@ module.exports = {
 // //const apiRoutes = require(`./api-routes`);
 // const apiRoutes = require(`../../api`)
 // const postsRouter = new Router();
-// const { HttpCode } = require(`../../../HttpCode`);
+// const { HttpCode } = require(`../../../http-code`);
 // const { sendResponse, returnArticles, returnTitles } = require(`../../../utils`);
 // const notFoundMessageText = `Not found`;
 // const MOCK_FILE_PATH = `./mocks.json`;
@@ -102,7 +102,7 @@ module.exports = {
 // const run = async (args) => {
 //   try {
 //     await getSequelize.authenticate();
-//     console.log(`Соединение с сервером установлено!`);
+//     // console.log(`Соединение с сервером установлено!`);
 //     logger.info(`Соединение с сервером установлено!`);
 //   } catch (err) {
 //     logger.error(`Не удалось установить соединение по причине: ${err}`);
@@ -121,9 +121,9 @@ module.exports = {
 //   const allPosts = await Post.findAll({raw: true,});
 //   const allTitles = await returnTitles(allPosts);
 //   const message = allTitles.map((post) => `<li>${post}</li>`).join(``);
-//   console.log('all posts', allPosts);
+//   // console.log('all posts', allPosts);
 //   // logger.info(`Connection to database established`);
-//   console.log(`Connection to database established`);
+//   // console.log(`Connection to database established`);
 //
 //   const app = express();
 //
@@ -154,7 +154,7 @@ module.exports = {
   //   postsRouter.get(`/`, async (req, res) => {
   //     res.json(allPosts);
   //     logger.info(`End request get /posts with status code ${res.statusCode}`);
-  //     console.log(`End request get /posts with status code ${res.statusCode}`);
+  //     // console.log(`End request get /posts with status code ${res.statusCode}`);
   //   })
   // );
 
@@ -169,7 +169,7 @@ module.exports = {
 //     if (err) {
 //       logger.error(`Ошибка при создании сервера`, err);
 //     }
-//     console.log(`Ожидаю соединений на ${port} src/service/cli/server/index.js`);
+//     // console.log(`Ожидаю соединений на ${port} src/service/cli/server/index.js`);
 //     return logger.info(`Ожидаю соединений на ${port}`);
 //   });
 // };

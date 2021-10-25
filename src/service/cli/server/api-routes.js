@@ -2,7 +2,7 @@
 // Commented routes are implemented in service/api
 // const MOCK_FILE_PATH = `./mocks.json`;
 // const CATEGORIES = `./data/categories.txt`;
-// const { HttpCode } = require(`../../../HttpCode`);
+// const { HttpCode } = require(`../../../http-code`);
 
 // const bodyParser = require(`body-parser`);
 // const {findReplaceItemById} = require("../../../utils");

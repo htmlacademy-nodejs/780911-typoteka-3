@@ -5,7 +5,7 @@
 // "use strict";
 //
 // const MOCK_FILE_PATH = `./mocks.json`;
-// const { HttpCode } = require(`../../../HttpCode`);
+// const { HttpCode } = require(`../../../http-code`);
 // const { sendResponse, returnArticles, returnTitles } = require(`../../../utils`);
 // const notFoundMessageText = `Not found`;
 // const express = require(`express`);
@@ -45,13 +45,13 @@
 //
 //    // const posts = await define.Post.findAll();
 //    //  const posts = await define(getSequelize).Post.findAll();
-//    //  console.log(posts);
-//     // console.log(posts.every(post => post instanceof define.Post)); // true
-//     //console.log("All posts:", JSON.stringify(posts, null, 2));
+//    //  // console.log(posts);
+//     // // console.log(posts.every(post => post instanceof define.Post)); // true
+//     //// console.log("All posts:", JSON.stringify(posts, null, 2));
 //
 //     // log.info(`Connection to database established`);
-//     console.log(`Connection to database established 111`);
-//     // console.log(`Connection to database established`);
+//     // console.log(`Connection to database established 111`);
+//     // // console.log(`Connection to database established`);
 //      const message = JSON.stringify(articlesList, null, 2);
 //     // const message = `hohoho`;
 //     try {

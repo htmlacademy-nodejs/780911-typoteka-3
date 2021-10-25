@@ -1,7 +1,7 @@
 "use strict";
 
 const { Router } = require(`express`);
-const { HttpCode } = require(`../../HttpCode`);
+const { HttpCode } = require(`../../http-code`);
 
 
 module.exports = (app, SearchService) => {
@@ -10,7 +10,7 @@ module.exports = (app, SearchService) => {
   app.use(`/search`, router);
 
   router.get(`/`, async (req, res) => {
-    console.log(`src/service/api/search-routes.js file`);
+    // console.log(`src/service/api/search-routes.js file`);
 
     const {query = ``} = req.query;
     if (!query) {

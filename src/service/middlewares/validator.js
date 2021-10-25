@@ -1,7 +1,13 @@
 "use strict";
 
-const ArticleKeys = [`created_date`,`title`, `announce`, `full_text`, `categories`];
-const { HttpCode } = require(`../../HttpCode`);
+const ArticleKeys = [
+  `created_date`,
+  `title`,
+  `announce`,
+  `full_text`,
+  `categories`,
+];
+const { HttpCode } = require(`../../http-code`);
 const { sendResponse } = require(`../../utils`);
 
 const articleBackEndValidator = (req, res, next) => {
@@ -9,6 +15,7 @@ const articleBackEndValidator = (req, res, next) => {
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.every((key) => keys.includes(key));
 
+  // console.log("GOT data for validation on back end", req.body);
   if (!keysExists) {
     sendResponse(
       res,
@@ -24,12 +31,15 @@ const articlePutValidator = (req, res, next) => {
   const newArticle = req.body;
   const keys = Object.keys(newArticle);
   const keysExists = ArticleKeys.some((key) => keys.includes(key));
-  console.log("Got article in validator on back", newArticle);
+  // console.log("Got article in validator on back", newArticle);
   if (!keysExists) {
-     console.log("article DOES NOT pass validation on back", Object.keys(newArticle).join());
+    // console.log(
+    //   "article DOES NOT pass validation on back",
+    //   Object.keys(newArticle).join()
+    // );
     sendResponse(res, HttpCode.BAD_REQUEST, `no such fields in offer`);
   } else {
-     console.log("article passes validation on back");
+    // console.log("article passes validation on back");
     next();
   }
 };

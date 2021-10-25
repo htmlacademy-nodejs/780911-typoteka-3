@@ -9,7 +9,7 @@ class SearchService {
   }
 
   async findAll(searchText) {
-    console.log('search-service.js file searchText:', searchText);
+    // console.log('search-service.js file searchText:', searchText);
     const posts = await this._Post.findAll({
       where: {
         title: {

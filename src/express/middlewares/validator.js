@@ -47,7 +47,7 @@ const articleRequirements = {
 
 // const articleValidator = async (req, res, next) => {
 //   const article = req.body;
-//   console.log("data got in validator", article);
+//   // console.log("data got in validator", article);
 //   article.category = returnMatchingStringsArray(
 //     await returnCategory(),
 //     Object.keys(article)
@@ -74,30 +74,30 @@ const articleRequirements = {
 //     errorsList.full_text = articleRequirements.full_text.maxErrorText;
 //   }
 //
-//   console.log("errorsList", errorsList);
+//   // console.log("errorsList", errorsList);
 //   res.locals.errorList = errorsList;
 //   if (Object.keys(errorsList).length) {
-//     console.log(`Catch some errors ${Object.keys(errorsList).join()}`);
+//     // console.log(`Catch some errors ${Object.keys(errorsList).join()}`);
 //   }
 //   next();
 // };
 
 const articlePutValidator = (req, res, next) => {
-  console.log("articlePutValidator 1");
+  // console.log("articlePutValidator 1");
   const newArticle = req.body;
   const keys = Object.keys(newArticle);
-  console.log("articlePutValidator req.params", req.params);
-  console.log("articlePutValidator req.body", req.body);
+  // console.log("articlePutValidator req.params", req.params);
+  // console.log("articlePutValidator req.body", req.body);
   const keysExists = ArticleKeys.some((key) => keys.includes(key));
-  console.log("Got article in validator on back", newArticle);
+  // console.log("Got article in validator on back", newArticle);
   if (!keysExists) {
-    console.log(
+    // console.log(
       "article DOES NOT pass validation on back",
       Object.keys(newArticle).join()
     );
     sendResponse(res, HttpCode.BAD_REQUEST, `no such fields in offer`);
   } else {
-    console.log("article passes validation on back");
+    // console.log("article passes validation on back");
     next();
   }
 };

@@ -6,9 +6,9 @@ block content
           .search-page__wrapper
             h1 Поиск
             .search.search-page__form
-              form(action='/search' method='get')
+              form(action='' method='get')
                 label
-                  input(type='text' placeholder='Что ищем?' value=`${searchValue}`)
+                  input(type='text' placeholder='Что ищем?' value=`${searchValue}` name='search')
                 button.search__button.button.button--transparent(type='submit') Найти
               .search__result
                 each article in articles

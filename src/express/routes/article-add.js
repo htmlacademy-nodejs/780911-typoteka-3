@@ -2,31 +2,22 @@
 
 const { Router } = require(`express`);
 const articleAddRouter = new Router();
-const bodyParser = require(`body-parser`);
-const jsonParser = bodyParser.urlencoded({ extended: true });
-const axios = require(`axios`);
-const { URL_LIST, returnCurrentDate, upload } = require(`../../helper`);
+const { upload } = require(`../../helper`);
 const addArticleValidator = require(`../middlewares/add-article-frontend-validator.js`);
-const {pageTitles} = require("../../constants");
+const { pageTitles } = require("../../constants");
+const moment = require("moment");
+const api = require(`../api`).getAPI();
 
-let now = returnCurrentDate();
 const emptyPost = {
   title: ``,
   announce: ``,
   fullText: ``,
-  created_date: now,
+  created_date: moment(),
 };
 const type = pageTitles.newPost;
 
 async function getCategories() {
-  try {
-    const { data: response } = await axios.get(URL_LIST.CATEGORIES, {
-      params: { withCount: false },
-    });
-    return response;
-  } catch (error) {
-    return error;
-  }
+  return await api.getCategories({ withCount: false });
 }
 
 articleAddRouter.get(`/`, async (req, res) => {
@@ -34,6 +25,7 @@ articleAddRouter.get(`/`, async (req, res) => {
 
   res.render(`article-add`, {
     article: emptyPost,
+    moment: require( 'moment' ),
     type,
     pageTitle: type,
     categories: categoriesArr,
@@ -43,38 +35,24 @@ articleAddRouter.get(`/`, async (req, res) => {
 
 articleAddRouter.post(
   `/`,
-  jsonParser,
   upload.single(`avatar`),
   addArticleValidator,
   async (req, res) => {
-    const newArticle = req.body;
     const categoriesArr = await getCategories();
+    // // console.log("req.body on front ", req.body);
+    try {
+      await api.createPost({ data: req.body });
 
-    if (Object.keys(res.locals.errorList).length) {
-      console.log('GOT ERR', res.locals.errorList);
+      res.redirect(`/my`);
+    } catch (error) {
+      // // console.log("GOT ERR", error);
       res.render(`article-add`, {
-        article: newArticle,
+        article: req.body,
         type,
         pageTitle: type,
         categories: categoriesArr,
         action: `/articles/add`,
       });
-    } else {
-      axios
-        .post(URL_LIST.ARTICLES, newArticle)
-        .then(() => {
-          res.redirect(`/my`);
-        })
-        .catch((err) => {
-          console.log('Catch err on axios', err);
-          res.render(`article-add`, {
-            article: emptyPost,
-            type,
-            pageTitle: type,
-            categories: categoriesArr,
-            action: `/articles/add`,
-          });
-        });
     }
   }
 );
