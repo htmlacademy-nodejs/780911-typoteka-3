@@ -5,10 +5,18 @@ const myArticlesRouter = new Router();
 const { pageTitles } = require("../../constants");
 const pageTitle = pageTitles.default;
 const api = require(`../api`).getAPI();
+const wrap = require("async-middleware").wrap;
 
-myArticlesRouter.get(`/`, async (req, res) => {
-  const articles = await api.getPosts({ withComments: false });
-  res.render(`my-articles`, { articles, pageTitle });
-});
+myArticlesRouter.get(
+  `/`,
+  wrap(async (req, res) => {
+    const articles = await api.getPosts({ withComments: false });
+    res.render(`my-articles`, {
+      articles,
+      moment: require("moment"),
+      pageTitle,
+    });
+  })
+);
 
 module.exports = myArticlesRouter;

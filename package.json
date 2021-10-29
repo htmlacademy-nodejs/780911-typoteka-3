@@ -9,8 +9,8 @@
     "fix": "eslint --fix --ext .js,.jsx .",
     "eslint": "eslint --ext .js src/",
     "start": "LOG_LEVEL=error && nodemon ./src/service/service.js --server 3000",
-    "start::debug": "LOG_LEVEL=debug nodemon ./src/service/server.js --server 3000 | ./node_modules/.bin/pino-pretty ",
-    "server": "nodemon ./src/service/server.js --server 3000",
+    "start::debug": "LOG_LEVEL=debug nodemon ./src/service/service.js --server 3000 | pino-pretty",
+    "server": "nodemon ./src/service/service.js --server 3000",
     "start-front-server": "nodemon ./src/express/express.js"
   },
   "repository": {
@@ -36,6 +36,7 @@
     "supertest": "^6.1.3"
   },
   "dependencies": {
+    "async-middleware": "^1.2.1",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "chalk": "4.1.0",

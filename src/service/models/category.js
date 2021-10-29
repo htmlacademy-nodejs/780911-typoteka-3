@@ -1,3 +1,4 @@
+/* eslint new-cap: ["error", { "properties": false }] */
 "use strict";
 
 const {DataTypes, Model} = require(`sequelize`);

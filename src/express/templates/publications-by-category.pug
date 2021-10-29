@@ -23,7 +23,7 @@ block content
               if article.avatar
                 .preview__background
                   img.preview__background-image(src='/img/skyscraper@1x.jpg' width='460' height='240' srcset='/img/skyscraper@1x.jpg, /img/skyscraper@2x.jpg 2x' alt='Фотография небоскреба')
-              time.preview__time(datetime=article.created_date) #{article.created_date}
+              time.preview__time(datetime=article.createdDate) #{article.createdDate}
               h3.preview__name
                 a.preview__name-link(href='#') #{article.title}
               p.preview__text #{article.announce}

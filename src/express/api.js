@@ -23,7 +23,6 @@ class API {
   }
 
   getPostsByCategoryId({ offset, limit, id, withComments } = {}) {
-    //// console.log("API id", id, "offset", offset, "limit", limit);
     return this._load(`/articles/category/${id}`, {
       params: { limit, offset, withComments },
     });
@@ -42,7 +41,6 @@ class API {
   }
 
   createPost({ data }) {
-    // console.log("got post in api create Post", data);
     return this._load(`/articles`, {
       method: HttpMethod.POST,
       data,
@@ -50,7 +48,6 @@ class API {
   }
 
   putPost({ id, data }) {
-    // console.log("API on front got", id, data);
     return this._load(`/articles/${id}`, {
       method: HttpMethod.PUT,
       data,

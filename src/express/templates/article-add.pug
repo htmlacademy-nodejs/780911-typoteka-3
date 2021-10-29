@@ -14,7 +14,7 @@ body(style='height: 1050px;')
                   .new-publication__date-form-division
                     .new-publication__date-block
                       label(for='new-publication-date' aria-label='Календарь')
-                      input#new-publication-date(type='text' placeholder=`${moment(article.created_date).format('YYYY-MM-DD')}` name='created_date' value=`${moment(article.created_date).format('DD.MM.YYYY')}`)
+                      input#new-publication-date(type='text' placeholder=`${moment(article.createdDate).format('YYYY-MM-DD')}` name='createdDate' value=`${moment(article.createdDate).format('DD.MM.YYYY')}`)
                 button.new-publication__button.button.button--colored(type='submit') Опубликовать
               button.popup__button.button.button--popup-close(type='button' aria-label='Закрыть окно') Закрыть окно
               .new-publication__form.form
@@ -43,7 +43,7 @@ body(style='height: 1050px;')
                       textarea(rows='1' placeholder='Анонс публикации' name='announce')=article.announce
                   .form__field.form__field--publication-text
                     label
-                      textarea(rows='1' placeholder='Полный текст публикации' name='full_text')=article.full_text
+                      textarea(rows='1' placeholder='Полный текст публикации' name='fullText')=article.fullText
         .modal__overlay
   script(src='/js/vendor.js')
   script(src='/js/main.js')

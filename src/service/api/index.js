@@ -17,7 +17,6 @@ const defineModels = require(`../models`);
 const app = new Router();
 const sequelize = getSequelize();
 
-// console.log("src/service/api/index.js");
 defineModels(sequelize);
 
 (() => {

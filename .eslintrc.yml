@@ -6,7 +6,4 @@ env:
   node: true
   jest: true
 
-ignorePatterns:
-  '**/express/public/**/*.js'
-
 extends: ['htmlacademy/node', 'prettier']

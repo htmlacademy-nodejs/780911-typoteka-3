@@ -36,7 +36,7 @@ module.exports = class CategoryService {
   }
 
   async findPage({ id, limit, offset }) {
-    // console.log("findPage in category-service", id, limit, offset);
+
     const posts = await this._PostCategory.findAll({
       attributes: [`PostId`],
       where: {
@@ -45,7 +45,6 @@ module.exports = class CategoryService {
       raw: true,
     });
 
-    // // console.log("posts", posts);
 
     const postsId = posts.map((postIdItem) => postIdItem.PostId);
 
@@ -65,7 +64,7 @@ module.exports = class CategoryService {
       },
       distinct: true,
     });
-    // // console.log("count", count, "rows", rows);
+
     return { count, posts: rows };
   }
 
@@ -93,7 +92,6 @@ module.exports = class CategoryService {
       ],
     };
     // options.order = [[`createdAt`, `DESC`]];
-    // console.log("category-service findAllArticlesById");
     return this._PostCategory.findAll(options);
   }
 };

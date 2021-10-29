@@ -52,16 +52,6 @@ const shuffle = (someArray) => {
   return someArray;
 };
 
-const getRandomSubarray = (items) => {
-  items = items.slice();
-  let count = getRandomInt(1, items.length - 1);
-  const result = [];
-  while (count--) {
-    result.push(...items.splice(getRandomInt(0, items.length - 1), 1));
-  }
-  return result;
-};
-
 const readContentJSON = async (filePath) => {
   try {
     const content = await fsp.readFile(filePath, `utf8`);
@@ -107,22 +97,20 @@ const createArticle = (offer) => {
   return Object.assign({ id: nanoid(), comments: [] }, offer);
 };
 
-const generatePublications = (count, titles, categories, sentences, comments) =>
+const generatePublications = (count, titles, categories, sentences) =>
   Array(count)
     .fill({})
     .map(() => ({
-      // comments: createCommentsList(comments, getRandomInt(1, count)),
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
-      full_text: shuffle(sentences)
+      fullText: shuffle(sentences)
         .slice(1, getRandomInt(1, sentences.length - 1))
         .join(` `),
-      created_date: moment().format("L"),
+      createdDate: moment().format("L"),
       categories: shuffle(categories).slice(
         0,
         getRandomInt(1, categories.length)
       ),
-      // author_id: getRandomInt(0, count)
     }));
 
 const sendResponse = (res, statusCode, message) => {
@@ -180,10 +168,6 @@ const formatDateForPug = (dateIn) => {
   }
 };
 
-const formatDataForPug = (data) => {
-
-};
-
 const returnMatchingStringsArray = function (arr1, arr2) {
   const ret = [];
   arr1.sort();
@@ -197,7 +181,7 @@ const returnMatchingStringsArray = function (arr1, arr2) {
 };
 
 const findReplaceItemById = (arr, replacer) => {
-  const foundIndex = arr.findIndex((item) => item.id == replacer.id);
+  const foundIndex = arr.findIndex((item) => item.id === replacer.id);
   arr[foundIndex] = replacer;
   return arr;
 };
@@ -218,5 +202,4 @@ module.exports = {
   formatDateForPug,
   returnMatchingStringsArray,
   findReplaceItemById,
-  formatDataForPug
 };

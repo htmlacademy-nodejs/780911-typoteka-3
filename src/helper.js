@@ -7,24 +7,11 @@ const URL_LIST = {
   DEFAULT: `http://localhost:3000/api/`,
 };
 
-const axios = require(`axios`);
 const multer = require("multer");
 const { nanoid } = require(`nanoid`);
 const UPLOAD_DIR = `../upload/img/`;
 const path = require(`path`);
 const uploadDirAbsolute = path.resolve(__dirname, UPLOAD_DIR);
-const returnCategory = async () => {
-  const category = axios
-    .get(URL_LIST.CATEGORIES)
-    .then((response) => {
-      const data = response.data;
-      return data;
-    })
-    .catch((err) => {
-      return [];
-    });
-  return category;
-};
 
 
 const storage = multer.diskStorage({
@@ -38,7 +25,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 module.exports = {
-  returnCategory,
   URL_LIST,
   upload,
 };

@@ -1,3 +1,4 @@
+/* eslint new-cap: ["error", { "properties": false }] */
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
@@ -10,15 +11,15 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT(),
       allowNull: false,
     },
-    created_date: {
+    createdDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    author_id: {
+    authorId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    post_id: {
+    postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     }

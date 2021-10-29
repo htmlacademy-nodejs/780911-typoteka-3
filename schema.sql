@@ -4,8 +4,8 @@ CREATE TABLE categories(
 );
 CREATE TABLE authors(
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  first_name varchar(255) NOT NULL,
-  last_name varchar(255) NOT NULL,
+  firstName varchar(255) NOT NULL,
+  lastName varchar(255) NOT NULL,
   email varchar(255) UNIQUE NOT NULL,
   password_hash varchar(255) NOT NULL,
   avatar varchar(50)
@@ -13,27 +13,27 @@ CREATE TABLE authors(
 CREATE TABLE posts(
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   title varchar(250) NOT NULL,
-  created_date timestamp NOT NULL,
-  full_text text NOT NULL,
+  createdDate timestamp NOT NULL,
+  fullText text NOT NULL,
   announce text NOT NULL,
   avatar varchar(50),
-  author_id integer NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES authors(id)
+  authorId integer NOT NULL,
+  FOREIGN KEY (authorId) REFERENCES authors(id)
 );
 CREATE TABLE comments(
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   text text NOT NULL,
-  created_date timestamp NOT NULL,
-  author_id integer NOT NULL,
-  post_id integer NOT NULL,
-  FOREIGN KEY (author_id) REFERENCES authors(id),
-  FOREIGN KEY (post_id) REFERENCES posts(id)
+  createdDate timestamp NOT NULL,
+  authorId integer NOT NULL,
+  postId integer NOT NULL,
+  FOREIGN KEY (authorId) REFERENCES authors(id),
+  FOREIGN KEY (postId) REFERENCES posts(id)
 );
 CREATE TABLE posts_categories(
-  post_id integer NOT NULL,
+  postId integer NOT NULL,
   category_id integer NOT NULL,
-  PRIMARY KEY (post_id, category_id),
-  FOREIGN KEY (post_id) REFERENCES posts(id),
+  PRIMARY KEY (postId, category_id),
+  FOREIGN KEY (postId) REFERENCES posts(id),
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 

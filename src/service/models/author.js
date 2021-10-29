@@ -1,3 +1,4 @@
+/* eslint new-cap: ["error", { "properties": false }] */
 "use strict";
 
 const {Model, DataTypes} = require(`sequelize`);
@@ -14,11 +15,11 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    last_name: {
+    lastName: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },

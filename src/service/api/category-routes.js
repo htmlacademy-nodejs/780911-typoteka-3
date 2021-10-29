@@ -9,7 +9,6 @@ module.exports = (app, CategoryService) => {
   app.use(`/category`, router);
 
   router.get(`/`, async (req, res) => {
-    // console.log(`src/service/api/category-routes.js file`);
     const {withCount} = req.query;
     const categories = await CategoryService.findAll(withCount);
 

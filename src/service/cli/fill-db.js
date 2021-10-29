@@ -3,7 +3,6 @@
 const { generatePublications, readContentTxt } = require("../../utils");
 const { getSequelize } = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
-const { Alias } = require(`../models/alias`);
 const { getLogger } = require(`./server/logger`);
 const logger = getLogger();
 const { ExitCode } = require(`../../constants`);
@@ -25,17 +24,14 @@ module.exports = {
     const comments = await readContentTxt(COMMENTS);
 
     try {
-      // console.log(`Trying to connect to database...`);
       logger.info(`Trying to connect to database...`);
       await sequelize.authenticate();
     } catch (err) {
-      // console.log(`An error occurred: ${err.message}`);
       logger.error(`An error occurred: ${err.message}`);
       process.exit(ExitCode.error);
     }
 
     logger.info(`Connection to database established`);
-    // console.log(`Connection to database established`);
 
     const { Post, Category } = defineModels(sequelize);
 
@@ -54,7 +50,6 @@ module.exports = {
     );
 
     const postPromises = generatedPosts.map(async (post) => {
-      // const postModel = await Post.create(post, { include: [Alias.COMMENTS] });
       const postModel = await Post.create(post);
       await postModel.addCategories(post.categories);
     });

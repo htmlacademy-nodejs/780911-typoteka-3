@@ -16,11 +16,11 @@ const define = (sequelize) => {
 
   Post.hasMany(Comment, {
     as: Alias.COMMENTS,
-    foreignKey: `post_id`,
+    foreignKey: `postId`,
     onDelete: `cascade`,
   });
   Comment.belongsTo(Post, {
-    foreignKey: `post_id`,
+    foreignKey: `postId`,
   });
 
   Post.belongsToMany(Category, {
@@ -33,16 +33,16 @@ const define = (sequelize) => {
   });
   Category.hasMany(PostCategory, { as: Alias.POST_CATEGORIES });
 
-  Author.hasMany(Post, { as: Alias.POSTS, foreignKey: `author_id` });
+  Author.hasMany(Post, { as: Alias.POSTS, foreignKey: `authorId` });
   Post.belongsTo(Author, {
     as: Alias.AUTHORS,
-    foreignKey: `author_id`,
+    foreignKey: `authorId`,
   });
 
-  Author.hasMany(Comment, { as: Alias.COMMENTS, foreignKey: `author_id` });
+  Author.hasMany(Comment, { as: Alias.COMMENTS, foreignKey: `authorId` });
   Comment.belongsTo(Author, {
     as: Alias.AUTHORS,
-    foreignKey: `author_id`,
+    foreignKey: `authorId`,
   });
 
   return { Post, Category, Comment, PostCategory };

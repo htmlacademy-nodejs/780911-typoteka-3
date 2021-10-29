@@ -10,7 +10,6 @@ module.exports = (app, SearchService) => {
   app.use(`/search`, router);
 
   router.get(`/`, async (req, res) => {
-    // console.log(`src/service/api/search-routes.js file`);
 
     const {query = ``} = req.query;
     if (!query) {

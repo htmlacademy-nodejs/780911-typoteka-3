@@ -32,7 +32,7 @@ module.exports = class PostService {
     options.order = [[`createdAt`, `DESC`]];
 
     const posts = await this._Post.findAll(options);
-    // console.log("findAll in post-service ", posts);
+
     return posts.map((post) => post.get());
   }
 
@@ -54,7 +54,7 @@ module.exports = class PostService {
     const { count, rows } = await this._Post.findAndCountAll(options);
     return { count, posts: rows };
   }
-  //TODO: remove this method findByCategory
+  // TODO: remove this method findByCategory
   async findByCategory({ id, limit, offset }) {
     const options = {
       include: [
@@ -62,7 +62,7 @@ module.exports = class PostService {
           model: this._Category,
           as: Alias.CATEGORIES,
           where: {
-            id: id,
+            id,
           },
         },
       ],
@@ -85,7 +85,6 @@ module.exports = class PostService {
     const result = await this._Post.findAll({ options });
     const posts = result.map((it) => it.get());
 
-    // console.log("hohoho");
     return {
       count: posts.length,
       posts,
@@ -93,7 +92,6 @@ module.exports = class PostService {
   }
 
   findOne({ articleId, withComments }) {
-    // console.log("id: ", articleId);
     const options = {
       include: [Alias.CATEGORIES],
       where: [
@@ -117,21 +115,17 @@ module.exports = class PostService {
   }
 
   async update({ id, post }) {
-    // console.log("PostService", id, post);
     const affectedRows = await this._Post.update(post, {
       where: {
         id,
       },
     });
 
-    // console.log("affectedRows", affectedRows);
-
     const updatedOffer = await this._Post.findOne({
       where: {
         id,
       },
     });
-    // console.log("updatedOffer", updatedOffer);
 
     await updatedOffer.setCategories(post.categories);
 
@@ -142,6 +136,6 @@ module.exports = class PostService {
     const deletedRows = await this._Post.destroy({
       where: { id },
     });
-    return Boolean(!!deletedRows);
+    return Boolean(deletedRows);
   }
 };

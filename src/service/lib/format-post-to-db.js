@@ -3,18 +3,18 @@
 const getCategories = (categories) => {
 
   return categories.map((category) => {
-    return parseInt(category);
+    return parseInt(category, 10);
   });
 };
 
 const formatPostToDb = (postData) => {
   const adaptedPost = {
     title: postData.title,
-    created_date: postData.created_date,
-    full_text: postData.full_text,
+    createdDate: postData.createdDate,
+    fullText: postData.fullText,
     announce: postData.announce,
     avatar: postData.avatar,
-    // author_id: postData.author_id,
+    // authorId: postData.authorId,
     createdAt: postData.createdAt,
     updatedAt: postData.updatedAt,
     categories: getCategories(postData.categories),

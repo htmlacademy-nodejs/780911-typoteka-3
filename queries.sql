@@ -31,21 +31,21 @@ ORDER BY
 SELECT posts.id,
 posts.title,
 posts.announce,
-posts.created_date,
-authors.first_name,
-authors.last_name,
+posts.createdDate,
+authors.firstName,
+authors.lastName,
 authors.email,
-COUNT(comments.post_id) AS "comment_counts",
+COUNT(comments.postId) AS "comment_counts",
 (SELECT string_agg(categories.name, ', ')
  FROM categories
- RIGHT JOIN posts_categories ON posts.id = posts_categories.post_id
+ RIGHT JOIN posts_categories ON posts.id = posts_categories.postId
  AND categories.id = posts_categories.category_id
 ) AS "categories_ids"
 FROM posts
-INNER JOIN authors ON posts.author_id = authors.id
-LEFT JOIN comments ON posts.id = comments.post_id
+INNER JOIN authors ON posts.authorId = authors.id
+LEFT JOIN comments ON posts.id = comments.postId
 
-GROUP BY posts.id, first_name, last_name, email
+GROUP BY posts.id, firstName, lastName, email
 
 /*Получить полную информацию определённой публикации (идентификатор публикации,
  заголовок публикации, анонс, полный текст публикации, дата публикации,
@@ -56,36 +56,36 @@ GROUP BY posts.id, first_name, last_name, email
  posts.id,
  posts.title,
  posts.announce,
- posts.full_text,
- posts.created_date,
+ posts.fullText,
+ posts.createdDate,
  posts.picture,
- authors.first_name,
- authors.last_name,
+ authors.firstName,
+ authors.lastName,
  authors.email,
- COUNT(comments.post_id),
+ COUNT(comments.postId),
  (SELECT string_agg(categories.name, ', ')
   FROM categories
-  RIGHT JOIN posts_categories ON posts_categories.post_id = posts.id
+  RIGHT JOIN posts_categories ON posts_categories.postId = posts.id
   AND posts_categories.category_id = categories.id
  )
  FROM posts
- LEFT JOIN authors on authors.id = posts.author_id
- LEFT JOIN comments on comments.post_id = posts.id
+ LEFT JOIN authors on authors.id = posts.authorId
+ LEFT JOIN comments on comments.postId = posts.id
  WHERE posts.id = 1
- GROUP BY posts.id, authors.first_name, authors.last_name, authors.email
+ GROUP BY posts.id, authors.firstName, authors.lastName, authors.email
 
 /*Получить список из 5 свежих комментариев (идентификатор комментария,
 идентификатор публикации, имя и фамилия автора, текст комментария);*/
 
 SELECT
-comments.created_date,
+comments.createdDate,
 comments.id,
-comments.post_id,
-concat(authors.first_name, " ", authors.last_name) AS "authors name",
+comments.postId,
+concat(authors.firstName, " ", authors.lastName) AS "authors name",
 comments.text
 FROM comments
-LEFT JOIN authors ON authors.id = comments.author_id
-ORDER BY comments.created_date DESC
+LEFT JOIN authors ON authors.id = comments.authorId
+ORDER BY comments.createdDate DESC
 LIMIT 5;
 
 /*Получить список комментариев для определённой публикации (идентификатор комментария,
@@ -95,12 +95,12 @@ LIMIT 5;
 SELECT
 comments.id AS "comments id",
 posts.id AS "posts id",
-concat(authors.first_name, " ", authors.last_name) AS "authors name",
+concat(authors.firstName, " ", authors.lastName) AS "authors name",
 comments.text
 FROM comments
-LEFT JOIN authors ON authors.id = comments.author_id
-LEFT JOIN posts ON posts.id = comments.post_id
-WHERE comments.post_id = 1
+LEFT JOIN authors ON authors.id = comments.authorId
+LEFT JOIN posts ON posts.id = comments.postId
+WHERE comments.postId = 1
 
 /*Обновить заголовок определённой публикации на «Как я встретил Новый год»;
 В данном запросе это пост с id = 1*/

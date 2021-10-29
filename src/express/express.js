@@ -6,12 +6,12 @@ const DEFAULT_PORT = 8080;
 const PUBLIC_DIR = `./public`;
 const UPLOAD_DIR = `upload`;
 const api = require(`./api`).getAPI();
-const login = require(`./routes/login`);
-const search = require(`./routes/search`);
-const usersPost = require(`./routes/post-user`);
-const my = require(`./routes/my`);
-const articles = require(`./routes/articles`);
-const categories = require(`./routes/categories`);
+const loginRoute = require(`./routes/login`);
+const searchRoute = require(`./routes/search`);
+const usersPostRoute = require(`./routes/post-user`);
+const myRoute = require(`./routes/my`);
+const articlesRoute = require(`./routes/articles`);
+const categoriesRoute = require(`./routes/categories`);
 const { POSTS_PER_PAGE, pageTitles } = require(`../constants`);
 
 const pageTitle = pageTitles.default;
@@ -24,12 +24,12 @@ app.set(`views`, path.join(__dirname, `./templates`));
 app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 app.use(express.static(path.resolve(__dirname, UPLOAD_DIR)));
 
-app.use(`/login`, login);
-app.use(`/search`, search);
-app.use(`/post`, usersPost);
-app.use(`/my`, my);
-app.use(`/articles`, articles);
-app.use(`/categories`, categories);
+app.use(`/login`, loginRoute);
+app.use(`/search`, searchRoute);
+app.use(`/post`, usersPostRoute);
+app.use(`/my`, myRoute);
+app.use(`/articles`, articlesRoute);
+app.use(`/categories`, categoriesRoute);
 
 app.get(`/`, async (req, res) => {
   let { page = 1 } = req.query;
@@ -43,14 +43,13 @@ app.get(`/`, async (req, res) => {
   ]);
 
   const totalPages = Math.ceil(count / POSTS_PER_PAGE);
-
-  // console.log('main page count', count, 'posts length', posts.length)
   res.render(`main`, {
     articles: posts,
     pageTitle,
     categories,
     page,
     totalPages,
+    moment: require("moment"),
   });
 });
 
