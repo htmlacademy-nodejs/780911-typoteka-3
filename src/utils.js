@@ -4,6 +4,7 @@ const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
 const { getLogger } = require(`./service/cli/server/logger`);
 const moment = require("moment");
+const { FULL_TEXT_MIN } = require("./constants");
 const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
@@ -104,13 +105,43 @@ const generatePublications = (count, titles, categories, sentences) =>
       title: titles[getRandomInt(0, titles.length - 1)],
       announce: shuffle(sentences).slice(1, 5).join(` `),
       fullText: shuffle(sentences)
-        .slice(1, getRandomInt(1, sentences.length - 1))
+        .slice(1, getRandomInt(FULL_TEXT_MIN, sentences.length - 1))
         .join(` `),
       createdDate: moment().format("L"),
       categories: shuffle(categories).slice(
         0,
         getRandomInt(1, categories.length)
       ),
+    }));
+
+/*
+  const comments = [
+    {
+      text: "В этом задании мы подружим наше приложение с базой данных.",
+      createdDate: "2021-07-09 13:57:40",
+      createdAt: "2021-07-09 13:57:40",
+      updatedAt: "2021-07-09 13:57:40",
+      authorId: 1,
+      postId: getRandomInt(0, posts.length - 1),
+    },
+    {
+      text: "test2",
+      createdDate: "2021-07-09 13:57:40",
+      createdAt: "2021-07-09 13:57:40",
+      updatedAt: "2021-07-09 13:57:40",
+      authorId: 1,
+      postId: getRandomInt(0, posts.length - 1),
+    },
+  ];
+ */
+const generateComments = (count, comments, maxAuthors, maxPosts) =>
+  Array(count)
+    .fill({})
+    .map(() => ({
+      text: comments[getRandomInt(0, comments.length - 1)],
+      createdDate: moment().format("L"),
+      authorId: getRandomInt(0, maxAuthors),
+      postId: getRandomInt(0, maxPosts),
     }));
 
 const sendResponse = (res, statusCode, message) => {
@@ -202,4 +233,5 @@ module.exports = {
   formatDateForPug,
   returnMatchingStringsArray,
   findReplaceItemById,
+  generateComments,
 };

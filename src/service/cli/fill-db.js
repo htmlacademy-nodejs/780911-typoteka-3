@@ -1,11 +1,15 @@
 "use strict";
 
-const { generatePublications, readContentTxt } = require("../../utils");
+const {
+  generatePublications,
+  readContentTxt,
+  generateComments,
+} = require("../../utils");
 const { getSequelize } = require(`../lib/sequelize`);
-const defineModels = require(`../models`);
 const { getLogger } = require(`./server/logger`);
 const logger = getLogger();
-const { ExitCode } = require(`../../constants`);
+const { ExitCode, mockAuthors } = require(`../../constants`);
+const initDatabase = require(`../lib/init-db`);
 const DEFAULT_COUNT = 1;
 const TITLES = `./data/titles.txt`;
 const ANNOUNCE = `./data/sentences.txt`;
@@ -33,26 +37,21 @@ module.exports = {
 
     logger.info(`Connection to database established`);
 
-    const { Post, Category } = defineModels(sequelize);
-
-    await sequelize.sync({ force: true });
-
-    const categoryModels = await Category.bulkCreate(
-      categories.map((item) => ({ name: item }))
-    );
-
-    const generatedPosts = generatePublications(
+    const posts = generatePublications(
       countVal,
       titles,
-      categoryModels,
+      categories,
       sentences,
       comments
     );
 
-    const postPromises = generatedPosts.map(async (post) => {
-      const postModel = await Post.create(post);
-      await postModel.addCategories(post.categories);
+    const commentsList = generateComments(countVal, comments, 1, countVal - 1);
+
+    return initDatabase(sequelize, {
+      categories,
+      posts,
+      comments: commentsList,
+      authors: mockAuthors,
     });
-    await Promise.all(postPromises);
   },
 };

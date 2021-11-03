@@ -97,14 +97,14 @@ module.exports = (app, postService, commentService, CategoryService) => {
   });
 
   router.delete(`/:articleId`, async (req, res) => {
-    const { postId } = req.params;
-    const post = await postService.findOne({ postId });
+    const { articleId } = req.params;
+    const post = await postService.findOne({ articleId });
 
     if (!post) {
       return res.status(HttpCode.NOT_FOUND).send(`Not found`);
     }
 
-    const deletedPost = await postService.drop({ id: postId });
+    const deletedPost = await postService.drop({ id: articleId });
 
     if (!deletedPost) {
       return res.status(HttpCode.FORBIDDEN).send(`Forbidden`);
@@ -148,7 +148,6 @@ module.exports = (app, postService, commentService, CategoryService) => {
       if (!comment) {
         return res.status(HttpCode.NOT_FOUND).send(`Not found`);
       }
-
 
       const deletedComment = await commentService.drop(articleId, commentId);
 

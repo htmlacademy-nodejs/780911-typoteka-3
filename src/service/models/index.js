@@ -45,7 +45,7 @@ const define = (sequelize) => {
     foreignKey: `authorId`,
   });
 
-  return { Post, Category, Comment, PostCategory };
+  return { Post, Category, Comment, PostCategory, Author };
 };
 
 module.exports = define;
