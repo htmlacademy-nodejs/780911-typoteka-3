@@ -1,9 +1,7 @@
 "use strict";
 
 const defineModels = require(`../models`);
-// const { authorsSQLQuery } = require("../../constants");
 const Alias = require("../models/alias");
-// const { getRandomInt, generateComments } = require("../../utils");
 
 module.exports = async (
   sequelize,

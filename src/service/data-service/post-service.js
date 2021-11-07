@@ -121,13 +121,13 @@ module.exports = class PostService {
       },
     });
 
-    const updatedOffer = await this._Post.findOne({
+    const updatedPost = await this._Post.findOne({
       where: {
         id,
       },
     });
 
-    await updatedOffer.setCategories(post.categories);
+    await updatedPost.setCategories(post.categories);
 
     return !!affectedRows;
   }
@@ -136,6 +136,6 @@ module.exports = class PostService {
     const deletedRows = await this._Post.destroy({
       where: { id },
     });
-    return Boolean(deletedRows);
+    return !!deletedRows;
   }
 };

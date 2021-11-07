@@ -84,15 +84,23 @@ module.exports = (app, postService, commentService, CategoryService) => {
     return res.json(data);
   });
 
+  // TODO: add validator for PUT route
   router.put(`/:articleId`, jsonParser, async (req, res) => {
     const { articleId } = req.params;
-    const updated = await postService.update({ id: articleId, post: req.body });
 
-    if (!updated) {
+    const article = await postService.findOne({
+      articleId,
+      withComments: false,
+    });
+
+    if (!article) {
       return res
         .status(HttpCode.NOT_FOUND)
         .send(`the article with id ${articleId} is not found`);
     }
+
+    const updated = await postService.update({ id: articleId, post: req.body });
+
     return res.status(HttpCode.OK).json(updated);
   });
 

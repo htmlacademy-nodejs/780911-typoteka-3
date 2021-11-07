@@ -11,7 +11,8 @@
     "start": "LOG_LEVEL=error && nodemon ./src/service/service.js --server 3000",
     "start::debug": "LOG_LEVEL=debug nodemon ./src/service/service.js --server 3000 | pino-pretty",
     "server": "nodemon ./src/service/service.js --server 3000",
-    "start-front-server": "nodemon ./src/express/express.js"
+    "start-front-server": "nodemon ./src/express/express.js",
+    "cli": "cross-env node -r dotenv/config ./src/service/service.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/ChloeSilent/780911-typoteka-3#readme",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "7.16.0",
     "eslint-config-htmlacademy": "0.6.0",
     "eslint-config-prettier": "^7.1.0",

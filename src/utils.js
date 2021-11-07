@@ -4,7 +4,7 @@ const fsp = require(`fs`).promises;
 const { nanoid } = require(`nanoid`);
 const { getLogger } = require(`./service/cli/server/logger`);
 const moment = require("moment");
-const { FULL_TEXT_MIN } = require("./constants");
+const { FULL_TEXT_MIN, MIN_VALUE_FOR_DB_ID } = require("./constants");
 const log = getLogger();
 const getRandomDateOfLastThreeMonths = () => {
   const start = new Date(
@@ -140,8 +140,8 @@ const generateComments = (count, comments, maxAuthors, maxPosts) =>
     .map(() => ({
       text: comments[getRandomInt(0, comments.length - 1)],
       createdDate: moment().format("L"),
-      authorId: getRandomInt(0, maxAuthors),
-      postId: getRandomInt(0, maxPosts),
+      authorId: getRandomInt(MIN_VALUE_FOR_DB_ID, maxAuthors),
+      postId: getRandomInt(MIN_VALUE_FOR_DB_ID, maxPosts),
     }));
 
 const sendResponse = (res, statusCode, message) => {

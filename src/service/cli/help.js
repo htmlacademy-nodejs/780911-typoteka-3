@@ -9,7 +9,8 @@ const helpText = `
     Команды:
     --version:            выводит номер версии
     --help:               печатает этот текст
-    --generate <count>    формирует файл mocks.json
+    --filldb <count>      наполняет БД данными в количестве count
+    --server <port>       запустит порт для бека на порту <port>
 `;
 
 

@@ -11,6 +11,32 @@ module.exports = class CategoryService {
     this._Comment = sequelize.models.Comment;
   }
 
+  create(category) {
+    return this._Category.create(category);
+  }
+
+  async update({ id, category }) {
+    const affectedRows = await this._Category.update(category, {
+      where: {
+        id,
+      },
+    });
+
+    return !!affectedRows;
+  }
+
+  drop(id) {
+    const deletedRows = this._Category.destroy({
+      where: { id },
+    });
+
+    return !!deletedRows;
+  }
+
+  findOne(id) {
+    return this._Category.findByPk(id);
+  }
+
   async findAll(withCount) {
     if (withCount) {
       const categories = await this._Category.findAll({
@@ -36,7 +62,6 @@ module.exports = class CategoryService {
   }
 
   async findPage({ id, limit, offset }) {
-
     const posts = await this._PostCategory.findAll({
       attributes: [`PostId`],
       where: {
@@ -44,7 +69,6 @@ module.exports = class CategoryService {
       },
       raw: true,
     });
-
 
     const postsId = posts.map((postIdItem) => postIdItem.PostId);
 

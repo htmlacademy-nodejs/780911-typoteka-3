@@ -45,7 +45,7 @@ module.exports = {
       comments
     );
 
-    const commentsList = generateComments(countVal, comments, 1, countVal - 1);
+    const commentsList = generateComments(countVal, comments, mockAuthors.length, countVal - 1);
 
     return initDatabase(sequelize, {
       categories,
