@@ -6,10 +6,8 @@ const Sequelize = require(`sequelize`);
 const initDB = require(`../lib/init-db`);
 const categoryRoute = require(`./category-routes`);
 const CategoryService = require(`../data-service/category-service`);
-const routes = require(`../api`);
 const {
   HttpCode,
-  API_PREFIX,
   mockCategories,
   mockPosts,
   mockAuthors,
@@ -26,7 +24,6 @@ const createAPI = async () => {
   });
   const app = express();
   app.use(express.json());
-  app.use(API_PREFIX, routes);
   categoryRoute(app, new CategoryService(mockDB));
   return app;
 };

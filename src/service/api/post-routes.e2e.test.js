@@ -7,7 +7,6 @@ const initDB = require(`../lib/init-db`);
 const postRoutes = require(`./post-routes`);
 const {
   HttpCode,
-  API_PREFIX,
   mockCategories,
   mockPosts,
   sendMockPost,
@@ -21,7 +20,6 @@ const {
   CommentService,
   PostService,
 } = require("../data-service");
-const routes = require(`../api`);
 
 const createAPI = async () => {
   const mockDB = new Sequelize(`sqlite::memory:`, { logging: false });
@@ -33,7 +31,6 @@ const createAPI = async () => {
   });
   const app = express();
   app.use(express.json());
-  app.use(API_PREFIX, routes);
   postRoutes(
     app,
     new PostService(mockDB),

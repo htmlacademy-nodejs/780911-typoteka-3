@@ -18,10 +18,13 @@ mixin pagination(page, totalPages, width, prefix)
     ul.preview__pagination.pagination
       if start > 1
         li
-          a.pagination__button.button.button--backwards.button--disabled(href='#' aria-label='Страница назад') Назад
+          a.pagination__button.button.button--backwards(class=`${page === 1 ? 'button--disabled' : ''}`)(href=`${prefix}page=${page - 1}` aria-label='Страница назад') Назад
       while i++ < end
         li.pagination__item(class=i === page ? 'pagination__item--active': '')
-          a(href=`${prefix}page=${i}`) #{i}
+          if i === page
+            a #{i}
+          else
+            a(href=`${prefix}page=${i}`) #{i}
       if end < totalPages
         li
           a.pagination__button.button.button--forward(href=`${prefix}page=${page + 1}` aria-label='Страница вперед') Вперед

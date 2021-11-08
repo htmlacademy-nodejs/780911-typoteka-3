@@ -8,14 +8,12 @@ const searchRoute = require(`./search-routes`);
 const { SearchService } = require(`../data-service/`);
 const {
   HttpCode,
-  API_PREFIX,
   mockCategories,
   mockPosts,
   mockAuthors,
   mockComments,
 } = require("../../constants");
 
-const routes = require(`../api`);
 
 const createAPI = async () => {
   const mockDB = new Sequelize(`sqlite::memory:`, { logging: false });
@@ -27,7 +25,6 @@ const createAPI = async () => {
   });
   const app = express();
   app.use(express.json());
-  app.use(API_PREFIX, routes);
   searchRoute(app, new SearchService(mockDB));
   return app;
 };
